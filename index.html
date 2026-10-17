@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Raider Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08080d;--sf:rgba(255,255,255,.04);--sf2:rgba(255,255,255,.08);--ln:rgba(255,255,255,.1);--tx:#f1f1fa;--mu:#8f91ab;--ac:#7c7cff;--ac2:#b6b0ff;--glow:rgba(124,124,255,.22);--nav:rgba(10,10,16,.72);--on:#fff;--ac3:#c78bff;--o2:rgba(255,90,140,.12);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="light"]{--bg:#f2f2fa;--sf:rgba(255,255,255,.8);--sf2:rgba(20,20,70,.07);--ln:rgba(20,20,70,.13);--tx:#14142b;--mu:#585a76;--ac:#5555ee;--ac2:#3d3dc8;--glow:rgba(85,85,238,.18);--nav:rgba(242,242,250,.78);--on:#fff;--ac3:#8a5cf0;--o2:rgba(255,90,140,.12);color-scheme:light}
+:root[data-theme="amoled"]{--bg:#000;--sf:rgba(255,255,255,.035);--sf2:rgba(255,255,255,.07);--ln:rgba(255,255,255,.12);--tx:#fff;--mu:#9a9a9a;--ac:#e8e8ff;--ac2:#fff;--glow:rgba(255,255,255,.12);--nav:rgba(0,0,0,.75);--on:#000;--ac3:#9a9aff;--o2:rgba(120,120,255,.08)}
+:root[data-theme="ocean"]{--bg:#050c14;--sf:rgba(120,200,255,.045);--sf2:rgba(120,200,255,.09);--ln:rgba(140,210,255,.14);--tx:#eaf6ff;--mu:#86a3b8;--ac:#38bdf8;--ac2:#8fdcff;--glow:rgba(56,189,248,.22);--nav:rgba(5,12,20,.74);--on:#04141f;--ac3:#22d3ee;--o2:rgba(45,212,191,.12)}
+:root[data-theme="sunset"]{--bg:#0f0806;--sf:rgba(255,160,100,.045);--sf2:rgba(255,160,100,.09);--ln:rgba(255,170,120,.15);--tx:#fff1ea;--mu:#b39387;--ac:#ff7a45;--ac2:#ffb08a;--glow:rgba(255,122,69,.24);--nav:rgba(15,8,6,.74);--on:#1a0a04;--ac3:#ff4d7d;--o2:rgba(255,77,125,.13)}
+:root[data-theme="forest"]{--bg:#050e09;--sf:rgba(120,255,180,.04);--sf2:rgba(120,255,180,.08);--ln:rgba(130,255,190,.14);--tx:#eafff3;--mu:#85ab96;--ac:#34d399;--ac2:#8cf0c4;--glow:rgba(52,211,153,.22);--nav:rgba(5,14,9,.74);--on:#03140a;--ac3:#a3e635;--o2:rgba(163,230,53,.09)}
+:root[data-theme="rose"]{--bg:#10060c;--sf:rgba(255,120,180,.045);--sf2:rgba(255,120,180,.09);--ln:rgba(255,140,190,.15);--tx:#ffeef6;--mu:#b88aa2;--ac:#ff5fa2;--ac2:#ffa3cc;--glow:rgba(255,95,162,.24);--nav:rgba(16,6,12,.74);--on:#1c0612;--ac3:#c084fc;--o2:rgba(192,132,252,.13)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:120px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.45;overflow-x:hidden;min-height:100vh}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ac2);outline-offset:3px}
+
+#loader{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:opacity .7s ease,visibility .7s;animation:failsafe .1s 6s forwards}
+#loader.done{opacity:0;visibility:hidden}
+@keyframes failsafe{to{opacity:0;visibility:hidden}}
+.lw{font-size:1.6rem;font-weight:500;letter-spacing:-.01em}.lw b{font-weight:500;color:var(--ac)}
+.dots{display:flex;gap:20px;height:36px;align-items:flex-start}
+.dots i{width:18px;height:18px;border-radius:50%;background:var(--ac);animation:bob 1.1s ease-in-out infinite}
+.dots i:nth-child(2){animation-delay:.16s}
+.dots i:nth-child(3){animation-delay:.32s;background:var(--ac2);opacity:.7}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(16px)}}
+.lbar{width:min(320px,70vw);height:9px;border-radius:9px;background:var(--sf2);overflow:hidden}
+.lbar i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--ac),var(--ac2));box-shadow:0 0 18px var(--glow)}
+#lpct{color:var(--mu);font-size:.95rem;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+
+.orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;opacity:.55}
+.o1{width:520px;height:520px;background:var(--glow);top:-160px;left:-120px;animation:d1 22s ease-in-out infinite alternate}
+.o2{width:460px;height:460px;background:var(--o2);bottom:-160px;right:-100px;animation:d2 26s ease-in-out infinite alternate}
+@keyframes d1{to{transform:translate(220px,140px) scale(1.2)}}
+@keyframes d2{to{transform:translate(-200px,-120px) scale(1.15)}}
+.site{position:relative;z-index:1}
+
+.bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:18px;padding:12px clamp(14px,3vw,36px);background:var(--nav);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--ln)}
+.brand{font-weight:600;font-size:1.2rem;white-space:nowrap}.brand b{font-weight:600;color:var(--ac)}
+.tabs{display:flex;gap:4px;position:relative;margin:0 auto;padding:4px;background:var(--sf);border:1px solid var(--ln);border-radius:99px;overflow-x:auto;max-width:100%}
+.tabs button{position:relative;z-index:1;padding:8px 18px;border-radius:99px;font-weight:500;color:var(--mu);white-space:nowrap;transition:color .25s}
+.tabs button[aria-selected="true"]{color:var(--on)}
+.pill{position:absolute;z-index:0;top:4px;bottom:4px;left:0;border-radius:99px;background:linear-gradient(135deg,var(--ac),var(--ac3));box-shadow:0 4px 20px var(--glow);transition:transform .45s cubic-bezier(.3,1.3,.5,1),width .45s cubic-bezier(.3,1.3,.5,1)}
+.ibtn{padding:8px 16px;border:1px solid var(--ln);border-radius:99px;background:var(--sf);font-weight:500;white-space:nowrap;transition:.2s}
+.ibtn:hover:not(:disabled){border-color:var(--ac);background:var(--sf2);transform:translateY(-1px)}
+.ibtn:disabled{opacity:.3;cursor:not-allowed}
+main{max-width:1280px;margin:0 auto;padding:0 clamp(14px,3vw,36px) 70px}
+.panel{display:none}.panel.on{display:block;animation:in .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(16px)}}
+
+.hero{padding:clamp(38px,8vw,90px) 0 26px;text-align:center}
+.hero h1{font-size:clamp(2.6rem,8vw,5.4rem);font-weight:600;letter-spacing:-.045em;line-height:1}
+.hero h1 b{font-weight:600;background:linear-gradient(100deg,var(--ac),var(--ac3),var(--ac));background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 6s linear infinite}
+@keyframes sheen{to{background-position:-220% 0}}
+.hero p{color:var(--mu);margin:14px auto 26px;max-width:46ch;font-size:1.1rem}
+.sbox{position:relative;max-width:620px;margin:0 auto}
+.sbox input{width:100%;padding:17px 22px;border-radius:99px;border:1px solid var(--ln);background:var(--sf);color:var(--tx);font:inherit;font-size:1.05rem;backdrop-filter:blur(10px);transition:.25s}
+.sbox input:focus{outline:0;border-color:var(--ac);box-shadow:0 0 0 5px var(--glow)}
+.stats{display:flex;justify-content:center;gap:clamp(20px,6vw,64px);margin-top:34px}
+.stats div{text-align:center}.stats b{display:block;font-size:2rem;font-weight:600;font-variant-numeric:tabular-nums}.stats span{color:var(--mu);font-size:.85rem}
+.chips{position:sticky;top:64px;z-index:10;display:flex;gap:8px;overflow-x:auto;padding:12px 0;margin-bottom:8px;scrollbar-width:none;background:linear-gradient(var(--bg) 60%,transparent)}
+.chip{flex:none;padding:7px 16px;border:1px solid var(--ln);border-radius:99px;background:var(--sf);color:var(--mu);font-weight:500;transition:.2s}
+.chip:hover{color:var(--tx);border-color:var(--ac)}
+.chip[aria-pressed="true"]{background:var(--ac);border-color:var(--ac);color:var(--on);box-shadow:0 4px 16px var(--glow)}
+.cat{margin-bottom:34px}
+.cat h2{font-size:1.15rem;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.cat h2 small{font-weight:400;color:var(--mu);background:var(--sf2);padding:1px 10px;border-radius:99px;font-size:.78rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.app{--mx:50%;--my:50%;position:relative;display:flex;align-items:center;gap:13px;padding:13px;border-radius:16px;background:var(--sf);border:1px solid var(--ln);text-decoration:none;min-width:0;overflow:hidden;animation:pop .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(min(var(--i),30)*22ms);transition:transform .25s,border-color .25s}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.95)}}
+.app::before{content:"";position:absolute;inset:0;background:radial-gradient(180px circle at var(--mx) var(--my),var(--glow),transparent 70%);opacity:0;transition:opacity .3s}
+.app:hover{transform:translateY(-4px);border-color:var(--ac)}
+.app:hover::before{opacity:1}
+.app:active{transform:translateY(0) scale(.98)}
+.tile{position:relative;flex:none;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;color:#fff;font-weight:600;transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+.app:hover .tile{transform:rotate(-8deg) scale(1.12)}
+.meta{position:relative;min-width:0;flex:1}
+.nm{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hs{color:var(--mu);font-size:.76rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pin{position:relative;flex:none;font-size:.72rem;font-weight:500;padding:3px 10px;border-radius:99px;border:1px solid var(--ln);background:var(--sf2);opacity:0;transform:scale(.85);transition:.2s}
+.app:hover .pin,.app:focus-within .pin,.pin.on{opacity:1;transform:none}
+.pin.on{background:var(--ac);border-color:var(--ac);color:var(--on)}
+@media(hover:none){.pin{opacity:1;transform:none}}
+.empty{border:1px dashed var(--ln);border-radius:16px;padding:34px;color:var(--mu);text-align:center}
+
+.ph{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:600;letter-spacing:-.03em;padding:38px 0 20px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:18px;padding:20px;transition:.25s;animation:pop .5s both;animation-delay:calc(var(--i,0)*60ms)}
+.cols .card:hover{border-color:var(--ac);transform:translateY(-3px)}
+.card h3{font-size:1.1rem;font-weight:600;margin-bottom:6px}
+.row{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--ln);font-size:.93rem}
+.row:last-child{border:0}.row .k{color:var(--mu);min-width:100px}
+.row a{color:var(--ac2)}
+.sub{color:var(--mu);font-size:.86rem}
+.pager{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.pager h2{flex:1;font-size:1.25rem;font-weight:600}.pager span{color:var(--mu);font-size:.9rem}
+h2.sec{font-size:1.1rem;font-weight:600;margin:30px 0 12px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.93rem}
+th{text-align:left;color:var(--mu);font-weight:500;padding:8px 6px;border-bottom:1px solid var(--ln)}
+td{padding:10px 6px;border-bottom:1px solid var(--ln)}
+tbody tr:hover{background:var(--sf2)}
+.cl{display:grid;grid-template-columns:1fr auto}
+.cl div{padding:11px 6px;border-bottom:1px solid var(--ln);animation:in .35s both}
+.cl .n{text-align:right;color:var(--ac2);font-weight:600;font-variant-numeric:tabular-nums}
+.csearch{width:100%;max-width:520px;padding:14px 20px;border-radius:99px;border:1px solid var(--ln);background:var(--sf);color:var(--tx);font:inherit;margin-bottom:14px}
+.csearch:focus{outline:0;border-color:var(--ac);box-shadow:0 0 0 4px var(--glow)}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.quick a{text-decoration:none}
+@media(max-width:720px){.bar{flex-wrap:wrap}.tabs{order:3;flex:1 1 100%}.chips{top:112px}html{scroll-padding-top:170px}}
+@media(prefers-reduced-motion:reduce){*,*::before{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}}
+
+#sp{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;background:linear-gradient(90deg,var(--ac),var(--ac3));transform-origin:left;transform:scaleX(0);box-shadow:0 0 12px var(--glow)}
+#fx{position:fixed;inset:0;z-index:0;pointer-events:none}
+.tabs button{padding:8px 15px}
+.ibtn,.chip,.tabs button{position:relative;overflow:hidden}
+.rip{position:absolute;border-radius:50%;background:var(--glow);transform:scale(0);animation:rp .65s ease-out forwards;pointer-events:none}
+@keyframes rp{to{transform:scale(1);opacity:0}}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+.tst{padding:10px 20px;border-radius:99px;background:var(--ac);color:var(--on);font-weight:500;box-shadow:0 10px 30px var(--glow);animation:tin .45s cubic-bezier(.3,1.4,.5,1)}
+.tst.out{opacity:0;transform:translateY(12px);transition:.4s}
+@keyframes tin{from{opacity:0;transform:translateY(30px) scale(.8)}}
+#top{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:30;opacity:0;transform:translateY(20px) scale(.8);pointer-events:none;background:var(--bg)}
+#top.show{opacity:1;transform:none;pointer-events:auto}
+.mwrap{position:relative}
+.menu{display:none;position:absolute;right:0;top:calc(100% + 10px);min-width:200px;padding:8px;background:var(--bg);border:1px solid var(--ln);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.4);flex-direction:column;gap:2px}
+.menu.open{display:flex;animation:drop .3s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes drop{from{opacity:0;transform:translateY(-10px) scale(.95)}}
+.mi{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:10px;text-align:left;transition:.15s}
+.mi:hover{background:var(--sf2)}.mi.on{background:var(--sf2);outline:1px solid var(--ac)}
+.mi i{width:16px;height:16px;border-radius:50%}
+.thgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.thc{display:flex;flex-direction:column;gap:12px;align-items:flex-start;padding:16px;border-radius:16px;background:var(--sf);border:1px solid var(--ln);font-weight:500;transition:.25s}
+.thc i{display:block;width:100%;height:52px;border-radius:10px}
+.thc:hover{transform:translateY(-4px) rotate(-1deg);border-color:var(--ac)}
+.thc.on{border-color:var(--ac);box-shadow:0 0 0 3px var(--glow)}
+.srow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--ln)}.srow:last-child{border:0}
+.tg{flex:none;width:50px;height:28px;border-radius:99px;background:var(--sf2);border:1px solid var(--ln);position:relative;transition:.3s}
+.tg::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--mu);transition:.35s cubic-bezier(.3,1.5,.5,1)}
+.tg[aria-checked="true"]{background:var(--ac);border-color:var(--ac)}.tg[aria-checked="true"]::after{transform:translateX(22px);background:var(--on)}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px}
+.tool .btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tool input,.tool select,.tool textarea{padding:10px 14px;border-radius:12px;border:1px solid var(--ln);background:var(--sf2);color:var(--tx);font:inherit;min-width:0;width:100%}
+.tool input:focus,.tool select:focus,.tool textarea:focus{outline:0;border-color:var(--ac);box-shadow:0 0 0 3px var(--glow)}
+.tool textarea{min-height:170px;resize:vertical}
+.trow{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-bottom:8px;animation:in .35s both}
+.x{font-size:.8rem;color:var(--mu);padding:4px 8px;border-radius:8px}.x:hover{color:var(--tx);background:var(--sf2)}
+.res{margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--sf2);font-size:.95rem}.res b{color:var(--ac2);font-size:1.15rem}
+.pri{background:var(--ac);border-color:var(--ac);color:var(--on)}.pri:hover:not(:disabled){background:var(--ac)}
+.fgrid{display:grid;gap:8px}
+.ring{position:relative;width:190px;height:190px;margin:10px auto 6px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:7}.rb{stroke:var(--sf2)}.rf{stroke:var(--ac);stroke-linecap:round;transition:stroke-dashoffset 1s linear;filter:drop-shadow(0 0 6px var(--glow))}
+.ring div{position:absolute;inset:0;display:grid;place-items:center;font-size:2.4rem;font-weight:500;font-variant-numeric:tabular-nums}
+#tdl{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:6px}
+#tdl li{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:var(--sf2);transition:.25s}
+#tdl li.new{animation:pop .45s cubic-bezier(.3,1.4,.5,1)}
+#tdl li.gone{opacity:0;transform:translateX(30px)}
+#tdl .tx{flex:1;text-align:left}#tdl li.done .tx{text-decoration:line-through;color:var(--mu)}
+.tdh{display:flex;gap:8px}
+.cal2{display:grid;grid-template-columns:minmax(300px,1.3fr) 1fr;gap:14px}
+@media(max-width:820px){.cal2{grid-template-columns:1fr}}
+.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.dh{text-align:center;color:var(--mu);font-size:.8rem;padding:4px 0}
+.day{aspect-ratio:1;border-radius:12px;border:1px solid transparent;color:var(--mu);position:relative;transition:.2s;animation:pop .4s both;animation-delay:calc(var(--i)*12ms)}
+.day.in{background:var(--sf2);color:var(--tx)}
+.day:hover{border-color:var(--ac);transform:scale(1.08)}
+.day.today{background:var(--ac);color:var(--on);font-weight:700;box-shadow:0 0 18px var(--glow)}
+.day.ev::after{content:"";position:absolute;bottom:5px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:var(--ac3);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{transform:scale(1.8);opacity:.5}}
+.pbar{height:12px;border-radius:12px;background:var(--sf2);overflow:hidden;margin:10px 0}
+.pbar i{display:block;height:100%;width:0;border-radius:12px;background:linear-gradient(90deg,var(--ac),var(--ac3));transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.row.past{opacity:.5}
+@keyframes rise{from{opacity:0;transform:translateY(40px);filter:blur(12px)}}
+.intro .hero h1 .w{display:inline-block;animation:rise 1s cubic-bezier(.2,.8,.2,1) 2.8s both}
+.intro .hero h1 b{display:inline-block;animation:sheen 6s linear infinite,rise 1s cubic-bezier(.2,.8,.2,1) 2.95s both}
+.intro .hero p{animation:rise .9s cubic-bezier(.2,.8,.2,1) 3.1s both}
+.intro .sbox{animation:rise .9s cubic-bezier(.2,.8,.2,1) 3.25s both}
+.intro .stats{animation:rise .9s cubic-bezier(.2,.8,.2,1) 3.4s both}
+html[data-compact] .grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+html[data-compact] .app{padding:9px;gap:10px}html[data-compact] .tile{width:34px;height:34px;font-size:.8rem}
+html[data-anim="off"] *,html[data-anim="off"] *::before,html[data-anim="off"] *::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
+</style>
+</head>
+<body>
+<div id="loader"><div class="lw">Raider <b>Portal</b></div><div class="dots"><i></i><i></i><i></i></div><div class="lbar"><i id="lbar"></i></div><div id="lpct">Loading... 0%</div></div>
+<div class="orb o1"></div><div class="orb o2"></div><canvas id="fx"></canvas><div id="sp"></div><div id="toast"></div><button class="ibtn" id="top">Top</button>
+<div class="site">
+<div class="bar">
+  <div class="brand">Raider <b>Portal</b></div>
+  <div class="tabs" id="tabs" role="tablist"><div class="pill" id="pill"></div></div>
+  <div class="mwrap"><button class="ibtn" id="theme" aria-haspopup="true">Themes</button><div class="menu" id="menu"></div></div>
+</div>
+<main>
+  <section class="panel on" id="p-apps">
+    <div class="hero">
+      <h1><span class="w">Raider</span> <b>Portal</b></h1>
+      <p id="greet"></p>
+      <div class="sbox"><input id="q" type="search" placeholder="Search every app... (press / to focus)" aria-label="Search apps"></div>
+      <div class="stats"><div><b data-n="259">0</b><span>Apps</span></div><div><b data-n="15">0</b><span>Categories</span></div><div><b data-n="127">0</b><span>Courses</span></div></div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div id="favBox"></div><div id="recBox"></div><div id="appBox"></div>
+  </section>
+
+  <section class="panel" id="p-school">
+    <h1 class="ph">School information</h1>
+    <div class="pager"><button class="ibtn" id="sPrev">Prev</button><h2 id="sName"></h2><span id="sPg"></span><button class="ibtn" id="sNext">Next</button></div>
+    <div class="cols" id="sGrid"></div>
+    <h2 class="sec">2026-2027 calendar <span class="sub">180 school days</span></h2>
+    <div class="card tw"><table id="terms"></table></div>
+  </section>
+
+  <section class="panel" id="p-courses">
+    <h1 class="ph">Course catalog</h1>
+    <input class="csearch" id="cq" type="search" placeholder="Filter by course name or number" aria-label="Filter courses">
+    <h2 class="sec" id="cCount" style="margin-top:0"></h2>
+    <div class="card"><div class="cl" id="cList"></div></div>
+    <div class="pager" style="justify-content:center;margin:18px 0 0"><button class="ibtn" id="cPrev">Prev</button><span id="cPg"></span><button class="ibtn" id="cNext">Next</button></div>
+  </section>
+
+  <section class="panel" id="p-help">
+    <h1 class="ph">Counseling</h1>
+    <div class="pager"><button class="ibtn" id="hPrev">Prev</button><h2 id="hName"></h2><span id="hPg"></span><button class="ibtn" id="hNext">Next</button></div>
+    <div class="cols" id="hGrid"></div>
+    <h2 class="sec">Need help right now?</h2>
+    <div class="card"><p>If you or someone you know is in crisis, call or text <b>988</b>. In an emergency, call <b>911</b>.</p>
+    <div class="quick"><a class="ibtn" href="tel:988">Call 988</a><a class="ibtn" href="https://caresolace.com/site/middletownarea" target="_blank" rel="noopener">Care Solace</a><a class="ibtn" href="https://www.safe2saypa.org" target="_blank" rel="noopener">Safe2Say PA</a><a class="ibtn" href="https://www.raiderweb.org/student_services" target="_blank" rel="noopener">Student Services</a></div></div>
+  </section>
+
+  <section class="panel" id="p-tools">
+    <h1 class="ph">Tools</h1>
+    <div class="tgrid">
+      <div class="card tool" style="--i:0"><h3>Study timer</h3>
+        <div class="ring"><svg viewBox="0 0 120 120"><circle class="rb" cx="60" cy="60" r="52"/><circle class="rf" id="rf" cx="60" cy="60" r="52"/></svg><div id="tm">25:00</div></div>
+        <div class="btns" style="justify-content:center"><button class="ibtn" data-m="25">Focus</button><button class="ibtn" data-m="5">Short break</button><button class="ibtn" data-m="15">Long break</button></div>
+        <div class="btns" style="justify-content:center"><button class="ibtn pri" id="tgo">Start</button><button class="ibtn" id="trs">Reset</button></div></div>
+      <div class="card tool" style="--i:1"><h3>Grade calculator</h3><p class="sub" style="margin-bottom:10px">Score and weight for each category or assignment.</p><div id="gr"></div><div class="btns"><button class="ibtn" id="gadd">Add row</button></div><div class="res" id="gres"></div></div>
+      <div class="card tool" style="--i:2"><h3>GPA calculator</h3><p class="sub" style="margin-bottom:10px">Unweighted, 4.0 scale.</p><div id="gp"></div><div class="btns"><button class="ibtn" id="padd">Add class</button></div><div class="res" id="pres"></div></div>
+      <div class="card tool" style="--i:3"><h3>Final exam calculator</h3><p class="sub" style="margin-bottom:10px">What do you need on the final?</p><div class="fgrid"><input id="fc" type="number" placeholder="Current grade %" aria-label="Current grade"><input id="fw" type="number" placeholder="Final counts for % of grade" aria-label="Final weight"><input id="fg" type="number" placeholder="Grade you want %" aria-label="Goal grade"></div><div class="res" id="fres">Fill in all three boxes</div></div>
+      <div class="card tool" style="--i:4"><h3>To-do list <span class="sub" id="tdc"></span></h3><div class="tdh"><input id="tdi" placeholder="Add a task and press Enter" aria-label="New task"><button class="ibtn pri" id="tda">Add</button></div><ul id="tdl"></ul></div>
+      <div class="card tool" style="--i:5"><h3>Quick notes</h3><textarea id="nt" placeholder="Type anything. It saves automatically." aria-label="Notes"></textarea><div class="sub" id="ns" style="margin-top:8px">Saved on this device</div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-cal">
+    <h1 class="ph">Calendar</h1>
+    <div class="cal2">
+      <div class="card"><div class="pager"><button class="ibtn" id="mP">Prev</button><h2 id="mTitle" style="text-align:center"></h2><button class="ibtn" id="mN">Next</button></div><div class="cgrid" id="cg"></div></div>
+      <div class="card"><h3>School year progress</h3><div class="pbar"><i id="yb"></i></div><div class="sub" id="ys"></div><h3 style="margin-top:22px">Key dates</h3><div id="ev"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-settings">
+    <h1 class="ph">Settings</h1>
+    <h2 class="sec" style="margin-top:0">Themes</h2><div class="thgrid" id="thGrid"></div>
+    <h2 class="sec">Effects</h2><div class="card" id="sw"></div>
+    <h2 class="sec">Your data</h2><div class="card"><p class="sub">Pins, recent apps, notes, tasks and settings are saved only on this device.</p><div class="quick"><button class="ibtn" id="dPin">Clear pinned apps</button><button class="ibtn" id="dRec">Clear recent apps</button><button class="ibtn" id="dRep">Replay intro</button><button class="ibtn" id="dAll">Reset everything</button></div></div>
+  </section>
+</main>
+</div>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+var t0=performance.now(),DUR=reduce?150:2400,fin=false;
+function step(now){
+  var p=Math.min(1,(now-t0)/DUR),n=Math.floor((1-Math.pow(1-p,2.4))*99);
+  if(p>=1){n=100}
+  $("lbar").style.width=n+"%";$("lpct").textContent="Loading... "+n+"%";
+  if(p<1)requestAnimationFrame(step);else setTimeout(function(){$("loader").classList.add("done");countUp()},reduce?0:380);
+}
+requestAnimationFrame(step);
+function countUp(){if(fin)return;fin=true;Array.prototype.forEach.call(document.querySelectorAll("[data-n]"),function(el){var to=+el.dataset.n,s=performance.now();(function f(now){var p=Math.min(1,(now-s)/1200);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(s)})}
+
+var VIEWS=[["apps","Apps"],["tools","Tools"],["cal","Calendar"],["school","School info"],["courses","Courses"],["help","Counseling"],["settings","Settings"]],tabs=$("tabs"),pill=$("pill");
+VIEWS.forEach(function(v){var b=document.createElement("button");b.textContent=v[1];b.dataset.t=v[0];b.setAttribute("role","tab");b.onclick=function(){go(v[0])};tabs.appendChild(b)});
+function place(){var a=tabs.querySelector('[aria-selected="true"]');if(a){pill.style.width=a.offsetWidth+"px";pill.style.transform="translateX("+a.offsetLeft+"px)"}}
+function go(id){
+  Array.prototype.forEach.call(tabs.querySelectorAll("button"),function(b){b.setAttribute("aria-selected",b.dataset.t===id)});
+  Array.prototype.forEach.call(document.querySelectorAll(".panel"),function(p){p.classList.toggle("on",p.id==="p-"+id)});
+  place();var sa=tabs.querySelector('[aria-selected="true"]');if(sa&&tabs.scrollTo)tabs.scrollTo({left:sa.offsetLeft-30,behavior:"smooth"});store("rp_tab",id);window.scrollTo(0,0);
+}
+window.addEventListener("resize",place);
+var th=store("rp_theme");if(th)document.documentElement.dataset.theme=th;
+
+var hr=new Date().getHours();$("greet").textContent=(hr<12?"Good morning":hr<18?"Good afternoon":"Good evening")+". Every school tool you need, one click away.";
+
+var D=[
+["School","Canvas~middletownsd.instructure.com|Clever~clever.com/in/masd/student/portal|RaiderWeb~www.raiderweb.org/home|PowerSchool~powerschool.raiderweb.org/public/|LinkIt! Student~raiderweb.linkit.com/student|Naviance~id.naviance.com|Destiny Library~http://destiny.raiderweb.org|Securly Pass~pass.securly.com/passes/create|Securly Flex~flex.securly.com/login|MAHS Announce~www.youtube.com/user/MAHSAnnouncements|PBIS Rewards~pbisr.navigate360.com/login.php|FitnessGram~myhealthyzone.fitnessgram.net|Student Services~www.raiderweb.org/student_services|Hazing Reporting~www.raiderweb.org/student_services/hazing_reporting"],
+["Google","Drive~drive.google.com/drive/my-drive|Gmail~mail.google.com/mail/u/0/|Classroom~classroom.google.com/u/3/?pli=1|Docs~docs.google.com/document|Sheets~docs.google.com/spreadsheets|Slides~docs.google.com/presentation|Forms~docs.google.com/forms|Drawings~docs.google.com/drawings|Calendar~calendar.google.com|Meet~meet.google.com|Keep~keep.google.com|Sites~sites.google.com|Scholar~scholar.google.com|Translate~translate.google.com|Maps~maps.google.com|Earth~earth.google.com|Books~books.google.com|Arts and Culture~artsandculture.google.com|Photos~photos.google.com|YouTube~www.youtube.com"],
+["Class Platforms","Amplify~learning.amplify.com/home/student/|Discovery Education~clever.discoveryeducation.com/learn/explore|McGraw-Hill~connected.mcgraw-hill.com/connected/ssoep.lti.do|Great Minds~digital.greatminds.org|Easybridge~easybridge-dashboard-web.savvaseasybridge.com/dashboard/student?ssoLogin=true|Scholastic~idp-awsprod1.education.scholastic.com/idp/|Edpuzzle~edpuzzle.com/classes/675714d5cf66573c6e2facb6|Quill~www.quill.org/classes|Nearpod~nearpod.com|MasteryConnect~app.masteryconnect.com/student/home|FastBridge~auth.fastbridge.org/login.do|IXL~www.ixl.com/dashboard|Pear Deck~app.peardeck.com|Seesaw~app.seesaw.me|Flip~flip.com|Socrative~b.socrative.com|Formative~goformative.com|Wayground~wayground.com|Classkick~classkick.com|Savvas Realize~www.savvasrealize.com|i-Ready~login.i-ready.com|Zearn~www.zearn.org|Study Island~www.studyisland.com|ReadWorks~www.readworks.org|Epic~www.getepic.com|Turnitin~www.turnitin.com|Gale~www.gale.com|Schoology~app.schoology.com"],
+["Math","Desmos Graphing~www.desmos.com/calculator|Desmos Scientific~www.desmos.com/scientific|Desmos Geometry~www.desmos.com/geometry|GeoGebra~www.geogebra.org/graphing|Wolfram Alpha~www.wolframalpha.com|Mathway~www.mathway.com|Symbolab~www.symbolab.com|Khan Academy~www.khanacademy.org|Delta Math~www.deltamath.com|Prodigy Math~www.prodigygame.com|Brilliant~brilliant.org|Math Playground~www.mathplayground.com|Math Is Fun~www.mathsisfun.com|Calculator Soup~www.calculatorsoup.com|Paul's Online Math Notes~tutorial.math.lamar.edu|Art of Problem Solving~artofproblemsolving.com|Mathigon~mathigon.org|MathWorld~mathworld.wolfram.com"],
+["Science","PhET Simulations~phet.colorado.edu|Gizmos~gizmos.explorelearning.com|CK-12~www.ck12.org|HHMI BioInteractive~www.biointeractive.org|Interactive Periodic Table~ptable.com|Chem LibreTexts~chem.libretexts.org|Physics Classroom~www.physicsclassroom.com|Biology Corner~www.biologycorner.com|NASA~www.nasa.gov|NOAA~www.noaa.gov|USGS~www.usgs.gov|EPA~www.epa.gov|National Geographic~education.nationalgeographic.org|Smithsonian~www.si.edu|LabXchange~www.labxchange.org|BioDigital Human~human.biodigital.com|Nature Scitable~www.nature.com/scitable"],
+["English","CommonLit~www.commonlit.org|Newsela~newsela.com|NoRedInk~www.noredink.com|Grammarly~www.grammarly.com|Purdue OWL~owl.purdue.edu|Citation Machine~www.citationmachine.net|EasyBib~www.easybib.com|MyBib~www.mybib.com|Merriam-Webster~www.merriam-webster.com|Thesaurus~www.thesaurus.com|Vocabulary.com~www.vocabulary.com|Etymonline~www.etymonline.com|Project Gutenberg~www.gutenberg.org|SparkNotes~www.sparknotes.com|Poetry Foundation~www.poetryfoundation.org|Poets.org~poets.org|Hemingway Editor~hemingwayapp.com|Flocabulary~www.flocabulary.com|ReadWriteThink~www.readwritethink.org|Libby~libbyapp.com|Goodreads~www.goodreads.com"],
+["Social Studies","Britannica School~school.eb.com|Library of Congress~www.loc.gov|National Archives~www.archives.gov|iCivics~www.icivics.org|Congress.gov~www.congress.gov|Constitution Center~constitutioncenter.org|Census~www.census.gov|World Factbook~www.cia.gov/the-world-factbook|Our World in Data~ourworldindata.org|Digital Public Library~dp.la|Gilder Lehrman~www.gilderlehrman.org|Crash Course~thecrashcourse.com|Seterra Geography~www.seterra.com|Stanford History Group~sheg.stanford.edu|History~www.history.com|PA Dept of Education~www.education.pa.gov"],
+["Languages","Duolingo~www.duolingo.com|SpanishDict~www.spanishdict.com|WordReference~www.wordreference.com|Linguee~www.linguee.com|Conjuguemos~conjuguemos.com|StudySpanish~studyspanish.com|Reverso~www.reverso.net|Forvo~forvo.com|TV5Monde~apprendre.tv5monde.com|News in Slow Spanish~www.newsinslowspanish.com"],
+["Coding","Code.org~studio.code.org|Hour of Code~hourofcode.com|Scratch~scratch.mit.edu|Replit~replit.com|GitHub~github.com|W3Schools~www.w3schools.com|MDN Web Docs~developer.mozilla.org|freeCodeCamp~www.freecodecamp.org|Codecademy~www.codecademy.com|CodingBat~codingbat.com|CodeHS~codehs.com|Trinket~trinket.io|Python~www.python.org|Programiz~www.programiz.com|Tinkercad~www.tinkercad.com|Arduino~www.arduino.cc|Stack Overflow~stackoverflow.com|CS50~cs50.harvard.edu"],
+["Creative","Canva~www.canva.com|Padlet~padlet.com|Adobe Express~express.adobe.com|Figma~www.figma.com|Photopea~www.photopea.com|Pixlr~pixlr.com|BandLab~www.bandlab.com|Soundtrap~www.soundtrap.com|Chrome Music Lab~musiclab.chromeexperiments.com|musictheory.net~www.musictheory.net|Flat~flat.io|WeVideo~www.wevideo.com|Clipchamp~clipchamp.com|Piktochart~piktochart.com|Infogram~infogram.com|AutoDraw~www.autodraw.com|Sketchpad~sketch.io/sketchpad|Unsplash~unsplash.com|Pexels~www.pexels.com|Pixabay~pixabay.com|Noun Project~thenounproject.com"],
+["Study Tools","Quizlet~quizlet.com|Anki~apps.ankiweb.net|Brainscape~www.brainscape.com|Cram~www.cram.com|Notion~www.notion.so|Todoist~todoist.com|Pomofocus~pomofocus.io|Forest~www.forestapp.cc|Coggle~coggle.it|Miro~miro.com|MindMeister~www.mindmeister.com|Lucidchart~lucid.app|Diagrams.net~app.diagrams.net|Zotero~www.zotero.org|BibMe~www.bibme.org|Wikipedia~www.wikipedia.org|Internet Archive~archive.org"],
+["College and Career","Common App~www.commonapp.org|College Board~www.collegeboard.org|BigFuture~bigfuture.collegeboard.org|ACT~www.act.org|FAFSA~studentaid.gov|PHEAA~www.pheaa.org|College Scorecard~collegescorecard.ed.gov|Niche~www.niche.com|Fastweb~www.fastweb.com|Scholarships.com~www.scholarships.com|CareerOneStop~www.careeronestop.org|O*NET~www.onetonline.org|Occupational Outlook~www.bls.gov/ooh|PA CareerLink~www.pacareerlink.pa.gov|Handshake~joinhandshake.com|LinkedIn~www.linkedin.com|Indeed~www.indeed.com|Coursera~www.coursera.org|edX~www.edx.org|MIT OpenCourseWare~ocw.mit.edu|HACC~www.hacc.edu|Penn State~www.psu.edu|Millersville~www.millersville.edu"],
+["Typing and Skills","Typing.com~www.typing.com|TypingClub~www.typingclub.com|Keybr~www.keybr.com|Monkeytype~monkeytype.com|Ratatype~www.ratatype.com|Nitro Type~www.nitrotype.com|TypeRacer~play.typeracer.com|GCFGlobal~edu.gcfglobal.org"],
+["Support","Care Solace~caresolace.com/site/middletownarea|Safe2Say PA~www.safe2saypa.org|988 Lifeline~988lifeline.org|Crisis Text Line~www.crisistextline.org|Trevor Project~www.thetrevorproject.org|Teen Line~teenline.org|StopBullying~www.stopbullying.gov|NAMI~www.nami.org|SAMHSA~www.samhsa.gov|RAINN~www.rainn.org|Love Is Respect~www.loveisrespect.org|Childhelp~www.childhelphotline.org|Poison Control~www.poison.org"],
+["Games and Fun","Gimkit~www.gimkit.com|Kahoot~kahoot.com|Blooket~www.blooket.com|GeoGuessr~www.geoguessr.com|Chess.com~www.chess.com|Lichess~lichess.org|NYT Games~www.nytimes.com/games|Sudoku~sudoku.com|Sporcle~www.sporcle.com|Jigsaw Planet~www.jigsawplanet.com|Skribbl~skribbl.io|2048~play2048.co|Tetris~tetris.com|Coolmath Games~www.coolmathgames.com|Minecraft Education~education.minecraft.net"]
+];
+var apps=[];D.forEach(function(c,ci){c[1].split("|").forEach(function(e){var i=e.indexOf("~"),u=e.slice(i+1);apps.push({c:ci,n:e.slice(0,i),u:u.indexOf("http")===0?u:"https://"+u,h:u.replace(/^https?:\/\//,"").split("/")[0].replace(/^www\./,"")})})});
+var favs=[],recs=[],cat=-1;
+try{favs=JSON.parse(store("rp_favs")||"[]");recs=JSON.parse(store("rp_recs")||"[]")}catch(e){}
+var chips=$("chips");
+["All"].concat(D.map(function(c){return c[0]})).forEach(function(n,i){var b=document.createElement("button");b.className="chip";b.textContent=n;b.dataset.c=i-1;b.setAttribute("aria-pressed",i===0);b.onclick=function(){cat=i-1;Array.prototype.forEach.call(chips.children,function(x){x.setAttribute("aria-pressed",+x.dataset.c===cat)});draw()};chips.appendChild(b)});
+function hue(s){var n=0;for(var i=0;i<s.length;i++)n=(n*31+s.charCodeAt(i))%360;return n}
+function ini(n){var w=n.replace(/[^A-Za-z0-9 ]/g,"").split(" ").filter(Boolean);return(w.length>1?w[0][0]+w[1][0]:w[0].slice(0,2)).toUpperCase()}
+var idx=0;
+function card(a){
+  var el=document.createElement("a");el.className="app";el.href=a.u;el.target="_blank";el.rel="noopener";el.style.setProperty("--i",idx++);
+  var h=hue(a.n),t=document.createElement("div");t.className="tile";t.textContent=ini(a.n);t.style.background="linear-gradient(135deg,hsl("+h+" 65% 52%),hsl("+(h+40)+" 65% 38%))";
+  var m=document.createElement("div");m.className="meta";var n=document.createElement("div");n.className="nm";n.textContent=a.n;var s=document.createElement("div");s.className="hs";s.textContent=a.h;m.appendChild(n);m.appendChild(s);
+  var on=favs.indexOf(a.n)>-1,p=document.createElement("button");p.className="pin"+(on?" on":"");p.textContent=on?"Pinned":"Pin";p.setAttribute("aria-label",(on?"Unpin ":"Pin ")+a.n);
+  p.onclick=function(e){e.preventDefault();e.stopPropagation();var k=favs.indexOf(a.n);k>-1?favs.splice(k,1):favs.push(a.n);store("rp_favs",JSON.stringify(favs));toast((k>-1?"Unpinned ":"Pinned ")+a.n);draw()};
+  el.onclick=function(e){if(e.target===p)return;recs=[a.n].concat(recs.filter(function(x){return x!==a.n})).slice(0,8);store("rp_recs",JSON.stringify(recs))};
+  el.appendChild(t);el.appendChild(m);el.appendChild(p);return el;
+}
+function section(id,title,list){
+  var s=document.createElement("div");s.className="cat";if(id)s.id=id;
+  var h=document.createElement("h2");h.textContent=title;var c=document.createElement("small");c.textContent=list.length;h.appendChild(c);s.appendChild(h);
+  var g=document.createElement("div");g.className="grid";list.forEach(function(a){g.appendChild(card(a))});s.appendChild(g);return s;
+}
+function byName(arr){return arr.map(function(n){return apps.filter(function(a){return a.n===n})[0]}).filter(Boolean)}
+function draw(){
+  idx=0;var q=$("q").value.trim().toLowerCase(),fb=$("favBox"),rb=$("recBox"),ab=$("appBox");fb.innerHTML=rb.innerHTML=ab.innerHTML="";
+  if(!q&&cat<0){var f=byName(favs),r=byName(recs);if(f.length)fb.appendChild(section("","Pinned",f));if(r.length)rb.appendChild(section("","Recently opened",r))}
+  var any=false;
+  D.forEach(function(c,ci){if(cat>=0&&cat!==ci)return;var l=apps.filter(function(a){return a.c===ci&&(!q||a.n.toLowerCase().indexOf(q)>-1||c[0].toLowerCase().indexOf(q)>-1||a.h.indexOf(q)>-1)});if(l.length){any=true;ab.appendChild(section("c"+ci,c[0],l))}});
+  if(!any)ab.innerHTML='<div class="empty">No apps match "'+q.replace(/[<>&"]/g,"")+'". Try a shorter word or a subject name.</div>';
+}
+$("q").oninput=draw;
+document.addEventListener("keydown",function(e){if(e.key==="/"&&document.activeElement.tagName!=="INPUT"){e.preventDefault();go("apps");$("q").focus()}});
+document.addEventListener("mousemove",function(e){var a=e.target.closest&&e.target.closest(".app");if(a){var r=a.getBoundingClientRect();a.style.setProperty("--mx",(e.clientX-r.left)+"px");a.style.setProperty("--my",(e.clientY-r.top)+"px")}});
+
+var S=[{n:"Middletown Area High School",a:"1155 North Union St, Middletown, PA 17057",p:"717-948-3333",f:"717-948-3359",ad:[["Principal","Mr. Paul Roman","proman"],["Assistant Principal","Mr. Jose Ortiz","jortiz"]],co:[["School Counselor","Mrs. Breann Fleming","bfleming","60009"],["School Counselor","Mr. Donnie Russell","drussell","60007"],["School Counselor","Mrs. Jennifer Stoe","jstoe","60008"],["Guidance Office Secretary","Mrs. Katelynn Wilson","kwilson","60009"]]},
+{n:"Middletown Area Middle School",a:"215 Oberlin Road, Middletown, PA 17057",p:"717-930-0739",f:"717-944-0591",ad:[["Principal","Dr. Shannon L. Wevodau","swevodau"],["Assistant Principal","Mr. Michael DeFilippo","mdefilippo"]],co:[["School Counselor (A-K)","Mrs. Lynette Good","lgood","5310"],["School Counselor (L-Z)","Mrs. Kiersten Betancourt","krobinson","5004"],["Guidance and Attendance Secretary","Mrs. Keim Cowan","kcowan","5006"],["MAMS Social Worker","Ms. Amy McPhilemy","amcphilemy","5005"]]}];
+function tel(p,x){return'<a href="tel:'+p.replace(/-/g,"")+'">'+p+(x?" ext. "+x:"")+'</a>'}
+function mail(u){return'<a href="mailto:'+u+'@raiderweb.org">'+u+'@raiderweb.org</a>'}
+function row(k,v){return'<div class="row"><span class="k">'+k+'</span><span>'+v+'</span></div>'}
+var sp=0,hp=0;
+function drawSchool(){var s=S[sp];$("sName").textContent=s.n;$("sPg").textContent=(sp+1)+" of "+S.length;$("sPrev").disabled=!sp;$("sNext").disabled=sp===S.length-1;
+ var h='<div class="card"><h3>Contact</h3>'+row("Address",s.a)+row("Phone",tel(s.p))+row("Fax",s.f)+'</div><div class="card" style="--i:1"><h3>Administration</h3>';
+ s.ad.forEach(function(a){h+=row(a[0],a[1])+row("Email",mail(a[2]))});$("sGrid").innerHTML=h+'</div>'}
+function drawHelp(){var s=S[hp];$("hName").textContent=s.n;$("hPg").textContent=(hp+1)+" of "+S.length;$("hPrev").disabled=!hp;$("hNext").disabled=hp===S.length-1;
+ $("hGrid").innerHTML=s.co.map(function(c,i){return'<div class="card" style="--i:'+i+'"><div class="sub">'+c[0]+'</div><h3>'+c[1]+'</h3>'+row("Phone",tel(s.p,c[3]))+row("Email",mail(c[2]))+'</div>'}).join("")}
+$("sPrev").onclick=function(){sp--;drawSchool()};$("sNext").onclick=function(){sp++;drawSchool()};
+$("hPrev").onclick=function(){hp--;drawHelp()};$("hNext").onclick=function(){hp++;drawHelp()};
+var T=[["School year","08/27/2026","06/09/2027",180],["Semester 1","08/27/2026","01/22/2027",90],["Semester 2","01/25/2027","06/09/2027",90],["Quarter 1","08/27/2026","11/04/2026",45],["Quarter 2","11/05/2026","01/22/2027",45],["Quarter 3","01/25/2027","04/05/2027",45],["Quarter 4","04/06/2027","06/09/2027",45]];
+$("terms").innerHTML="<thead><tr><th>Term</th><th>Start</th><th>End</th><th>Days</th></tr></thead><tbody>"+T.map(function(t){return"<tr><td>"+t[0]+"</td><td>"+t[1]+"</td><td>"+t[2]+"</td><td>"+t[3]+"</td></tr>"}).join("")+"</tbody>";
+
+
+var courses=("Honors U.S. History I 215|Environmental Science 351|Piano III 898|Honors Pre-Calc 424|Radio Communications I 984|Honors English II 125|French II 512|AP Government 244|AP Biology 348|AP Computer Science 10012|Chorus 907|Yearbook 190|AP Calculus (BC) 2446|Geometry 435|ESL - Math 451|Internship 601|Video Production & Animation I 10658|TV Production 613|Intro to Coding 805|Algebra II 420|R-English 3 563|Radio Communications III 986|Video Production & Animation II 10659|Honors World History 225|Accounting 651|Creative Writing - Story Writing 173|Geometry Theory & Structure 430|Band 901|AP Environmental Science 352|Criminal Justice 255|AP Chemistry 343|Spanish III 543|Health Science 937|R-English 2 562|Honors Geometry w/Trig 423|Lifetime Fitness 9544|AP Language and Composition 146|Forensics 336|Reading 557|Interior Design I 747|Band/Chorus 919|AP Literature and Composition 145|Earth System Science 314|Creative Living 742|AP U.S. History 235|Physics I 340|Ceramics and Pottery 873|World History 220|Probability & Statistics 442|Art I 855|Academic English II 120|Honors Chemistry 330|Spanish IV 544|Spanish I 541|Health 9934|21st Cent Skills/Entrepreneurship 605|Radio Communications II 985|U.S. History I 211|ESL Support 182|U.S. History II 231|Pre-Calculus/Trigonometry 426|Digital Photography Tech 798|Intro to Business 633|Public Speaking 160|Graphic Arts Tech III 799|Art II 856|ESL English 181|Personal Finance 612|STEM 427|Study Hall 999|Philosophy 268|Honors Algebra I 409|AP Calculus (AB) 445|Honors Algebra II 422|Radio Communications IV 987|French I 511|Spanish II 542|Sociology 252|Sports & Entertainment Marketing 641|Art IV 865|Arts and Crafts 866|Anatomy and Physiology 939|Academic English III 130|Honors English IV 144|Adaptive Physical Educ 915|Academic Biology 322|Algebra I 412|Piano II 896|Dramatic Arts 169|Honors U.S. History II 232|Economics & Government 240|Internship 602|Guitar I 883|Mythology 170|AP Psychology 203|R-English 1 561|History of Rock & Roll 870|Honors Biology 324|Guitar III 885|Academic English IV 140|AP Statistics 204|Academic Chemistry 332|Intro to Materials & Manufacturing 789|Zoology 335|Graphic Arts Tech I 792|Art III 857|Guitar II 895|Athletic Training 938|Psychology 254|Applied Math 9449|Academic English I 110|Pre-Algebra 411|French III 513|R-English 4 564|Sectionals 901S|AP Human Geography 236|Calculus 469|Child Development 744|Graphic Arts Tech II 793|Strength and Conditioning 941|Sports and Games 955|Children’s Literature and Story Telling 171|Accounting II 652|Honors English I 115|Abnormal Psychology 256|Piano I 888|Honors English III 135").split("|").map(function(s){var i=s.lastIndexOf(" ");return{n:s.slice(0,i),c:s.slice(i+1)}}).sort(function(a,b){return a.n.localeCompare(b.n)});
+var cp=0,PER=15,cf=courses;
+function drawCourses(){var pg=Math.max(1,Math.ceil(cf.length/PER));cp=Math.min(cp,pg-1);$("cCount").textContent=cf.length+" courses";
+ $("cList").innerHTML=cf.slice(cp*PER,cp*PER+PER).map(function(c,i){var d='style="animation-delay:'+i*25+'ms"';return"<div "+d+">"+c.n.replace(/&/g,"&amp;")+'</div><div class="n" '+d+'>'+c.c+"</div>"}).join("")||'<div style="grid-column:1/-1;color:var(--mu)">No courses match.</div>';
+ $("cPg").textContent="Page "+(cp+1)+" of "+pg;$("cPrev").disabled=!cp;$("cNext").disabled=cp>=pg-1}
+$("cq").oninput=function(){var q=this.value.trim().toLowerCase();cf=courses.filter(function(c){return c.n.toLowerCase().indexOf(q)>-1||c.c.toLowerCase().indexOf(q)>-1});cp=0;drawCourses()};
+$("cPrev").onclick=function(){cp--;drawCourses()};$("cNext").onclick=function(){cp++;drawCourses()};
+
+
+var R=document.documentElement,pc="#7c7cff";
+R.classList.add("intro");setTimeout(function(){R.classList.remove("intro")},4800);
+var TH=[["dark","Indigo","#7c7cff"],["light","Light","#5555ee"],["amoled","Amoled","#e8e8ff"],["ocean","Ocean","#38bdf8"],["sunset","Sunset","#ff7a45"],["forest","Forest","#34d399"],["rose","Rose","#ff5fa2"]];
+function toast(m){var e=document.createElement("div");e.className="tst";e.textContent=m;$("toast").appendChild(e);setTimeout(function(){e.classList.add("out");setTimeout(function(){e.remove()},400)},2200)}
+function applyTheme(id,quiet){R.dataset.theme=id;store("rp_theme",id);pc=getComputedStyle(R).getPropertyValue("--ac").trim()||pc;
+  Array.prototype.forEach.call(document.querySelectorAll("[data-th]"),function(b){b.classList.toggle("on",b.dataset.th===id)});
+  if(!quiet)toast(TH.filter(function(x){return x[0]===id})[0][1]+" theme")}
+var menu=$("menu");
+function thBtn(x,cls){var b=document.createElement("button");b.className=cls;b.dataset.th=x[0];b.innerHTML='<i style="background:'+x[2]+'"></i>'+x[1];b.onclick=function(){applyTheme(x[0]);menu.classList.remove("open")};return b}
+TH.forEach(function(x){menu.appendChild(thBtn(x,"mi"));$("thGrid").appendChild(thBtn(x,"thc"))});
+$("theme").onclick=function(e){e.stopPropagation();menu.classList.toggle("open")};
+document.addEventListener("click",function(){menu.classList.remove("open")});
+applyTheme(TH.some(function(x){return x[0]===R.dataset.theme})?R.dataset.theme:"dark",true);
+
+var P={anim:1,fx:reduce?0:1,tilt:1,compact:0};
+try{var sp0=JSON.parse(store("rp_prefs")||"{}");for(var k0 in sp0)P[k0]=sp0[k0]}catch(e){}
+function applyPrefs(){R.dataset.anim=P.anim?"on":"off";if(P.compact)R.dataset.compact="1";else delete R.dataset.compact;$("fx").style.display=P.fx?"":"none";store("rp_prefs",JSON.stringify(P))}
+[["anim","Animations","Motion across pages, cards and hovers"],["fx","Floating particles","Drifting dots behind the page"],["tilt","3D card tilt","App cards lean toward your cursor"],["compact","Compact cards","Smaller app cards so more fit on screen"]].forEach(function(s){
+  var r=document.createElement("div");r.className="srow";r.innerHTML='<div><b>'+s[1]+'</b><div class="sub">'+s[2]+'</div></div>';
+  var b=document.createElement("button");b.className="tg";b.setAttribute("role","switch");b.setAttribute("aria-label",s[1]);
+  function sync(){b.setAttribute("aria-checked",!!P[s[0]])}sync();
+  b.onclick=function(){P[s[0]]=P[s[0]]?0:1;sync();applyPrefs();if(s[0]==="compact")draw()};
+  r.appendChild(b);$("sw").appendChild(r)});
+applyPrefs();
+$("dPin").onclick=function(){favs=[];store("rp_favs","[]");draw();toast("Pinned apps cleared")};
+$("dRec").onclick=function(){recs=[];store("rp_recs","[]");draw();toast("Recent apps cleared")};
+$("dRep").onclick=function(){location.reload()};
+$("dAll").onclick=function(){try{localStorage.clear()}catch(e){}location.reload()};
+
+var tb=$("top");function sc(){var m=R.scrollHeight-innerHeight;$("sp").style.transform="scaleX("+(m>0?scrollY/m:0)+")";tb.classList.toggle("show",scrollY>500)}
+addEventListener("scroll",sc,{passive:true});tb.onclick=function(){scrollTo({top:0,behavior:"smooth"})};
+
+var PH=["Search Canvas...","Search Desmos...","Search college tools...","Search Khan Academy...","Search by subject...","Search Google Docs..."],pi=0,pj=0,pd=0;
+(function tw(){var q=$("q");if(document.activeElement!==q&&!q.value){var s=PH[pi];if(!pd){pj++;q.placeholder=s.slice(0,pj)+"|";if(pj>=s.length){pd=1;setTimeout(tw,1600);return}}else{pj--;q.placeholder=s.slice(0,pj)+"|";if(pj<=0){pd=0;pi=(pi+1)%PH.length}}}setTimeout(tw,pd?35:75)})();
+
+document.addEventListener("pointerdown",function(e){var b=e.target.closest&&e.target.closest(".ibtn,.chip,.tabs button");if(!b||!P.anim)return;var r=b.getBoundingClientRect(),s=document.createElement("span"),d=Math.max(r.width,r.height)*2;s.className="rip";s.style.cssText="width:"+d+"px;height:"+d+"px;left:"+(e.clientX-r.left-d/2)+"px;top:"+(e.clientY-r.top-d/2)+"px";b.appendChild(s);setTimeout(function(){s.remove()},650)});
+var o1=document.querySelector(".o1"),o2=document.querySelector(".o2"),touch=matchMedia("(hover:none)").matches;
+document.addEventListener("mousemove",function(e){
+  if(P.anim){var x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;o1.style.translate=(x*70)+"px "+(y*70)+"px";o2.style.translate=(-x*70)+"px "+(-y*70)+"px"}
+  var a=e.target.closest&&e.target.closest(".app");
+  if(a&&P.tilt&&P.anim&&!touch){var r=a.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;a.style.transform="perspective(700px) rotateX("+(-py*9)+"deg) rotateY("+(px*9)+"deg) translateY(-4px)"}});
+document.addEventListener("mouseout",function(e){var a=e.target.closest&&e.target.closest(".app");if(a&&!a.contains(e.relatedTarget))a.style.transform=""});
+
+var cv=$("fx"),cx=cv.getContext("2d"),pts=[];
+function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();addEventListener("resize",rs);
+for(var pi2=0;pi2<46;pi2++)pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.8+.6});
+(function loop(){if(P.fx){cx.clearRect(0,0,cv.width,cv.height);cx.fillStyle=pc;cx.strokeStyle=pc;
+  pts.forEach(function(p,i){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>cv.width)p.vx*=-1;if(p.y<0||p.y>cv.height)p.vy*=-1;cx.globalAlpha=.5;cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);cx.fill();
+    for(var j=i+1;j<pts.length;j++){var q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<130){cx.globalAlpha=(1-d/130)*.18;cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.stroke()}}})}
+  requestAnimationFrame(loop)})();
+
+var CIR=2*Math.PI*52,tl0=1500,tl=1500,tt=null,rf=$("rf");rf.style.strokeDasharray=CIR;
+function fmt(s){return Math.floor(s/60)+":"+("0"+s%60).slice(-2)}
+function tdraw(){$("tm").textContent=fmt(tl);rf.style.strokeDashoffset=CIR*(1-tl/tl0)}
+function tstop(){clearInterval(tt);tt=null;$("tgo").textContent="Start"}
+Array.prototype.forEach.call(document.querySelectorAll("[data-m]"),function(b){b.onclick=function(){tstop();tl0=tl=+b.dataset.m*60;tdraw()}});
+$("tgo").onclick=function(){if(tt){tstop();return}$("tgo").textContent="Pause";tt=setInterval(function(){tl--;tdraw();if(tl<=0){tstop();toast("Timer finished")}},1000)};
+$("trs").onclick=function(){tstop();tl=tl0;tdraw()};tdraw();
+
+function rowsUI(host,mk,calc,n){var add=function(){var r=document.createElement("div");r.className="trow";mk(r);var x=document.createElement("button");x.className="x";x.textContent="Remove";x.setAttribute("aria-label","Remove row");x.onclick=function(){r.remove();calc()};r.appendChild(x);Array.prototype.forEach.call(r.querySelectorAll("input,select"),function(i){i.oninput=calc;i.onchange=calc});host.appendChild(r);calc()};for(var i=0;i<n;i++)add();return add}
+function letter(p){return p>=90?"A":p>=80?"B":p>=70?"C":p>=60?"D":"F"}
+function gcalc(){var s=0,w=0;Array.prototype.forEach.call($("gr").children,function(r){var i=r.querySelectorAll("input"),a=parseFloat(i[0].value),b=parseFloat(i[1].value);if(!isNaN(a)&&!isNaN(b)&&b>0){s+=a*b;w+=b}});$("gres").innerHTML=w?'Weighted average <b>'+(s/w).toFixed(1)+'%</b> ('+letter(s/w)+') across '+w+'% of the grade':"Enter scores and weights"}
+$("gadd").onclick=rowsUI($("gr"),function(r){r.innerHTML='<input type="number" min="0" placeholder="Score %" aria-label="Score"><input type="number" min="0" placeholder="Weight %" aria-label="Weight">'},gcalc,3);
+var GP={"A":4,"A-":3.7,"B+":3.3,"B":3,"B-":2.7,"C+":2.3,"C":2,"C-":1.7,"D":1,"F":0};
+function pcalc(){var s=0,c=0;Array.prototype.forEach.call($("gp").children,function(r){var g=GP[r.querySelector("select").value],cr=parseFloat(r.querySelector("input").value);if(!isNaN(cr)&&cr>0){s+=g*cr;c+=cr}});$("pres").innerHTML=c?'GPA <b>'+(s/c).toFixed(2)+'</b> on a 4.0 scale':"Add your classes"}
+$("padd").onclick=rowsUI($("gp"),function(r){r.innerHTML='<select aria-label="Grade">'+Object.keys(GP).map(function(g){return"<option>"+g+"</option>"}).join("")+'</select><input type="number" min="0" step="0.5" value="1" aria-label="Credits">'},pcalc,4);
+function fcalc(){var c=parseFloat($("fc").value),w=parseFloat($("fw").value)/100,g=parseFloat($("fg").value);if(isNaN(c)||isNaN(w)||isNaN(g)||w<=0){$("fres").textContent="Fill in all three boxes";return}var n=(g-c*(1-w))/w;$("fres").innerHTML=n>100?'You would need <b>'+n.toFixed(1)+'%</b>, which is above 100%. Go for the highest score you can.':n<=0?'Your goal is already locked in, even with a 0% on the final.':'You need <b>'+n.toFixed(1)+'%</b> on the final'}
+["fc","fw","fg"].forEach(function(i){$(i).oninput=fcalc});
+var todo=[];try{todo=JSON.parse(store("rp_todo")||"[]")}catch(e){}
+function sv(){store("rp_todo",JSON.stringify(todo))}
+function tdr(nw){var u=$("tdl");u.innerHTML="";todo.forEach(function(t,i){var li=document.createElement("li");if(i===nw)li.className="new";if(t.d)li.classList.add("done");var b=document.createElement("button");b.className="tx";b.textContent=t.t;b.onclick=function(){t.d=!t.d;sv();tdr()};var x=document.createElement("button");x.className="x";x.textContent="Remove";x.onclick=function(){li.classList.add("gone");setTimeout(function(){todo.splice(i,1);sv();tdr()},250)};li.appendChild(b);li.appendChild(x);u.appendChild(li)});$("tdc").textContent=todo.length?"("+todo.filter(function(t){return!t.d}).length+" left)":""}
+function tadd(){var v=$("tdi").value.trim();if(!v)return;todo.push({t:v,d:0});$("tdi").value="";sv();tdr(todo.length-1)}
+$("tda").onclick=tadd;$("tdi").onkeydown=function(e){if(e.key==="Enter")tadd()};tdr();
+var nt=$("nt");nt.value=store("rp_note")||"";nt.oninput=function(){store("rp_note",nt.value);$("ns").textContent="Saved on this device"};
+
+var EV={"2026-08-27":"First day of school. Quarter 1 and Semester 1 begin.","2026-11-04":"Quarter 1 ends.","2026-11-05":"Quarter 2 begins.","2027-01-22":"Quarter 2 and Semester 1 end.","2027-01-25":"Semester 2 and Quarter 3 begin.","2027-04-05":"Quarter 3 ends.","2027-04-06":"Quarter 4 begins.","2027-06-09":"Last day of school."};
+var now=new Date(),cy=now.getFullYear(),cm=now.getMonth(),MN="January February March April May June July August September October November December".split(" ");
+function iso(y,m,d){return y+"-"+("0"+(m+1)).slice(-2)+"-"+("0"+d).slice(-2)}
+function drawCal(){
+  $("mTitle").textContent=MN[cm]+" "+cy;
+  var first=new Date(cy,cm,1).getDay(),dim=new Date(cy,cm+1,0).getDate(),ti=iso(now.getFullYear(),now.getMonth(),now.getDate()),h="SMTWTFS".split("").map(function(d){return'<div class="dh">'+d+'</div>'}).join("");
+  for(var i=0;i<first;i++)h+="<div></div>";
+  for(var d=1;d<=dim;d++){var k=iso(cy,cm,d),wd=(first+d-1)%7,inY=k>="2026-08-27"&&k<="2027-06-09"&&wd>0&&wd<6;h+='<button class="day'+(k===ti?" today":"")+(inY?" in":"")+(EV[k]?" ev":"")+'" data-k="'+k+'" style="--i:'+d+'">'+d+"</button>"}
+  $("cg").innerHTML=h;
+  Array.prototype.forEach.call($("cg").querySelectorAll(".day"),function(b){b.onclick=function(){toast(EV[b.dataset.k]||"No key dates on this day")}});
+}
+$("mP").onclick=function(){cm--;if(cm<0){cm=11;cy--}drawCal()};$("mN").onclick=function(){cm++;if(cm>11){cm=0;cy++}drawCal()};
+var ys=new Date(2026,7,27),ye=new Date(2027,5,9),pr=Math.max(0,Math.min(1,(now-ys)/(ye-ys)));
+setTimeout(function(){$("yb").style.width=(pr*100).toFixed(1)+"%"},300);
+$("ys").textContent=now<ys?"The school year starts in "+Math.ceil((ys-now)/864e5)+" days.":now>ye?"The school year is over. Enjoy the break.":Math.round(pr*100)+"% of the school year has passed. "+Math.ceil((ye-now)/864e5)+" calendar days until the last day.";
+$("ev").innerHTML=Object.keys(EV).map(function(k){var d=new Date(k+"T00:00:00");return'<div class="row'+(d<now?" past":"")+'"><span class="k">'+MN[d.getMonth()].slice(0,3)+" "+d.getDate()+", "+d.getFullYear()+'</span><span>'+EV[k]+'</span></div>'}).join("");
+drawCal();sc();
+
+draw();drawSchool();drawHelp();drawCourses();
+var t1=store("rp_tab");go(VIEWS.some(function(v){return v[0]===t1})?t1:"apps");
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place);
+})();
+</script>
+</body>
+</html>
