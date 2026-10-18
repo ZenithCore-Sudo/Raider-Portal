@@ -15,11 +15,12 @@
 :root[data-theme="forest"]{--bg:#050e09;--sf:rgba(120,255,180,.04);--sf2:rgba(120,255,180,.08);--ln:rgba(130,255,190,.14);--tx:#eafff3;--mu:#85ab96;--ac:#34d399;--ac2:#8cf0c4;--glow:rgba(52,211,153,.22);--nav:rgba(5,14,9,.74);--on:#03140a;--ac3:#a3e635;--o2:rgba(163,230,53,.09)}
 :root[data-theme="rose"]{--bg:#10060c;--sf:rgba(255,120,180,.045);--sf2:rgba(255,120,180,.09);--ln:rgba(255,140,190,.15);--tx:#ffeef6;--mu:#b88aa2;--ac:#ff5fa2;--ac2:#ffa3cc;--glow:rgba(255,95,162,.24);--nav:rgba(16,6,12,.74);--on:#1c0612;--ac3:#c084fc;--o2:rgba(192,132,252,.13)}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-padding-top:120px;scroll-behavior:smooth}
-body{background:var(--bg);color:var(--tx);font-family:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.45;overflow-x:hidden;min-height:100vh}
+html{scroll-padding-top:120px;scroll-behavior:smooth;background:var(--bg)}
+body{background:var(--bg);color:var(--tx);font-family:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.45;overflow-x:hidden;min-height:100vh;min-height:100dvh}
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--ac2);outline-offset:3px}
+
 #loader{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:opacity .7s ease,visibility .7s;animation:failsafe .1s 6s forwards}
 #loader.done{opacity:0;visibility:hidden}
 @keyframes failsafe{to{opacity:0;visibility:hidden}}
@@ -32,12 +33,14 @@ a{color:inherit}
 .lbar{width:min(320px,70vw);height:9px;border-radius:9px;background:var(--sf2);overflow:hidden}
 .lbar i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--ac),var(--ac2));box-shadow:0 0 18px var(--glow)}
 #lpct{color:var(--mu);font-size:.95rem;letter-spacing:.04em;font-variant-numeric:tabular-nums}
-.orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;opacity:.55}
+
+.orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;opacity:.55;will-change:transform}
 .o1{width:520px;height:520px;background:var(--glow);top:-160px;left:-120px;animation:d1 22s ease-in-out infinite alternate}
 .o2{width:460px;height:460px;background:var(--o2);bottom:-160px;right:-100px;animation:d2 26s ease-in-out infinite alternate}
 @keyframes d1{to{transform:translate(220px,140px) scale(1.2)}}
 @keyframes d2{to{transform:translate(-200px,-120px) scale(1.15)}}
 .site{position:relative;z-index:1}
+
 .bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:18px;padding:12px clamp(14px,3vw,36px);background:var(--nav);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--ln)}
 .brand{font-weight:600;font-size:1.2rem;white-space:nowrap}.brand b{font-weight:600;color:var(--ac)}
 .tabs{display:flex;gap:4px;position:relative;margin:0 auto;padding:4px;background:var(--sf);border:1px solid var(--ln);border-radius:99px;overflow-x:auto;max-width:100%}
@@ -50,6 +53,7 @@ a{color:inherit}
 main{max-width:1280px;margin:0 auto;padding:0 clamp(14px,3vw,36px) 70px}
 .panel{display:none}.panel.on{display:block;animation:in .5s cubic-bezier(.2,.8,.2,1)}
 @keyframes in{from{opacity:0;transform:translateY(16px)}}
+
 .hero{padding:clamp(38px,8vw,90px) 0 26px;text-align:center}
 .hero h1{font-size:clamp(2.6rem,8vw,5.4rem);font-weight:600;letter-spacing:-.045em;line-height:1}
 .hero h1 b{font-weight:600;background:linear-gradient(100deg,var(--ac),var(--ac3),var(--ac));background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 6s linear infinite}
@@ -84,6 +88,7 @@ main{max-width:1280px;margin:0 auto;padding:0 clamp(14px,3vw,36px) 70px}
 .pin.on{background:var(--ac);border-color:var(--ac);color:var(--on)}
 @media(hover:none){.pin{opacity:1;transform:none}}
 .empty{border:1px dashed var(--ln);border-radius:16px;padding:34px;color:var(--mu);text-align:center}
+
 .ph{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:600;letter-spacing:-.03em;padding:38px 0 20px}
 .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
 .card{background:var(--sf);border:1px solid var(--ln);border-radius:18px;padding:20px;transition:.25s;animation:pop .5s both;animation-delay:calc(var(--i,0)*60ms)}
@@ -111,7 +116,7 @@ tbody tr:hover{background:var(--sf2)}
 @media(prefers-reduced-motion:reduce){*,*::before{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}}
 
 #sp{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;background:linear-gradient(90deg,var(--ac),var(--ac3));transform-origin:left;transform:scaleX(0);box-shadow:0 0 12px var(--glow)}
-#fx{position:fixed;inset:0;z-index:0;pointer-events:none}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .tabs button{padding:8px 15px}
 .ibtn,.chip,.tabs button{position:relative;overflow:hidden}
 .rip{position:absolute;border-radius:50%;background:var(--glow);transform:scale(0);animation:rp .65s ease-out forwards;pointer-events:none}
@@ -158,16 +163,73 @@ tbody tr:hover{background:var(--sf2)}
 #tdl li.gone{opacity:0;transform:translateX(30px)}
 #tdl .tx{flex:1;text-align:left}#tdl li.done .tx{text-decoration:line-through;color:var(--mu)}
 .tdh{display:flex;gap:8px}
-.cal2{display:grid;grid-template-columns:minmax(300px,1.3fr) 1fr;gap:14px}
-@media(max-width:820px){.cal2{grid-template-columns:1fr}}
-.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.dh{text-align:center;color:var(--mu);font-size:.8rem;padding:4px 0}
-.day{aspect-ratio:1;border-radius:12px;border:1px solid transparent;color:var(--mu);position:relative;transition:.2s;animation:pop .4s both;animation-delay:calc(var(--i)*12ms)}
-.day.in{background:var(--sf2);color:var(--tx)}
-.day:hover{border-color:var(--ac);transform:scale(1.08)}
-.day.today{background:var(--ac);color:var(--on);font-weight:700;box-shadow:0 0 18px var(--glow)}
-.day.ev::after{content:"";position:absolute;bottom:5px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:var(--ac3);animation:pulse 1.8s infinite}
-@keyframes pulse{50%{transform:scale(1.8);opacity:.5}}
+.cal2{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(280px,1fr);gap:14px;align-items:start}
+@media(max-width:920px){.cal2{grid-template-columns:1fr}}
+.calhead{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:-8px 0 16px}.calhead .sp{flex:1}
+.ibtn.pri{background:linear-gradient(135deg,var(--ac),var(--ac3));color:var(--on);border-color:transparent;text-decoration:none;box-shadow:0 4px 18px var(--glow)}
+.ibtn.pri:hover{border-color:transparent}
+.stack{display:flex;flex-direction:column;gap:14px;min-width:0}
+.mh{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.mh h2{flex:1;font-size:clamp(1.5rem,3.2vw,2.1rem);font-weight:600;letter-spacing:-.035em}
+.nb{width:38px;height:38px;flex:none;border-radius:50%;border:1px solid var(--ln);background:var(--sf);display:grid;place-items:center;transition:.2s}
+.nb:hover{border-color:var(--ac);background:var(--sf2)}
+.nb svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.dh{color:var(--mu);font-size:.78rem;padding:2px 8px 6px}
+.day{min-height:94px;padding:7px;border-radius:12px;border:1px solid var(--ln);color:var(--mu);position:relative;display:flex;flex-direction:column;align-items:stretch;gap:5px;text-align:left;overflow:hidden;transition:border-color .2s,background .2s}
+.cgrid.fresh .day{animation:pop .4s both;animation-delay:calc(var(--i)*10ms)}
+.day.in{background:var(--sf);color:var(--tx)}
+.day.wk{opacity:.55}
+.day:hover{border-color:var(--ac);background:var(--sf2)}
+.day .n{width:26px;height:26px;display:grid;place-items:center;border-radius:50%;font-size:.9rem;font-weight:500;font-variant-numeric:tabular-nums}
+.day.today .n{background:var(--ac);color:var(--on);font-weight:700;box-shadow:0 0 14px var(--glow)}
+.day.sel{border-color:var(--ac);box-shadow:inset 0 0 0 1px var(--ac);background:var(--sf2)}
+.pls{display:flex;flex-direction:column;gap:3px;min-width:0}
+.pl{--c:var(--ac);font-size:.7rem;line-height:1.25;padding:2px 6px;border-radius:6px;border-left:3px solid var(--c);background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl.m{--c:var(--ac3)}.pl.u{--c:#34d399}
+.pl.more{--c:var(--ln);color:var(--mu);background:none}
+@media(max-width:640px){
+ .day{min-height:54px;padding:4px;gap:3px;align-items:center}
+ .day .n{width:24px;height:24px;font-size:.82rem}
+ .pls{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:3px}
+ .pl{width:7px;height:7px;padding:0;border:0;border-radius:50%;background:var(--c);font-size:0;overflow:hidden}
+ .pl.more{display:none}
+ .dh{padding:2px 0 6px;text-align:center;font-size:.7rem}
+}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;color:var(--mu);font-size:.82rem}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:10px;height:10px;border-radius:3px;background:var(--ac)}.legend i.m{background:var(--ac3)}.legend i.u{background:#34d399}
+.sdl{display:flex;flex-direction:column;gap:6px;margin:12px 0}
+.el{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;background:var(--sf2);border-left:4px solid var(--ac);font-size:.93rem}
+.el.m{border-color:var(--ac3)}.el.u{border-color:#34d399}
+.el span{flex:1;min-width:0;overflow-wrap:anywhere}
+.el button{flex:none;color:var(--mu);font-size:.8rem;padding:2px 8px;border-radius:99px;border:1px solid var(--ln)}
+.el button:hover{color:var(--tx);border-color:var(--ac)}
+.addr{display:flex;gap:8px;margin-top:4px}
+.addr input{flex:1;min-width:0;padding:10px 14px;border-radius:99px;border:1px solid var(--ln);background:var(--sf);color:var(--tx);font:inherit;transition:.2s}
+.addr input:focus{outline:0;border-color:var(--ac);box-shadow:0 0 0 4px var(--glow)}
+.nx{display:flex;align-items:center;gap:16px;margin-top:8px}
+.nx b{font-size:2.8rem;font-weight:600;letter-spacing:-.04em;line-height:1;min-width:2ch;text-align:center;font-variant-numeric:tabular-nums;color:var(--ac2)}
+.nx b small{display:block;font-size:.75rem;font-weight:400;color:var(--mu);letter-spacing:0}
+.qs{display:flex;gap:4px;margin:12px 0 8px}
+.qs button{position:relative;display:flex;flex-direction:column;gap:6px;min-width:0;text-align:left}
+.qs .bar2{height:12px;border-radius:8px;background:var(--sf2);overflow:hidden}
+.qs .bar2 i{display:block;height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,var(--ac),var(--ac3));transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.qs span{font-size:.78rem;color:var(--mu)}
+.qs button:hover span,.qs button.cur span{color:var(--tx)}
+.kd{width:100%;text-align:left;align-items:baseline;transition:background .2s;border-radius:8px}
+.kd:hover{background:var(--sf2)}
+.kd .k{min-width:96px;flex:none}.kd .dt{width:8px;height:8px;border-radius:50%;background:var(--ac);flex:none;align-self:center}
+.kd.m .dt{background:var(--ac3)}.kd.u .dt{background:#34d399}
+.pl.c{--c:#ff5a8c}.pl.e{--c:#f5b942}.pl.v{--c:#4ec2e8}.pl.b{--c:#9aa3c7}
+.el.c{border-color:#ff5a8c}.el.e{border-color:#f5b942}.el.v{border-color:#4ec2e8}.el.b{border-color:#9aa3c7}
+.legend i.c{background:#ff5a8c}.legend i.e{background:#f5b942}.legend i.v{background:#4ec2e8}.legend i.b{background:#9aa3c7}
+.kd.c .dt{background:#ff5a8c}.kd.e .dt{background:#f5b942}.kd.v .dt{background:#4ec2e8}.kd.b .dt{background:#9aa3c7}
+.day.cl{background:color-mix(in srgb,#ff5a8c 14%,var(--sf));border-color:color-mix(in srgb,#ff5a8c 35%,var(--ln))}
+.kh{display:flex;align-items:center;gap:10px;margin-bottom:6px}.kh h3{flex:1;margin:0}.kh .ibtn{padding:5px 12px;font-size:.82rem}
+.kdl{max-height:380px;overflow-y:auto;overscroll-behavior:contain;margin:0 -6px;padding:0 6px}
+
+#p-cal .card{background:color-mix(in srgb,var(--bg) 60%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .pbar{height:12px;border-radius:12px;background:var(--sf2);overflow:hidden;margin:10px 0}
 .pbar i{display:block;height:100%;width:0;border-radius:12px;background:linear-gradient(90deg,var(--ac),var(--ac3));transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
 .row.past{opacity:.5}
@@ -333,9 +395,16 @@ html[data-noqf] #cmdBtn{display:none}
 
   <section class="panel" id="p-cal">
     <h1 class="ph">Calendar</h1>
+    <div class="calhead"><span class="sub">Middletown Area School District, 2026-27</span><span class="sp"></span><button class="ibtn" id="cT">Today</button><a class="ibtn pri" href="https://www.raiderweb.org/our_district/district_calendars" target="_blank" rel="noopener">District calendars</a></div>
     <div class="cal2">
-      <div class="card"><div class="pager"><button class="ibtn" id="mP">Prev</button><h2 id="mTitle" style="text-align:center"></h2><button class="ibtn" id="mN">Next</button></div><div class="cgrid" id="cg"></div></div>
-      <div class="card"><h3>School year progress</h3><div class="pbar"><i id="yb"></i></div><div class="sub" id="ys"></div><h3 style="margin-top:22px">Key dates</h3><div id="ev"></div></div>
+      <div class="card"><div class="mh"><h2 id="mTitle"></h2><button class="nb" id="mP" aria-label="Previous month"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><button class="nb" id="mN" aria-label="Next month"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div><div class="cgrid fresh" id="cg"></div><div class="legend"><span><i class="c"></i>No school</span><span><i class="e"></i>Early dismissal</span><span><i class="m"></i>First and last day</span><span><i></i>Quarter changes</span><span><i class="b"></i>Board meeting</span><span><i class="v"></i>Events</span><span><i class="u"></i>My events</span></div></div>
+      <div class="stack">
+        <div class="card" id="sd"><h3 id="sdT"></h3><div class="sub" id="sdS"></div><div class="sdl" id="sdl"></div><div class="addr"><input id="ei" maxlength="60" placeholder="Add your own event" aria-label="New event title" autocomplete="off"><button class="ibtn" id="ea">Add</button></div><div class="sub" style="margin-top:8px">Your events are saved on this device only.</div></div>
+        <div class="card"><h3>Next key date</h3><div class="nx"><b id="nxN"></b><div><div id="nxT"></div><div class="sub" id="nxD"></div></div></div></div>
+        <div class="card"><h3>School year</h3><div class="qs" id="qs"></div><div class="sub" id="ys"></div></div>
+        <div class="card"><div class="kh"><h3>Key dates</h3><button class="ibtn" id="kp">Show past</button></div><div class="kdl" id="ev"></div></div>
+        <div class="card"><h3>More from the district</h3><p class="sub">This calendar follows the events the district lists on its website. Breaks, holidays and testing dates later in the year are posted there as calendar files.</p><div class="quick" style="margin-top:12px"><a class="ibtn" href="https://www.raiderweb.org/our_district/district_calendars" target="_blank" rel="noopener">District calendars</a><a class="ibtn" href="https://www.raiderweb.org/athletics/athletic_schedules" target="_blank" rel="noopener">Athletic schedules</a><a class="ibtn" href="https://www.raiderweb.org/our_district/inclement_weather_plan" target="_blank" rel="noopener">Inclement weather</a></div></div>
+      </div>
     </div>
   </section>
 
@@ -713,22 +782,100 @@ var sa=store("rp_accent");if(sa){accentApply(sa);clrIn.value=sa}
 applyPrefs();
 
 var EV={"2026-08-27":"First day of school. Quarter 1 and Semester 1 begin.","2026-11-04":"Quarter 1 ends.","2026-11-05":"Quarter 2 begins.","2027-01-22":"Quarter 2 and Semester 1 end.","2027-01-25":"Semester 2 and Quarter 3 begin.","2027-04-05":"Quarter 3 ends.","2027-04-06":"Quarter 4 begins.","2027-06-09":"Last day of school."};
+var ES={"2026-08-27":"First day","2026-11-04":"Q1 ends","2026-11-05":"Q2 begins","2027-01-22":"Q2 ends","2027-01-25":"Q3 begins","2027-04-05":"Q3 ends","2027-04-06":"Q4 begins","2027-06-09":"Last day"};
+var KT={"2026-08-27":"m","2027-06-09":"m"};
+var QT=[["Q1","2026-08-27","2026-11-04"],["Q2","2026-11-05","2027-01-22"],["Q3","2027-01-25","2027-04-05"],["Q4","2027-04-06","2027-06-09"]];
+var UE=[];try{UE=JSON.parse(store("rp_events")||"[]");if(!Array.isArray(UE))UE=[]}catch(e){UE=[]}
+function saveUE(){store("rp_events",JSON.stringify(UE))}
 var now=new Date(),cy=now.getFullYear(),cm=now.getMonth(),MN="January February March April May June July August September October November December".split(" ");
 function iso(y,m,d){return y+"-"+("0"+(m+1)).slice(-2)+"-"+("0"+d).slice(-2)}
-function drawCal(){
+function cDate(k){return new Date(k+"T00:00:00")}
+var cTk=iso(now.getFullYear(),now.getMonth(),now.getDate()),cSel=cTk,cToday=cDate(cTk);
+var OFF=[];
+Object.keys(EV).forEach(function(k){OFF.push({d:k,s:ES[k],t:EV[k],y:KT[k]||"q"})});
+function addO(d,s,t,y){OFF.push({d:d,s:s,t:t,y:y})}
+function addR(a,b,s,t,y){for(var d=a;d<=b;d++)addO("2026-10-"+("0"+d).slice(-2),s,t,y)}
+addO("2026-08-20","Orientation","Freshmen and new student orientation, Middletown Area High School","v");
+addO("2026-08-21","Orientation","Freshmen and new student orientation, Middletown Area High School","v");
+addR(13,16,"Book fair","Reid Elementary Book Fair, Reid Elementary School","v");
+addO("2026-10-14","HS bonfire","High School Homecoming Bonfire, 5:30 to 7:30 p.m.","v");
+addO("2026-10-16","MAPS photos","MAPS Picture Day, Middletown Area Primary School","v");
+addO("2026-10-16","Reid photos","Reid Elementary Picture Day","v");
+addO("2026-10-16","MS dance","Middle School Homecoming Dance, 2:45 to 4:00 p.m.","v");
+addO("2026-10-16","Alumni dinner","Alumni Homecoming Dinner and Hall of Fame Induction, 6:00 p.m.","v");
+addO("2026-10-17","Homecoming","MASD Homecoming Festivities: parade, football game vs. Susquehanna Township at 2:00 p.m., and the high school dance 6:30 to 9:30 p.m.","v");
+addO("2026-10-20","Board meeting","School Board Meeting, 7:00 p.m., Middletown Area High School","b");
+addO("2026-10-21","Post-secondary fair","High School Post Secondary Fair, Middletown Area High School","v");
+addO("2026-10-21","Math night","MAPS Bridges Math Family Night, 5:30 to 7:15 p.m.","v");
+addO("2026-10-22","Financial aid","Financial Aid Night, 6:00 to 7:30 p.m., Middletown Area High School","v");
+addO("2026-10-23","No school","No School for Students","c");
+addO("2026-11-02","Early dismissal","Elementary Early Dismissal","e");
+addO("2026-11-03","No school","No School for Students","c");
+addO("2026-11-05","Board meeting","School Board Meeting, 7:00 p.m., Middletown Area High School","b");
+addO("2026-11-11","Veterans program","Middle School Veterans Day program","v");
+var RK={c:0,e:1,m:2,q:3,b:4,v:5,u:6};
+function byDate(a,b){return a.d<b.d?-1:a.d>b.d?1:(RK[a.y]-RK[b.y])}
+function evOn(k){var a=OFF.filter(function(o){return o.d===k}).map(function(o){return{t:o.t,s:o.s,y:o.y}});UE.forEach(function(u,i){if(u.d===k)a.push({t:u.t,s:u.t,y:"u",i:i})});return a.sort(function(x,y){return RK[x.y]-RK[y.y]})}
+var showPast=false;
+function drawCal(anim){
+  var g=$("cg");g.classList.toggle("fresh",!!anim);g.innerHTML="";
   $("mTitle").textContent=MN[cm]+" "+cy;
-  var first=new Date(cy,cm,1).getDay(),dim=new Date(cy,cm+1,0).getDate(),ti=iso(now.getFullYear(),now.getMonth(),now.getDate()),h="SMTWTFS".split("").map(function(d){return'<div class="dh">'+d+'</div>'}).join("");
-  for(var i=0;i<first;i++)h+="<div></div>";
-  for(var d=1;d<=dim;d++){var k=iso(cy,cm,d),wd=(first+d-1)%7,inY=k>="2026-08-27"&&k<="2027-06-09"&&wd>0&&wd<6;h+='<button class="day'+(k===ti?" today":"")+(inY?" in":"")+(EV[k]?" ev":"")+'" data-k="'+k+'" style="--i:'+d+'">'+d+"</button>"}
-  $("cg").innerHTML=h;
-  Array.prototype.forEach.call($("cg").querySelectorAll(".day"),function(b){b.onclick=function(){toast(EV[b.dataset.k]||"No key dates on this day")}});
+  "Sun Mon Tue Wed Thu Fri Sat".split(" ").forEach(function(d){g.appendChild(mk("div","dh",d))});
+  var first=new Date(cy,cm,1).getDay(),dim=new Date(cy,cm+1,0).getDate();
+  for(var i=0;i<first;i++)g.appendChild(mk("div"));
+  for(var d=1;d<=dim;d++)(function(d){
+    var k=iso(cy,cm,d),wd=(first+d-1)%7,inY=k>="2026-08-27"&&k<="2027-06-09"&&wd>0&&wd<6,ev=evOn(k);
+    var b=mk("button","day"+(k===cTk?" today":"")+(k===cSel?" sel":"")+(inY?" in":"")+(wd===0||wd===6?" wk":"")+(ev.some(function(e){return e.y==="c"})?" cl":""));
+    b.dataset.k=k;b.style.setProperty("--i",d);
+    b.setAttribute("aria-label",cDate(k).toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"})+(ev.length?", "+ev.map(function(e){return e.t}).join(" "):""));
+    b.appendChild(mk("span","n",String(d)));
+    if(ev.length){var p=mk("div","pls");ev.slice(0,2).forEach(function(e){var x=mk("div","pl "+(e.y==="q"?"":e.y),e.s);x.title=e.t;p.appendChild(x)});if(ev.length>2)p.appendChild(mk("div","pl more","+"+(ev.length-2)+" more"));b.appendChild(p)}
+    b.onclick=function(){cPick(k)};g.appendChild(b)})(d);
 }
-$("mP").onclick=function(){cm--;if(cm<0){cm=11;cy--}drawCal()};$("mN").onclick=function(){cm++;if(cm>11){cm=0;cy++}drawCal()};
-var ys=new Date(2026,7,27),ye=new Date(2027,5,9),pr=Math.max(0,Math.min(1,(now-ys)/(ye-ys)));
-setTimeout(function(){$("yb").style.width=(pr*100).toFixed(1)+"%"},300);
-$("ys").textContent=now<ys?"The school year starts in "+Math.ceil((ys-now)/864e5)+" days.":now>ye?"The school year is over. Enjoy the break.":Math.round(pr*100)+"% of the school year has passed. "+Math.ceil((ye-now)/864e5)+" calendar days until the last day.";
-$("ev").innerHTML=Object.keys(EV).map(function(k){var d=new Date(k+"T00:00:00");return'<div class="row'+(d<now?" past":"")+'"><span class="k">'+MN[d.getMonth()].slice(0,3)+" "+d.getDate()+", "+d.getFullYear()+'</span><span>'+EV[k]+'</span></div>'}).join("");
-drawCal();sc();
+function cPick(k){cSel=k;Array.prototype.forEach.call($("cg").querySelectorAll(".day"),function(b){b.classList.toggle("sel",b.dataset.k===k)});drawSel()}
+function cJump(k){var d=cDate(k);cy=d.getFullYear();cm=d.getMonth();cSel=k;drawCal(true);drawSel();$("cg").scrollIntoView({behavior:"smooth",block:"nearest"})}
+function drawSel(){
+  var d=cDate(cSel),wd=d.getDay(),l=$("sdl");
+  $("sdT").textContent=d.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+  $("sdS").textContent=evOn(cSel).some(function(e){return e.y==="c"})?"No school for students":cSel===cTk?"Today":(wd===0||wd===6)?"Weekend":cSel>="2026-08-27"&&cSel<="2027-06-09"?"Within the school year":"Outside the school year";
+  l.innerHTML="";var ev=evOn(cSel);
+  if(!ev.length)l.appendChild(mk("div","sub","No key dates on this day."));
+  ev.forEach(function(e){var r=mk("div","el "+(e.y==="q"?"":e.y)),s=mk("span","",e.t);r.appendChild(s);
+    if(e.y==="u"){var x=mk("button","","Remove");x.setAttribute("aria-label","Remove "+e.t);x.onclick=function(){UE.splice(e.i,1);saveUE();cRefresh();toast("Event removed")};r.appendChild(x)}
+    l.appendChild(r)});
+}
+function drawNext(){
+  var all=OFF.concat(UE.map(function(u){return{d:u.d,t:u.t,y:"u"}})).filter(function(e){return cDate(e.d)>=cToday}).sort(byDate),n=all[0];
+  if(!n){$("nxN").textContent="";$("nxT").textContent="Nothing coming up";$("nxD").textContent="You are all caught up.";return}
+  var dd=Math.round((cDate(n.d)-cToday)/864e5);
+  $("nxN").innerHTML=dd===0?"Today":dd+"<small>"+(dd===1?"day":"days")+"</small>";
+  $("nxT").textContent=n.t;$("nxD").textContent=cDate(n.d).toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
+}
+function drawYear(){
+  var q=$("qs");q.innerHTML="";
+  QT.forEach(function(x){var a=cDate(x[1]),b=cDate(x[2]),len=Math.round((b-a)/864e5)+1,p=Math.max(0,Math.min(1,(now-a)/(b-a+864e5))),bt=mk("button",now>=a&&now<=b?"cur":"");
+    bt.style.flex=len+" 1 0";bt.setAttribute("aria-label",x[0]+", "+MN[a.getMonth()]+" "+a.getDate()+" to "+MN[b.getMonth()]+" "+b.getDate());
+    var br=mk("div","bar2"),f=mk("i");br.appendChild(f);bt.appendChild(br);bt.appendChild(mk("span","",x[0]));
+    bt.onclick=function(){cJump(x[1])};q.appendChild(bt);setTimeout(function(){f.style.width=(p*100).toFixed(1)+"%"},300)});
+  var ys=cDate("2026-08-27"),ye=cDate("2027-06-09"),pr=Math.max(0,Math.min(1,(now-ys)/(ye-ys)));
+  $("ys").textContent=now<ys?"The school year starts in "+Math.ceil((ys-now)/864e5)+" days.":now>ye?"The school year is over. Enjoy the break.":Math.round(pr*100)+"% of the school year has passed. "+Math.ceil((ye-now)/864e5)+" calendar days until the last day.";
+}
+function drawKey(){
+  var h=$("ev");h.innerHTML="";var n=0;
+  OFF.concat(UE.map(function(u){return{d:u.d,t:u.t,y:"u"}})).sort(byDate).forEach(function(e){
+    var d=cDate(e.d),past=d<cToday;if(past&&!showPast)return;n++;
+    var r=mk("button","row kd "+(e.y==="q"?"":e.y)+(past?" past":""));
+    r.appendChild(mk("span","dt"));r.appendChild(mk("span","k",MN[d.getMonth()].slice(0,3)+" "+d.getDate()+", "+d.getFullYear()));r.appendChild(mk("span","",e.t));
+    r.onclick=function(){cJump(e.d)};h.appendChild(r)});
+  if(!n)h.appendChild(mk("div","sub","No upcoming dates."));
+  $("kp").textContent=showPast?"Hide past":"Show past";
+}
+function cRefresh(){drawCal(false);drawSel();drawNext();drawKey()}
+$("mP").onclick=function(){cm--;if(cm<0){cm=11;cy--}drawCal(true)};$("mN").onclick=function(){cm++;if(cm>11){cm=0;cy++}drawCal(true)};
+$("cT").onclick=function(){cy=now.getFullYear();cm=now.getMonth();cSel=cTk;drawCal(true);drawSel()};
+function addEv(){var v=$("ei").value.trim();if(!v){$("ei").focus();return}UE.push({d:cSel,t:v});saveUE();$("ei").value="";cRefresh();toast("Event added")}
+$("kp").onclick=function(){showPast=!showPast;drawKey()};$("ea").onclick=addEv;$("ei").onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();addEv()}};
+drawCal(true);drawSel();drawNext();drawYear();drawKey();sc();
 
 var gT=0,GO={a:"apps",t:"tools",c:"cal",s:"school",u:"courses",h:"help",e:"settings"};
 document.addEventListener("keydown",function(e){
