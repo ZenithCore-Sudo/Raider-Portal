@@ -139,7 +139,6 @@ tbody tr:hover{background:var(--sf2)}
 .thc i{display:block;width:100%;height:52px;border-radius:10px}
 .thc:hover{transform:translateY(-4px) rotate(-1deg);border-color:var(--ac)}
 .thc.on{border-color:var(--ac);box-shadow:0 0 0 3px var(--glow)}
-.srow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--ln)}.srow:last-child{border:0}
 .tg{flex:none;width:50px;height:28px;border-radius:99px;background:var(--sf2);border:1px solid var(--ln);position:relative;transition:.3s}
 .tg::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--mu);transition:.35s cubic-bezier(.3,1.5,.5,1)}
 .tg[aria-checked="true"]{background:var(--ac);border-color:var(--ac)}.tg[aria-checked="true"]::after{transform:translateX(22px);background:var(--on)}
@@ -228,6 +227,17 @@ tbody tr:hover{background:var(--sf2)}
 .day.cl{background:color-mix(in srgb,#ff5a8c 14%,var(--sf));border-color:color-mix(in srgb,#ff5a8c 35%,var(--ln))}
 .kh{display:flex;align-items:center;gap:10px;margin-bottom:6px}.kh h3{flex:1;margin:0}.kh .ibtn{padding:5px 12px;font-size:.82rem}
 .kdl{max-height:380px;overflow-y:auto;overscroll-behavior:contain;margin:0 -6px;padding:0 6px}
+
+.a2{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
+@media(max-width:920px){.a2{grid-template-columns:1fr}}
+.alc{display:flex;flex-direction:column;gap:10px}
+.alc h3{margin:0}.alc p{flex:1}
+.srow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--ln)}.srow:last-child{border:0}
+
+.bar{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
+.bar .tabs{margin:0;justify-self:center}
+.bar .rt{display:flex;align-items:center;gap:10px;justify-self:end}
+@media(max-width:1180px){.bar{grid-template-columns:1fr auto;row-gap:10px}.bar .tabs{grid-column:1/-1;grid-row:2}.chips{top:112px}.cw{top:112px}html{scroll-padding-top:170px}}
 
 #p-cal .card{background:color-mix(in srgb,var(--bg) 60%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .pbar{height:12px;border-radius:12px;background:var(--sf2);overflow:hidden;margin:10px 0}
@@ -329,7 +339,7 @@ html[data-noqf] #cmdBtn{display:none}
 <div class="bar">
   <div class="brand">Raider <b>Portal</b></div>
   <div class="tabs" id="tabs" role="tablist"><div class="pill" id="pill"></div></div>
-  <button class="ibtn" id="cmdBtn">Quick find</button><div class="mwrap"><button class="ibtn" id="theme" aria-haspopup="true">Themes</button><div class="menu" id="menu"></div></div>
+  <div class="rt"><button class="ibtn" id="cmdBtn">Quick find</button><div class="mwrap"><button class="ibtn" id="theme" aria-haspopup="true">Themes</button><div class="menu" id="menu"></div></div></div>
 </div>
 <main>
   <section class="panel on" id="p-apps">
@@ -360,6 +370,16 @@ html[data-noqf] #cmdBtn{display:none}
     <h2 class="sec" id="cCount" style="margin-top:0"></h2>
     <div class="card"><div id="cList"></div></div>
     <div class="pager" style="justify-content:center;margin:18px 0 0"><button class="ibtn" id="cPrev">Prev</button><span id="cPg"></span><button class="ibtn" id="cNext">Next</button></div>
+  </section>
+
+  <section class="panel" id="p-ath">
+    <h1 class="ph">Athletics</h1>
+    <div class="cols" id="aGrid"></div>
+    <h2 class="sec">My games <span class="sub">Games you add also show on your calendar</span></h2>
+    <div class="cal2 a2">
+      <div class="card"><h3>Add a game</h3><div class="addr" style="flex-wrap:wrap"><input id="gd" type="date" aria-label="Game date" style="flex:0 0 auto"><input id="gt" maxlength="60" placeholder="Football vs. opponent, 7:00 p.m." aria-label="Game details" autocomplete="off" style="flex:1 1 220px"><button class="ibtn" id="ga">Add game</button></div><div class="sub" style="margin-top:8px">Check the athletic schedules page for official dates. Saved on this device only.</div></div>
+      <div class="card"><h3>Upcoming</h3><div class="sdl" id="gl"></div></div>
+    </div>
   </section>
 
   <section class="panel" id="p-help">
@@ -419,7 +439,7 @@ html[data-noqf] #cmdBtn{display:none}
     <p class="sub" style="margin-top:14px">A student hub for Middletown Area High School with apps, tools, a calendar and school info.</p>
     <div class="row"><span class="k">New in 2.2</span><span>Course filters, sorting and saved courses, new keyboard shortcuts, and a leaner list of 356 apps.</span></div></div>
     <h2 class="sec" id="kbs">Keyboard shortcuts</h2>
-    <div class="card"><div class="row"><span class="k" style="min-width:150px"><span class="kb">/</span></span><span>Search apps</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">Ctrl K</span></span><span>Quick find for apps, tabs and themes (Cmd K on Mac)</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">1 to 7</span></span><span>Jump straight to a tab</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">g then a, t, c, s, u, h, e</span></span><span>Go to Apps, Tools, Calendar, School info, Courses, Counseling or Settings</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">T</span></span><span>Switch to the next theme</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">L</span></span><span>Switch between grid and list view</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">[ and ]</span></span><span>Previous or next app category</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">?</span></span><span>Jump to this list</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">Esc</span></span><span>Close Quick find</span></div></div>
+    <div class="card"><div class="row"><span class="k" style="min-width:150px"><span class="kb">/</span></span><span>Search apps</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">Ctrl K</span></span><span>Quick find for apps, tabs and themes (Cmd K on Mac)</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">1 to 8</span></span><span>Jump straight to a tab</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">g then a, t, c, s, u, b, h, e</span></span><span>Go to Apps, Tools, Calendar, School info, Courses, Athletics, Counseling or Settings</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">T</span></span><span>Switch to the next theme</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">L</span></span><span>Switch between grid and list view</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">[ and ]</span></span><span>Previous or next app category</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">?</span></span><span>Jump to this list</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">Esc</span></span><span>Close Quick find</span></div></div>
   </section>
 
   
@@ -441,7 +461,7 @@ function step(now){
 requestAnimationFrame(step);
 function countUp(){if(fin)return;fin=true;Array.prototype.forEach.call(document.querySelectorAll("[data-n]"),function(el){var to=+el.dataset.n,s=performance.now();(function f(now){var p=Math.min(1,(now-s)/1200);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(s)})}
 
-var VIEWS=[["apps","Apps"],["tools","Tools"],["cal","Calendar"],["school","School info"],["courses","Courses"],["help","Counseling"],["settings","Settings"]],tabs=$("tabs"),pill=$("pill");
+var VIEWS=[["apps","Apps"],["tools","Tools"],["cal","Calendar"],["school","School info"],["courses","Courses"],["ath","Athletics"],["help","Counseling"],["settings","Settings"]],tabs=$("tabs"),pill=$("pill");
 VIEWS.forEach(function(v){var b=document.createElement("button");b.textContent=v[1];b.dataset.t=v[0];b.setAttribute("role","tab");b.onclick=function(){go(v[0])};tabs.appendChild(b)});
 function place(){var a=tabs.querySelector('[aria-selected="true"]');if(a){pill.style.width=a.offsetWidth+"px";pill.style.transform="translateX("+a.offsetLeft+"px)"}}
 function go(id){
@@ -514,7 +534,7 @@ $("q").oninput=draw;
 document.addEventListener("keydown",function(e){if(e.key==="/"&&document.activeElement.tagName!=="INPUT"){e.preventDefault();go("apps");$("q").focus()}});
 document.addEventListener("mousemove",function(e){var a=e.target.closest&&e.target.closest(".app");if(a){var r=a.getBoundingClientRect();a.style.setProperty("--mx",(e.clientX-r.left)+"px");a.style.setProperty("--my",(e.clientY-r.top)+"px")}});
 
-var S=[{n:"Middletown Area High School",a:"1155 North Union St, Middletown, PA 17057",p:"717-948-3333",f:"717-948-3359",ad:[["Principal","Mr. Paul Roman","proman"],["Assistant Principal","Mr. Jose Ortiz","jortiz"]],co:[["School Counselor","Mrs. Breann Fleming","bfleming","60009"],["School Counselor","Mr. Donnie Russell","drussell","60007"],["School Counselor","Mrs. Jennifer Stoe","jstoe","60008"],["Guidance Office Secretary","Mrs. Katelynn Wilson","kwilson","60009"]]},
+var S=[{n:"Middletown Area High School",a:"1155 North Union St, Middletown, PA 17057",p:"717-948-3333",f:"717-948-3359",ad:[["Principal","Mr. Paul Roman","proman"],["Assistant Principal","Mr. JJ Ortiz","jortiz"]],co:[["School Counselor","Mrs. Breann Fleming","bfleming","60009"],["School Counselor","Mr. Donnie Russell","drussell","60007"],["School Counselor","Mrs. Jennifer Stoe","jstoe","60008"],["Guidance Office Secretary","Mrs. Katelynn Wilson","kwilson","60009"]]},
 {n:"Middletown Area Middle School",a:"215 Oberlin Road, Middletown, PA 17057",p:"717-930-0739",f:"717-944-0591",ad:[["Principal","Dr. Shannon L. Wevodau","swevodau"],["Assistant Principal","Mr. Michael DeFilippo","mdefilippo"]],co:[["School Counselor (A-K)","Mrs. Lynette Good","lgood","5310"],["School Counselor (L-Z)","Mrs. Kiersten Betancourt","krobinson","5004"],["Guidance and Attendance Secretary","Mrs. Keim Cowan","kcowan","5006"],["MAMS Social Worker","Ms. Amy McPhilemy","amcphilemy","5005"]]}];
 function tel(p,x){return'<a href="tel:'+p.replace(/-/g,"")+'">'+p+(x?" ext. "+x:"")+'</a>'}
 function mail(u){return'<a href="mailto:'+u+'@raiderweb.org">'+u+'@raiderweb.org</a>'}
@@ -877,14 +897,32 @@ function addEv(){var v=$("ei").value.trim();if(!v){$("ei").focus();return}UE.pus
 $("kp").onclick=function(){showPast=!showPast;drawKey()};$("ea").onclick=addEv;$("ei").onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();addEv()}};
 drawCal(true);drawSel();drawNext();drawYear();drawKey();sc();
 
-var gT=0,GO={a:"apps",t:"tools",c:"cal",s:"school",u:"courses",h:"help",e:"settings"};
+
+var AL=[["Athletic schedules","Game schedules for every team.","https://www.raiderweb.org/athletics/athletic_schedules"],
+["Athletic information","Participation forms and important dates for students and athletes.","https://www.raiderweb.org/athletics/athletic_information"],
+["Contact a coach","Find the right coach for your sport.","https://www.raiderweb.org/athletics/contact_a_coach"],
+["Public behavior at events","Expectations for everyone attending games.","https://www.raiderweb.org/athletics/public_behavior_at_events"],
+["Athletic Hall of Fame","Honoring Middletown athletes, teams and supporters.","https://www.raiderweb.org/athletics/middletown_athletic_hall_of_fame"],
+["Raider apparel","Spirit wear for buildings, teams and clubs.","https://www.raiderweb.org/for_community/blue_raiders_apparel"],
+["Student accident insurance","Coverage for injuries at district events such as athletics.","https://www.raiderweb.org/student_services/student_insurance"]];
+(function(){var g=$("aGrid");AL.forEach(function(x,i){var c=mk("div","card alc");c.style.setProperty("--i",i);c.appendChild(mk("h3","",x[0]));c.appendChild(mk("p","sub",x[1]));var a=mk("div","acts");a.appendChild(act("Open",x[2]));c.appendChild(a);g.appendChild(c)})})();
+function drawGames(){
+  var l=$("gl");l.innerHTML="";var gs=UE.filter(function(u){return u.g&&cDate(u.d)>=cToday}).sort(function(a,b){return a.d<b.d?-1:a.d>b.d?1:0});
+  if(!gs.length)l.appendChild(mk("div","sub","No games added yet."));
+  gs.forEach(function(u){var d=cDate(u.d),r=mk("div","el u");r.appendChild(mk("span","",MN[d.getMonth()].slice(0,3)+" "+d.getDate()+": "+u.t));
+    var x=mk("button","","Remove");x.setAttribute("aria-label","Remove "+u.t);x.onclick=function(){var i=UE.indexOf(u);if(i>-1)UE.splice(i,1);saveUE();drawGames();cRefresh();toast("Game removed")};r.appendChild(x);l.appendChild(r)})}
+function addGame(){var d=$("gd").value,t=$("gt").value.trim();if(!d||!t){toast("Add a date and game details");return}UE.push({d:d,t:t,g:1});saveUE();$("gt").value="";drawGames();cRefresh();toast("Game added to your calendar")}
+$("ga").onclick=addGame;$("gt").onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();addGame()}};
+drawGames();
+
+var gT=0,GO={a:"apps",t:"tools",c:"cal",s:"school",u:"courses",b:"ath",h:"help",e:"settings"};
 document.addEventListener("keydown",function(e){
   var el=document.activeElement,tg=el&&el.tagName;
   if(e.ctrlKey||e.metaKey||e.altKey||tg==="INPUT"||tg==="TEXTAREA"||tg==="SELECT"||!cmd.hidden)return;
   var k=e.key;
   if(gT&&Date.now()<gT){gT=0;if(GO[k]){e.preventDefault();go(GO[k])}return}
   if(k==="g"){gT=Date.now()+1200;return}
-  if(/^[1-7]$/.test(k)){go(VIEWS[+k-1][0]);return}
+  if(/^[1-8]$/.test(k)){go(VIEWS[+k-1][0]);return}
   if(k==="t"||k==="T"){var ti=TH.map(function(x){return x[0]}).indexOf(R.dataset.theme);applyTheme(TH[(ti+1)%TH.length][0]);return}
   if(k==="l"||k==="L"){vb.click();return}
   if(k==="?"){go("settings");setTimeout(function(){$("kbs").scrollIntoView({behavior:"smooth"})},120);return}
