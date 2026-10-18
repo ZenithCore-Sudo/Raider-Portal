@@ -20,7 +20,6 @@ body{background:var(--bg);color:var(--tx);font-family:'Outfit',system-ui,-apple-
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--ac2);outline-offset:3px}
-/* loader */
 #loader{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:opacity .7s ease,visibility .7s;animation:failsafe .1s 6s forwards}
 #loader.done{opacity:0;visibility:hidden}
 @keyframes failsafe{to{opacity:0;visibility:hidden}}
@@ -33,14 +32,12 @@ a{color:inherit}
 .lbar{width:min(320px,70vw);height:9px;border-radius:9px;background:var(--sf2);overflow:hidden}
 .lbar i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--ac),var(--ac2));box-shadow:0 0 18px var(--glow)}
 #lpct{color:var(--mu);font-size:.95rem;letter-spacing:.04em;font-variant-numeric:tabular-nums}
-/* backdrop */
 .orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;opacity:.55}
 .o1{width:520px;height:520px;background:var(--glow);top:-160px;left:-120px;animation:d1 22s ease-in-out infinite alternate}
 .o2{width:460px;height:460px;background:var(--o2);bottom:-160px;right:-100px;animation:d2 26s ease-in-out infinite alternate}
 @keyframes d1{to{transform:translate(220px,140px) scale(1.2)}}
 @keyframes d2{to{transform:translate(-200px,-120px) scale(1.15)}}
 .site{position:relative;z-index:1}
-/* nav */
 .bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:18px;padding:12px clamp(14px,3vw,36px);background:var(--nav);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--ln)}
 .brand{font-weight:600;font-size:1.2rem;white-space:nowrap}.brand b{font-weight:600;color:var(--ac)}
 .tabs{display:flex;gap:4px;position:relative;margin:0 auto;padding:4px;background:var(--sf);border:1px solid var(--ln);border-radius:99px;overflow-x:auto;max-width:100%}
@@ -53,7 +50,6 @@ a{color:inherit}
 main{max-width:1280px;margin:0 auto;padding:0 clamp(14px,3vw,36px) 70px}
 .panel{display:none}.panel.on{display:block;animation:in .5s cubic-bezier(.2,.8,.2,1)}
 @keyframes in{from{opacity:0;transform:translateY(16px)}}
-/* hero */
 .hero{padding:clamp(38px,8vw,90px) 0 26px;text-align:center}
 .hero h1{font-size:clamp(2.6rem,8vw,5.4rem);font-weight:600;letter-spacing:-.045em;line-height:1}
 .hero h1 b{font-weight:600;background:linear-gradient(100deg,var(--ac),var(--ac3),var(--ac));background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 6s linear infinite}
@@ -88,7 +84,6 @@ main{max-width:1280px;margin:0 auto;padding:0 clamp(14px,3vw,36px) 70px}
 .pin.on{background:var(--ac);border-color:var(--ac);color:var(--on)}
 @media(hover:none){.pin{opacity:1;transform:none}}
 .empty{border:1px dashed var(--ln);border-radius:16px;padding:34px;color:var(--mu);text-align:center}
-/* other panels */
 .ph{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:600;letter-spacing:-.03em;padding:38px 0 20px}
 .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
 .card{background:var(--sf);border:1px solid var(--ln);border-radius:18px;padding:20px;transition:.25s;animation:pop .5s both;animation-delay:calc(var(--i,0)*60ms)}
@@ -251,17 +246,18 @@ html[data-nosticky] .cw{position:static}
 html[data-noqf] #cmdBtn{display:none}
 .ssel{padding:9px 14px;border-radius:12px;border:1px solid var(--ln);background:var(--sf2);color:var(--tx);font:inherit}
 .clr{width:44px;height:36px;border:1px solid var(--ln);border-radius:10px;background:none;padding:2px;cursor:pointer}
-.ban{display:flex;align-items:center;gap:14px;margin:16px 0 0;padding:12px 18px 12px 22px;border-radius:16px;border:1px solid var(--ac);background:var(--sf);box-shadow:0 0 30px var(--glow);animation:pop .5s cubic-bezier(.2,.9,.3,1.2);position:relative;overflow:hidden}
-.ban::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--ac)}
-.ban.ok{border-color:#34d399}.ban.ok::before{background:#34d399}
-.ban.warn{border-color:#ffb44a}.ban.warn::before{background:#ffb44a}
-.ban span{flex:1}
-.lockc{max-width:480px}
-.shk{animation:shk .45s}
-@keyframes shk{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
-.hdl{max-height:260px;overflow-y:auto;margin-top:8px}
-.ibtn.dz{border-color:#ff5a5a;color:#ff8f8f}
-.tool .row .x{flex:none}
+
+.cchips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.ctools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.crow{display:flex;align-items:center;gap:12px;padding:11px 6px;border-bottom:1px solid var(--ln);animation:in .35s both}
+.crow:last-child{border:0}
+.cmeta{flex:1;min-width:0}.cn{font-weight:500}
+.ctags{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}.ctags .role{margin:0}
+.cnum{padding:4px 12px;border-radius:99px;border:1px solid var(--ln);color:var(--ac2);font-weight:600;font-variant-numeric:tabular-nums;transition:.2s}
+.cnum:hover{border-color:var(--ac);background:var(--sf2)}
+.star{padding:6px 14px;border-radius:99px;border:1px solid var(--ln);background:var(--sf);font-size:.82rem;font-weight:500;transition:.2s}
+.star:hover{border-color:var(--ac)}.star.on{background:var(--ac);border-color:var(--ac);color:var(--on)}
+@media(max-width:560px){.crow{flex-wrap:wrap}.cmeta{flex:1 1 100%}}
 </style>
 </head>
 <body>
@@ -273,13 +269,13 @@ html[data-noqf] #cmdBtn{display:none}
   <div class="tabs" id="tabs" role="tablist"><div class="pill" id="pill"></div></div>
   <button class="ibtn" id="cmdBtn">Quick find</button><div class="mwrap"><button class="ibtn" id="theme" aria-haspopup="true">Themes</button><div class="menu" id="menu"></div></div>
 </div>
-<main><div class="ban" id="ban" hidden><span id="banT"></span><button class="ibtn" id="banX">Dismiss</button></div>
+<main>
   <section class="panel on" id="p-apps">
     <div class="hero">
       <h1><span class="w">Raider</span> <b>Portal</b></h1>
       <p id="greet"></p>
       <div class="sbox"><input id="q" type="search" placeholder="Search every app... (press / to focus)" aria-label="Search apps"></div>
-      <div class="stats"><div><b data-n="496">0</b><span>Apps</span></div><div><b data-n="20">0</b><span>Categories</span></div><div><b data-n="127">0</b><span>Courses</span></div></div>
+      <div class="stats"><div><b data-n="356">0</b><span>Apps</span></div><div><b data-n="20">0</b><span>Categories</span></div><div><b data-n="127">0</b><span>Courses</span></div></div>
     </div>
     <div class="cw"><button class="ca l" id="cL" aria-label="Scroll categories left"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><div class="chips" id="chips"></div><button class="ca r" id="cR" aria-label="Scroll categories right"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button></div>
     <div id="favBox"></div><div id="recBox"></div><div id="appBox"></div>
@@ -293,11 +289,14 @@ html[data-noqf] #cmdBtn{display:none}
     <div class="card tw"><table id="terms"></table></div>
   </section>
 
+  
+
   <section class="panel" id="p-courses">
     <h1 class="ph">Course catalog</h1>
-    <input class="csearch" id="cq" type="search" placeholder="Filter by course name or number" aria-label="Filter courses">
+    <input class="csearch" id="cq" type="search" placeholder="Search by course name, number or department" aria-label="Filter courses">
+    <div id="cFilters"></div>
     <h2 class="sec" id="cCount" style="margin-top:0"></h2>
-    <div class="card"><div class="cl" id="cList"></div></div>
+    <div class="card"><div id="cList"></div></div>
     <div class="pager" style="justify-content:center;margin:18px 0 0"><button class="ibtn" id="cPrev">Prev</button><span id="cPg"></span><button class="ibtn" id="cNext">Next</button></div>
   </section>
 
@@ -347,29 +346,14 @@ html[data-noqf] #cmdBtn{display:none}
     <h2 class="sec">Your data</h2><div class="card"><p class="sub">Pins, recent apps, notes, tasks and settings are saved only on this device.</p><div class="quick"><button class="ibtn" id="dPin">Clear pinned apps</button><button class="ibtn" id="dRec">Clear recent apps</button><button class="ibtn" id="dRep">Replay intro</button><button class="ibtn" id="dAll">Reset everything</button></div></div>
     <h2 class="sec">Personalize</h2><div class="card" id="pz"></div>
     <h2 class="sec">About</h2>
-    <div class="card"><div class="ab"><div class="mark2">R</div><div><h3 style="margin:0">Raider Portal</h3><div class="sub">Version 2.1 &middot; Made by Damien Mehlbaum</div></div></div>
+    <div class="card"><div class="ab"><div class="mark2">R</div><div><h3 style="margin:0">Raider Portal</h3><div class="sub">Version 2.2 &middot; Made by Damien Mehlbaum</div></div></div>
     <p class="sub" style="margin-top:14px">A student hub for Middletown Area High School with apps, tools, a calendar and school info.</p>
-    <div class="row"><span class="k">New in 2.1</span><span>Admin panel, more settings and personalization, 94 more apps, and three new categories.</span></div></div>
-    <h2 class="sec">Keyboard shortcuts</h2>
-    <div class="card"><div class="row"><span class="k"><span class="kb">/</span></span><span>Search apps</span></div><div class="row"><span class="k"><span class="kb">Ctrl</span> <span class="kb">K</span></span><span>Quick find for apps, tabs and themes (Cmd K on Mac)</span></div><div class="row"><span class="k"><span class="kb">Esc</span></span><span>Close Quick find</span></div></div>
+    <div class="row"><span class="k">New in 2.2</span><span>Course filters, sorting and saved courses, new keyboard shortcuts, and a leaner list of 356 apps.</span></div></div>
+    <h2 class="sec" id="kbs">Keyboard shortcuts</h2>
+    <div class="card"><div class="row"><span class="k" style="min-width:150px"><span class="kb">/</span></span><span>Search apps</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">Ctrl K</span></span><span>Quick find for apps, tabs and themes (Cmd K on Mac)</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">1 to 7</span></span><span>Jump straight to a tab</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">g then a, t, c, s, u, h, e</span></span><span>Go to Apps, Tools, Calendar, School info, Courses, Counseling or Settings</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">T</span></span><span>Switch to the next theme</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">L</span></span><span>Switch between grid and list view</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">[ and ]</span></span><span>Previous or next app category</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">?</span></span><span>Jump to this list</span></div><div class="row"><span class="k" style="min-width:150px"><span class="kb">Esc</span></span><span>Close Quick find</span></div></div>
   </section>
 
-  <section class="panel" id="p-admin">
-    <h1 class="ph">Admin panel</h1>
-    <div class="card tool lockc" id="adLock"><h3 id="adT">Admin access</h3><p class="sub" id="adMsg"></p><div class="tdh" style="margin-top:12px"><input id="adPin" type="password" placeholder="PIN" autocomplete="off" aria-label="PIN"><button class="ibtn pri" id="adGo">Unlock</button></div></div>
-    <div id="adBody" hidden>
-      <div class="card" style="margin-bottom:14px"><div class="ab"><div><h3 style="margin:0">Heads up</h3><p class="sub">Admin changes are saved in this browser only. Use Backup to move them to another device. The PIN is a simple lock, not real security.</p></div><button class="ibtn" id="adLk" style="margin-left:auto">Lock panel</button></div></div>
-      <div class="tgrid">
-        <div class="card tool"><h3>Announcement banner</h3><div class="fgrid"><input id="anT" placeholder="Message shown at the top of every tab" aria-label="Announcement"><select id="anK" aria-label="Style"><option value="info">Info</option><option value="ok">Success</option><option value="warn">Warning</option></select></div><div class="btns"><button class="ibtn pri" id="anPub">Publish</button><button class="ibtn" id="anClr">Remove</button></div></div>
-        <div class="card tool"><h3>Branding</h3><div class="fgrid"><input id="bnN" placeholder="Site name" aria-label="Site name"><input id="bnS" placeholder="Home page subtitle" aria-label="Subtitle"><select id="bnT" aria-label="Default theme"></select></div><div class="btns"><button class="ibtn pri" id="bnSave">Save</button><button class="ibtn" id="bnRs">Reset</button></div></div>
-        <div class="card tool"><h3>Add an app</h3><div class="fgrid"><input id="caN" placeholder="App name" aria-label="App name"><input id="caU" placeholder="Link (example.com)" aria-label="Link"><select id="caC" aria-label="Category"></select></div><div class="btns"><button class="ibtn pri" id="caAdd">Add app</button></div><h3 style="margin-top:16px">Custom apps</h3><div id="caL"></div></div>
-        <div class="card tool"><h3>Hide apps <span class="sub" id="hdN"></span></h3><input id="hdQ" placeholder="Search apps" aria-label="Search apps"><div class="hdl" id="hdL"></div><div class="btns"><button class="ibtn" id="hdAll">Show all apps</button></div></div>
-        <div class="card tool"><h3>Usage on this device</h3><div id="us"></div><div class="btns"><button class="ibtn" id="usClr">Clear usage stats</button></div></div>
-        <div class="card tool"><h3>Backup</h3><p class="sub" style="margin-bottom:10px">Export all your portal data, or paste a backup to restore it.</p><textarea id="bkT" style="min-height:110px" placeholder="Backup text appears here" aria-label="Backup"></textarea><div class="btns"><button class="ibtn" id="bkEx">Export</button><button class="ibtn" id="bkCp">Copy</button><button class="ibtn pri" id="bkIm">Import</button></div></div>
-        <div class="card tool"><h3>Security</h3><div class="tdh"><input id="pnN" type="password" placeholder="New PIN (4+ characters)" autocomplete="off" aria-label="New PIN"><button class="ibtn pri" id="pnS">Change</button></div><h3 style="margin-top:18px">Danger zone</h3><div class="btns"><button class="ibtn dz" id="dzA">Reset admin settings</button><button class="ibtn dz" id="dzW">Wipe all data</button></div></div>
-      </div>
-    </div>
-  </section>
+  
 </main>
 </div>
 <script>
@@ -378,7 +362,6 @@ var $=function(i){return document.getElementById(i)};
 function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
 var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
 
-/* loader */
 var t0=performance.now(),DUR=reduce?150:2400,fin=false;
 function step(now){
   var p=Math.min(1,(now-t0)/DUR),n=Math.floor((1-Math.pow(1-p,2.4))*99);
@@ -389,11 +372,10 @@ function step(now){
 requestAnimationFrame(step);
 function countUp(){if(fin)return;fin=true;Array.prototype.forEach.call(document.querySelectorAll("[data-n]"),function(el){var to=+el.dataset.n,s=performance.now();(function f(now){var p=Math.min(1,(now-s)/1200);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(s)})}
 
-/* tabs */
-var VIEWS=[["apps","Apps"],["tools","Tools"],["cal","Calendar"],["school","School info"],["courses","Courses"],["help","Counseling"],["settings","Settings"],["admin","Admin"]],tabs=$("tabs"),pill=$("pill");
+var VIEWS=[["apps","Apps"],["tools","Tools"],["cal","Calendar"],["school","School info"],["courses","Courses"],["help","Counseling"],["settings","Settings"]],tabs=$("tabs"),pill=$("pill");
 VIEWS.forEach(function(v){var b=document.createElement("button");b.textContent=v[1];b.dataset.t=v[0];b.setAttribute("role","tab");b.onclick=function(){go(v[0])};tabs.appendChild(b)});
 function place(){var a=tabs.querySelector('[aria-selected="true"]');if(a){pill.style.width=a.offsetWidth+"px";pill.style.transform="translateX("+a.offsetLeft+"px)"}}
-function go(id){if(id==="admin")adRender();
+function go(id){
   Array.prototype.forEach.call(tabs.querySelectorAll("button"),function(b){b.setAttribute("aria-selected",b.dataset.t===id)});
   Array.prototype.forEach.call(document.querySelectorAll(".panel"),function(p){p.classList.toggle("on",p.id==="p-"+id)});
   place();var sa=tabs.querySelector('[aria-selected="true"]');if(sa&&tabs.scrollTo)tabs.scrollTo({left:sa.offsetLeft-30,behavior:"smooth"});store("rp_tab",id);window.scrollTo(0,0);
@@ -403,20 +385,19 @@ var th=store("rp_theme");if(th)document.documentElement.dataset.theme=th;
 
 var hr=new Date().getHours();$("greet").textContent=(hr<12?"Good morning":hr<18?"Good afternoon":"Good evening")+". Every school tool you need, one click away.";
 
-/* apps */
 var D=[
 ["School","Canvas~middletownsd.instructure.com|Clever~clever.com/in/masd/student/portal|RaiderWeb~www.raiderweb.org/home|PowerSchool~powerschool.raiderweb.org/public/|LinkIt! Student~raiderweb.linkit.com/student|Naviance~id.naviance.com|Destiny Library~http://destiny.raiderweb.org|Securly Pass~pass.securly.com/passes/create|Securly Flex~flex.securly.com/login|MAHS Announce~www.youtube.com/user/MAHSAnnouncements|PBIS Rewards~pbisr.navigate360.com/login.php|FitnessGram~myhealthyzone.fitnessgram.net|Student Services~www.raiderweb.org/student_services|Hazing Reporting~www.raiderweb.org/student_services/hazing_reporting"],
 ["Google","Drive~drive.google.com/drive/my-drive|Gmail~mail.google.com/mail/u/0/|Classroom~classroom.google.com/u/3/?pli=1|Docs~docs.google.com/document|Sheets~docs.google.com/spreadsheets|Slides~docs.google.com/presentation|Forms~docs.google.com/forms|Drawings~docs.google.com/drawings|Calendar~calendar.google.com|Meet~meet.google.com|Keep~keep.google.com|Sites~sites.google.com|Scholar~scholar.google.com|Translate~translate.google.com|Maps~maps.google.com|Earth~earth.google.com|Books~books.google.com|Arts and Culture~artsandculture.google.com|Photos~photos.google.com|YouTube~www.youtube.com|Trends~trends.google.com|Chrome Web Store~chromewebstore.google.com|Contacts~contacts.google.com|Google Finance~www.google.com/finance"],
-["Class Platforms","Amplify~learning.amplify.com/home/student/|Discovery Education~clever.discoveryeducation.com/learn/explore|McGraw-Hill~connected.mcgraw-hill.com/connected/ssoep.lti.do|Great Minds~digital.greatminds.org|Easybridge~easybridge-dashboard-web.savvaseasybridge.com/dashboard/student?ssoLogin=true|Scholastic~idp-awsprod1.education.scholastic.com/idp/|Edpuzzle~edpuzzle.com/classes/675714d5cf66573c6e2facb6|Quill~www.quill.org/classes|Nearpod~nearpod.com|MasteryConnect~app.masteryconnect.com/student/home|FastBridge~auth.fastbridge.org/login.do|IXL~www.ixl.com/dashboard|Pear Deck~app.peardeck.com|Seesaw~app.seesaw.me|Flip~flip.com|Socrative~b.socrative.com|Formative~goformative.com|Wayground~wayground.com|Classkick~classkick.com|Savvas Realize~www.savvasrealize.com|i-Ready~login.i-ready.com|Zearn~www.zearn.org|Study Island~www.studyisland.com|ReadWorks~www.readworks.org|Epic~www.getepic.com|Turnitin~www.turnitin.com|Gale~www.gale.com|Schoology~app.schoology.com|Kami~www.kamiapp.com|Boom Learning~wow.boomlearning.com|Mentimeter~www.mentimeter.com|Poll Everywhere~www.polleverywhere.com|Screencastify~www.screencastify.com|Loom~www.loom.com|Genially~genial.ly|Prezi~prezi.com|Book Creator~bookcreator.com|Edulastic~edulastic.com|Quizalize~www.quizalize.com|Baamboozle~www.baamboozle.com|Wheel of Names~wheelofnames.com|ClassTools~www.classtools.net|Jeopardy Labs~jeopardylabs.com|Plickers~get.plickers.com|Flippity~flippity.net"],
+["Class Platforms","Amplify~learning.amplify.com/home/student/|Discovery Education~clever.discoveryeducation.com/learn/explore|McGraw-Hill~connected.mcgraw-hill.com/connected/ssoep.lti.do|Great Minds~digital.greatminds.org|Easybridge~easybridge-dashboard-web.savvaseasybridge.com/dashboard/student?ssoLogin=true|Scholastic~idp-awsprod1.education.scholastic.com/idp/|Edpuzzle~edpuzzle.com/classes/675714d5cf66573c6e2facb6|Quill~www.quill.org/classes|Nearpod~nearpod.com|MasteryConnect~app.masteryconnect.com/student/home|FastBridge~auth.fastbridge.org/login.do|IXL~www.ixl.com/dashboard|Pear Deck~app.peardeck.com|Flip~flip.com|Wayground~wayground.com|Savvas Realize~www.savvasrealize.com|i-Ready~login.i-ready.com"],
 ["Math","Desmos Graphing~www.desmos.com/calculator|Desmos Scientific~www.desmos.com/scientific|Desmos Geometry~www.desmos.com/geometry|GeoGebra~www.geogebra.org/graphing|Wolfram Alpha~www.wolframalpha.com|Mathway~www.mathway.com|Symbolab~www.symbolab.com|Khan Academy~www.khanacademy.org|Delta Math~www.deltamath.com|Prodigy Math~www.prodigygame.com|Brilliant~brilliant.org|Math Playground~www.mathplayground.com|Math Is Fun~www.mathsisfun.com|Calculator Soup~www.calculatorsoup.com|Paul's Online Math Notes~tutorial.math.lamar.edu|Art of Problem Solving~artofproblemsolving.com|Mathigon~mathigon.org|MathWorld~mathworld.wolfram.com|Desmos 3D~www.desmos.com/3d|Wolfram Demonstrations~demonstrations.wolfram.com|Math Antics~mathantics.com|Numberphile~www.numberphile.com|3Blue1Brown~www.3blue1brown.com|Purplemath~www.purplemath.com|NRICH~nrich.maths.org"],
-["Science","PhET Simulations~phet.colorado.edu|Gizmos~gizmos.explorelearning.com|CK-12~www.ck12.org|HHMI BioInteractive~www.biointeractive.org|Interactive Periodic Table~ptable.com|Chem LibreTexts~chem.libretexts.org|Physics Classroom~www.physicsclassroom.com|Biology Corner~www.biologycorner.com|NASA~www.nasa.gov|NOAA~www.noaa.gov|USGS~www.usgs.gov|EPA~www.epa.gov|National Geographic~education.nationalgeographic.org|Smithsonian~www.si.edu|LabXchange~www.labxchange.org|BioDigital Human~human.biodigital.com|Nature Scitable~www.nature.com/scitable|Periodic Videos~www.periodicvideos.com|Bozeman Science~www.bozemanscience.com|Science Buddies~www.sciencebuddies.org|Ask A Biologist~askabiologist.asu.edu|Mystery Science~mysteryscience.com|ChemCollective~chemcollective.org|Concord Consortium~learn.concord.org|SciShow~www.youtube.com/@scishow|Kurzgesagt~kurzgesagt.org|Veritasium~www.veritasium.com|NASA Eyes~eyes.nasa.gov|NASA Space Place~spaceplace.nasa.gov|Earth Nullschool~earth.nullschool.net|Windy~www.windy.com|Weather.gov~www.weather.gov|Exploratorium~www.exploratorium.edu|Stellarium Web~stellarium-web.org|Zooniverse~www.zooniverse.org|iNaturalist~www.inaturalist.org|eBird~ebird.org"],
-["English","CommonLit~www.commonlit.org|Newsela~newsela.com|NoRedInk~www.noredink.com|Grammarly~www.grammarly.com|Purdue OWL~owl.purdue.edu|Citation Machine~www.citationmachine.net|EasyBib~www.easybib.com|MyBib~www.mybib.com|Merriam-Webster~www.merriam-webster.com|Thesaurus~www.thesaurus.com|Vocabulary.com~www.vocabulary.com|Etymonline~www.etymonline.com|Project Gutenberg~www.gutenberg.org|SparkNotes~www.sparknotes.com|Poetry Foundation~www.poetryfoundation.org|Poets.org~poets.org|Hemingway Editor~hemingwayapp.com|Flocabulary~www.flocabulary.com|ReadWriteThink~www.readwritethink.org|Libby~libbyapp.com|Goodreads~www.goodreads.com|Storyboard That~www.storyboardthat.com|LitCharts~www.litcharts.com|No Fear Shakespeare~nfs.sparknotes.com|UNC Writing Center~writingcenter.unc.edu|Open Library~openlibrary.org|Lexile Find a Book~hub.lexile.com/find-a-book|Reading Rockets~www.readingrockets.org|Wordnik~www.wordnik.com|RhymeZone~www.rhymezone.com|OneLook~www.onelook.com|Power Thesaurus~www.powerthesaurus.org|Reedsy Prompts~blog.reedsy.com/creative-writing-prompts|ProWritingAid~prowritingaid.com|The StoryGraph~www.thestorygraph.com|Scribbr~www.scribbr.com|Poem Analysis~poemanalysis.com"],
-["Social Studies","Britannica School~school.eb.com|Library of Congress~www.loc.gov|National Archives~www.archives.gov|iCivics~www.icivics.org|Congress.gov~www.congress.gov|Constitution Center~constitutioncenter.org|Census~www.census.gov|World Factbook~www.cia.gov/the-world-factbook|Our World in Data~ourworldindata.org|Digital Public Library~dp.la|Gilder Lehrman~www.gilderlehrman.org|Crash Course~thecrashcourse.com|Seterra Geography~www.seterra.com|Stanford History Group~sheg.stanford.edu|History~www.history.com|PA Dept of Education~www.education.pa.gov|PBS LearningMedia~www.pbslearningmedia.org|National Park Service~www.nps.gov|Smithsonian Learning Lab~learninglab.si.edu|C-SPAN Classroom~www.c-span.org/classroom|MapChart~www.mapchart.net|Ducksters~www.ducksters.com|Facing History~www.facinghistory.org|Atlas Obscura~www.atlasobscura.com|Worldometer~www.worldometers.info|BBC History~www.bbc.co.uk/history|Digital History~www.digitalhistory.uh.edu|World History Encyclopedia~www.worldhistory.org|David Rumsey Maps~www.davidrumsey.com"],
+["Science","PhET Simulations~phet.colorado.edu|Gizmos~gizmos.explorelearning.com|CK-12~www.ck12.org|HHMI BioInteractive~www.biointeractive.org|Interactive Periodic Table~ptable.com|Chem LibreTexts~chem.libretexts.org|Physics Classroom~www.physicsclassroom.com|Biology Corner~www.biologycorner.com|NASA~www.nasa.gov|NOAA~www.noaa.gov|USGS~www.usgs.gov|EPA~www.epa.gov|National Geographic~education.nationalgeographic.org"],
+["English","CommonLit~www.commonlit.org|Newsela~newsela.com|NoRedInk~www.noredink.com|Grammarly~www.grammarly.com|Purdue OWL~owl.purdue.edu|Citation Machine~www.citationmachine.net|EasyBib~www.easybib.com|Merriam-Webster~www.merriam-webster.com|Thesaurus~www.thesaurus.com|Vocabulary.com~www.vocabulary.com|Etymonline~www.etymonline.com|Project Gutenberg~www.gutenberg.org|SparkNotes~www.sparknotes.com|Poetry Foundation~www.poetryfoundation.org|Poets.org~poets.org|Hemingway Editor~hemingwayapp.com|Flocabulary~www.flocabulary.com|ReadWriteThink~www.readwritethink.org"],
+["Social Studies","Britannica School~school.eb.com|Library of Congress~www.loc.gov|National Archives~www.archives.gov|iCivics~www.icivics.org|Congress.gov~www.congress.gov|Constitution Center~constitutioncenter.org|Census~www.census.gov|World Factbook~www.cia.gov/the-world-factbook|Our World in Data~ourworldindata.org|Digital Public Library~dp.la|Gilder Lehrman~www.gilderlehrman.org|Crash Course~thecrashcourse.com|Seterra Geography~www.seterra.com|PA Dept of Education~www.education.pa.gov|PBS LearningMedia~www.pbslearningmedia.org|National Park Service~www.nps.gov"],
 ["Languages","Duolingo~www.duolingo.com|SpanishDict~www.spanishdict.com|WordReference~www.wordreference.com|Linguee~www.linguee.com|Conjuguemos~conjuguemos.com|StudySpanish~studyspanish.com|Reverso~www.reverso.net|Forvo~forvo.com|TV5Monde~apprendre.tv5monde.com|News in Slow Spanish~www.newsinslowspanish.com|Memrise~www.memrise.com|Busuu~www.busuu.com|Babbel~www.babbel.com|DeepL~www.deepl.com|Bab.la~en.bab.la|Larousse~www.larousse.fr|Lingolia~www.lingolia.com"],
-["Coding","Code.org~studio.code.org|Hour of Code~hourofcode.com|Scratch~scratch.mit.edu|Replit~replit.com|GitHub~github.com|W3Schools~www.w3schools.com|MDN Web Docs~developer.mozilla.org|freeCodeCamp~www.freecodecamp.org|Codecademy~www.codecademy.com|CodingBat~codingbat.com|CodeHS~codehs.com|Trinket~trinket.io|Python~www.python.org|Programiz~www.programiz.com|Tinkercad~www.tinkercad.com|Arduino~www.arduino.cc|Stack Overflow~stackoverflow.com|CS50~cs50.harvard.edu|Codewars~www.codewars.com|LeetCode~leetcode.com|HackerRank~www.hackerrank.com|Kaggle~www.kaggle.com|JSFiddle~jsfiddle.net|CodePen~codepen.io|p5.js~p5js.org|Processing~processing.org|Raspberry Pi~www.raspberrypi.org|Can I Use~caniuse.com|Regex101~regex101.com|Python Tutor~pythontutor.com|Roadmap.sh~roadmap.sh|GitHub Pages~pages.github.com|Netlify~www.netlify.com|Vercel~vercel.com|CSS-Tricks~css-tricks.com|Flexbox Froggy~flexboxfroggy.com|CSS Grid Garden~cssgridgarden.com|Learn Git Branching~learngitbranching.js.org|VS Code for the Web~vscode.dev|Frontend Mentor~www.frontendmentor.io|DevDocs~devdocs.io|Tailwind CSS~tailwindcss.com"],
-["Creative","Canva~www.canva.com|Padlet~padlet.com|Adobe Express~express.adobe.com|Figma~www.figma.com|Photopea~www.photopea.com|Pixlr~pixlr.com|BandLab~www.bandlab.com|Soundtrap~www.soundtrap.com|Chrome Music Lab~musiclab.chromeexperiments.com|musictheory.net~www.musictheory.net|Flat~flat.io|WeVideo~www.wevideo.com|Clipchamp~clipchamp.com|Piktochart~piktochart.com|Infogram~infogram.com|AutoDraw~www.autodraw.com|Sketchpad~sketch.io/sketchpad|Unsplash~unsplash.com|Pexels~www.pexels.com|Pixabay~pixabay.com|Noun Project~thenounproject.com|Krita~krita.org|Piskel~www.piskelapp.com|Pixilart~www.pixilart.com|Sketchfab~sketchfab.com|Audacity~www.audacityteam.org|Freesound~freesound.org|Incompetech~incompetech.com|Blender~www.blender.org|GIMP~www.gimp.org|Inkscape~inkscape.org|Mixkit~mixkit.co|Behance~www.behance.net|Adobe Color~color.adobe.com|Vectr~vectr.com|Lunapic~www.lunapic.com|Fotor~www.fotor.com|Canva Design School~www.canva.com/designschool"],
+["Coding","Code.org~studio.code.org|Hour of Code~hourofcode.com|Scratch~scratch.mit.edu|Replit~replit.com|GitHub~github.com|W3Schools~www.w3schools.com|MDN Web Docs~developer.mozilla.org|freeCodeCamp~www.freecodecamp.org|Codecademy~www.codecademy.com|CodingBat~codingbat.com|CodeHS~codehs.com|Trinket~trinket.io|Python~www.python.org|Programiz~www.programiz.com|Tinkercad~www.tinkercad.com|Stack Overflow~stackoverflow.com|CS50~cs50.harvard.edu"],
+["Creative","Canva~www.canva.com|Padlet~padlet.com|Adobe Express~express.adobe.com|Figma~www.figma.com|Photopea~www.photopea.com|Pixlr~pixlr.com|BandLab~www.bandlab.com|Soundtrap~www.soundtrap.com|Chrome Music Lab~musiclab.chromeexperiments.com|musictheory.net~www.musictheory.net|Flat~flat.io|WeVideo~www.wevideo.com|Clipchamp~clipchamp.com|Unsplash~unsplash.com"],
 ["Study Tools","Quizlet~quizlet.com|Anki~apps.ankiweb.net|Brainscape~www.brainscape.com|Cram~www.cram.com|Notion~www.notion.so|Todoist~todoist.com|Pomofocus~pomofocus.io|Forest~www.forestapp.cc|Coggle~coggle.it|Miro~miro.com|MindMeister~www.mindmeister.com|Lucidchart~lucid.app|Diagrams.net~app.diagrams.net|Zotero~www.zotero.org|BibMe~www.bibme.org|Wikipedia~www.wikipedia.org|Internet Archive~archive.org|GoConqr~www.goconqr.com|Study.com~study.com|TED-Ed~ed.ted.com|TED~www.ted.com|Hippocampus~www.hippocampus.org|Wikibooks~www.wikibooks.org|LibreTexts~libretexts.org|OpenStax~openstax.org|Obsidian~obsidian.md|Focusmate~www.focusmate.com|Toggl~toggl.com|Quizlet Live~quizlet.com/live"],
-["College and Career","Common App~www.commonapp.org|College Board~www.collegeboard.org|BigFuture~bigfuture.collegeboard.org|ACT~www.act.org|FAFSA~studentaid.gov|PHEAA~www.pheaa.org|College Scorecard~collegescorecard.ed.gov|Niche~www.niche.com|Fastweb~www.fastweb.com|Scholarships.com~www.scholarships.com|CareerOneStop~www.careeronestop.org|O*NET~www.onetonline.org|Occupational Outlook~www.bls.gov/ooh|PA CareerLink~www.pacareerlink.pa.gov|Handshake~joinhandshake.com|LinkedIn~www.linkedin.com|Indeed~www.indeed.com|Coursera~www.coursera.org|edX~www.edx.org|MIT OpenCourseWare~ocw.mit.edu|HACC~www.hacc.edu|Penn State~www.psu.edu|Millersville~www.millersville.edu|Bluebook~bluebook.collegeboard.org|Princeton Review~www.princetonreview.com|Job Corps~www.jobcorps.gov|Apprenticeship.gov~www.apprenticeship.gov|Glassdoor~www.glassdoor.com|Khan SAT Prep~www.khanacademy.org/test-prep/sat|Scholarship America~scholarshipamerica.org|CollegeVine~www.collegevine.com|Penn College~www.pct.edu|Coalition for College~www.coalitionforcollegeaccess.org|College Navigator~nces.ed.gov/collegenavigator|CSS Profile~cssprofile.collegeboard.org|Going Merry~www.goingmerry.com|Bold.org~bold.org"],
+["College and Career","Common App~www.commonapp.org|College Board~www.collegeboard.org|BigFuture~bigfuture.collegeboard.org|ACT~www.act.org|FAFSA~studentaid.gov|PHEAA~www.pheaa.org|College Scorecard~collegescorecard.ed.gov|Niche~www.niche.com|Fastweb~www.fastweb.com|Scholarships.com~www.scholarships.com|CareerOneStop~www.careeronestop.org|O*NET~www.onetonline.org|Occupational Outlook~www.bls.gov/ooh|PA CareerLink~www.pacareerlink.pa.gov|Handshake~joinhandshake.com|LinkedIn~www.linkedin.com|Indeed~www.indeed.com|Coursera~www.coursera.org|edX~www.edx.org|MIT OpenCourseWare~ocw.mit.edu|HACC~www.hacc.edu|Penn State~www.psu.edu|Millersville~www.millersville.edu|Bluebook~bluebook.collegeboard.org|Princeton Review~www.princetonreview.com|Job Corps~www.jobcorps.gov|Apprenticeship.gov~www.apprenticeship.gov|Glassdoor~www.glassdoor.com|Khan SAT Prep~www.khanacademy.org/test-prep/sat|Bold.org~bold.org"],
 ["Typing and Skills","Typing.com~www.typing.com|TypingClub~www.typingclub.com|Keybr~www.keybr.com|Monkeytype~monkeytype.com|Ratatype~www.ratatype.com|Nitro Type~www.nitrotype.com|TypeRacer~play.typeracer.com|GCFGlobal~edu.gcfglobal.org|Typing Test~www.typingtest.com|ZType~zty.pe|10FastFingers~10fastfingers.com"],
 ["Productivity","Microsoft 365~www.office.com|OneNote~www.onenote.com|Zoom~zoom.us|Dropbox~www.dropbox.com|Evernote~evernote.com|Trello~trello.com|Time and Date~www.timeanddate.com|Unit Converters~www.unitconverters.net|Calculator.net~www.calculator.net|ILovePDF~www.ilovepdf.com|Smallpdf~smallpdf.com|Online Convert~www.online-convert.com|Google Fonts~fonts.google.com|Coolors~coolors.co|Excalidraw~excalidraw.com|Whimsical~whimsical.com|Bitly~bitly.com|QR Code Generator~www.qr-code-generator.com|Remove Background~www.remove.bg|TinyPNG~tinypng.com"],
 ["Wellness","Headspace~www.headspace.com|Calm~www.calm.com|Smiling Mind~www.smilingmind.com.au|Sleep Foundation~www.sleepfoundation.org|MyPlate~www.myplate.gov|Teens Health~kidshealth.org/en/teens|Teen Mental Health~www.teenmentalhealth.org|ReachOut~au.reachout.com|CDC Healthy Youth~www.cdc.gov/healthyyouth|Mindful~www.mindful.org|Yoga With Adriene~yogawithadriene.com|Insight Timer~insighttimer.com|Stop Breathe Think~www.stopbreathethink.com|Greater Good Science Center~greatergood.berkeley.edu|Sanvello~www.sanvello.com"],
@@ -427,12 +408,10 @@ var D=[
 ["Games and Fun","Gimkit~www.gimkit.com|Kahoot~kahoot.com|Blooket~www.blooket.com|GeoGuessr~www.geoguessr.com|Chess.com~www.chess.com|Lichess~lichess.org|NYT Games~www.nytimes.com/games|Sudoku~sudoku.com|Sporcle~www.sporcle.com|Jigsaw Planet~www.jigsawplanet.com|Skribbl~skribbl.io|2048~play2048.co|Tetris~tetris.com|Coolmath Games~www.coolmathgames.com|Minecraft Education~education.minecraft.net|Connections~www.nytimes.com/games/connections|Spelling Bee~www.nytimes.com/puzzles/spelling-bee|Wordle~www.nytimes.com/games/wordle|Crossword~www.nytimes.com/crosswords|Worldle~worldle.teuteuf.fr|Minesweeper~minesweeperonline.com|Solitaire~www.solitr.com|Little Alchemy 2~littlealchemy2.com|The Wiki Game~www.thewikigame.com|Neal.fun~neal.fun|Akinator~en.akinator.com|Lumosity~www.lumosity.com|Puzzle Baron~www.puzzle-baron.com|Nonograms~www.nonograms.org"]
 ];
 var apps=[];D.forEach(function(c,ci){c[1].split("|").forEach(function(e){var i=e.indexOf("~"),u=e.slice(i+1);apps.push({c:ci,n:e.slice(0,i),u:u.indexOf("http")===0?u:"https://"+u,h:u.replace(/^https?:\/\//,"").split("/")[0].replace(/^www\./,"")})})});
-var AD={};try{AD=JSON.parse(store("rp_admin")||"{}")}catch(e){}AD.hidden=AD.hidden||[];AD.custom=AD.custom||[];
+
 var cnt={};try{cnt=JSON.parse(store("rp_counts")||"{}")}catch(e){}
-var BASE=apps.length,BASED=D.length;
-function syncCustom(){apps.length=BASE;D.length=BASED;var names=D.map(function(c){return c[0]}),my=AD.custom.some(function(x){return names.indexOf(x.c)<0});if(my)D.push(["My Apps",""]);
-  AD.custom.forEach(function(x){var ci=names.indexOf(x.c);if(ci<0)ci=D.length-1;apps.push({c:ci,n:x.n,u:x.u,h:x.u.replace(/^https?:\/\//,"").split("/")[0].replace(/^www\./,""),cu:1})})}
-syncCustom();
+
+
 var favs=[],recs=[],cat=-1;
 try{favs=JSON.parse(store("rp_favs")||"[]");recs=JSON.parse(store("rp_recs")||"[]")}catch(e){}
 var chips=$("chips");
@@ -454,19 +433,18 @@ function section(id,title,list){
   var h=document.createElement("h2");h.textContent=title;var c=document.createElement("small");c.textContent=list.length;h.appendChild(c);s.appendChild(h);
   var g=document.createElement("div");g.className="grid";list.forEach(function(a){g.appendChild(card(a))});s.appendChild(g);return s;
 }
-function byName(arr){return arr.map(function(n){return apps.filter(function(a){return a.n===n})[0]}).filter(Boolean).filter(function(a){return AD.hidden.indexOf(a.n)<0})}
+function byName(arr){return arr.map(function(n){return apps.filter(function(a){return a.n===n})[0]}).filter(Boolean)}
 function draw(){
   idx=0;var q=$("q").value.trim().toLowerCase(),fb=$("favBox"),rb=$("recBox"),ab=$("appBox");fb.innerHTML=rb.innerHTML=ab.innerHTML="";
   if(!q&&cat<0){var f=byName(favs),r=byName(recs);if(f.length)fb.appendChild(section("","Pinned",f));if(r.length&&P.recent)rb.appendChild(section("","Recently opened",r))}
   var any=false;
-  D.forEach(function(c,ci){if(cat>=0&&cat!==ci)return;var l=apps.filter(function(a){return a.c===ci&&AD.hidden.indexOf(a.n)<0&&(!q||a.n.toLowerCase().indexOf(q)>-1||c[0].toLowerCase().indexOf(q)>-1||a.h.indexOf(q)>-1)});if(l.length){any=true;ab.appendChild(section("c"+ci,c[0],l))}});
+  D.forEach(function(c,ci){if(cat>=0&&cat!==ci)return;var l=apps.filter(function(a){return a.c===ci&&(!q||a.n.toLowerCase().indexOf(q)>-1||c[0].toLowerCase().indexOf(q)>-1||a.h.indexOf(q)>-1)});if(l.length){any=true;ab.appendChild(section("c"+ci,c[0],l))}});
   if(!any)ab.innerHTML='<div class="empty">No apps match "'+q.replace(/[<>&"]/g,"")+'". Try a shorter word or a subject name.</div>';
 }
 $("q").oninput=draw;
 document.addEventListener("keydown",function(e){if(e.key==="/"&&document.activeElement.tagName!=="INPUT"){e.preventDefault();go("apps");$("q").focus()}});
 document.addEventListener("mousemove",function(e){var a=e.target.closest&&e.target.closest(".app");if(a){var r=a.getBoundingClientRect();a.style.setProperty("--mx",(e.clientX-r.left)+"px");a.style.setProperty("--my",(e.clientY-r.top)+"px")}});
 
-/* school + counseling */
 var S=[{n:"Middletown Area High School",a:"1155 North Union St, Middletown, PA 17057",p:"717-948-3333",f:"717-948-3359",ad:[["Principal","Mr. Paul Roman","proman"],["Assistant Principal","Mr. Jose Ortiz","jortiz"]],co:[["School Counselor","Mrs. Breann Fleming","bfleming","60009"],["School Counselor","Mr. Donnie Russell","drussell","60007"],["School Counselor","Mrs. Jennifer Stoe","jstoe","60008"],["Guidance Office Secretary","Mrs. Katelynn Wilson","kwilson","60009"]]},
 {n:"Middletown Area Middle School",a:"215 Oberlin Road, Middletown, PA 17057",p:"717-930-0739",f:"717-944-0591",ad:[["Principal","Dr. Shannon L. Wevodau","swevodau"],["Assistant Principal","Mr. Michael DeFilippo","mdefilippo"]],co:[["School Counselor (A-K)","Mrs. Lynette Good","lgood","5310"],["School Counselor (L-Z)","Mrs. Kiersten Betancourt","krobinson","5004"],["Guidance and Attendance Secretary","Mrs. Keim Cowan","kcowan","5006"],["MAMS Social Worker","Ms. Amy McPhilemy","amcphilemy","5005"]]}];
 function tel(p,x){return'<a href="tel:'+p.replace(/-/g,"")+'">'+p+(x?" ext. "+x:"")+'</a>'}
@@ -496,17 +474,43 @@ seg($("hSeg"),function(){return hp},function(i){hp=i;drawHelp()});
 var T=[["School year","08/27/2026","06/09/2027",180],["Semester 1","08/27/2026","01/22/2027",90],["Semester 2","01/25/2027","06/09/2027",90],["Quarter 1","08/27/2026","11/04/2026",45],["Quarter 2","11/05/2026","01/22/2027",45],["Quarter 3","01/25/2027","04/05/2027",45],["Quarter 4","04/06/2027","06/09/2027",45]];
 $("terms").innerHTML="<thead><tr><th>Term</th><th>Start</th><th>End</th><th>Days</th></tr></thead><tbody>"+T.map(function(t){return"<tr><td>"+t[0]+"</td><td>"+t[1]+"</td><td>"+t[2]+"</td><td>"+t[3]+"</td></tr>"}).join("")+"</tbody>";
 
-/* courses */
 var courses=("Honors U.S. History I 215|Environmental Science 351|Piano III 898|Honors Pre-Calc 424|Radio Communications I 984|Honors English II 125|French II 512|AP Government 244|AP Biology 348|AP Computer Science 10012|Chorus 907|Yearbook 190|AP Calculus (BC) 2446|Geometry 435|ESL - Math 451|Internship 601|Video Production & Animation I 10658|TV Production 613|Intro to Coding 805|Algebra II 420|R-English 3 563|Radio Communications III 986|Video Production & Animation II 10659|Honors World History 225|Accounting 651|Creative Writing - Story Writing 173|Geometry Theory & Structure 430|Band 901|AP Environmental Science 352|Criminal Justice 255|AP Chemistry 343|Spanish III 543|Health Science 937|R-English 2 562|Honors Geometry w/Trig 423|Lifetime Fitness 9544|AP Language and Composition 146|Forensics 336|Reading 557|Interior Design I 747|Band/Chorus 919|AP Literature and Composition 145|Earth System Science 314|Creative Living 742|AP U.S. History 235|Physics I 340|Ceramics and Pottery 873|World History 220|Probability & Statistics 442|Art I 855|Academic English II 120|Honors Chemistry 330|Spanish IV 544|Spanish I 541|Health 9934|21st Cent Skills/Entrepreneurship 605|Radio Communications II 985|U.S. History I 211|ESL Support 182|U.S. History II 231|Pre-Calculus/Trigonometry 426|Digital Photography Tech 798|Intro to Business 633|Public Speaking 160|Graphic Arts Tech III 799|Art II 856|ESL English 181|Personal Finance 612|STEM 427|Study Hall 999|Philosophy 268|Honors Algebra I 409|AP Calculus (AB) 445|Honors Algebra II 422|Radio Communications IV 987|French I 511|Spanish II 542|Sociology 252|Sports & Entertainment Marketing 641|Art IV 865|Arts and Crafts 866|Anatomy and Physiology 939|Academic English III 130|Honors English IV 144|Adaptive Physical Educ 915|Academic Biology 322|Algebra I 412|Piano II 896|Dramatic Arts 169|Honors U.S. History II 232|Economics & Government 240|Internship 602|Guitar I 883|Mythology 170|AP Psychology 203|R-English 1 561|History of Rock & Roll 870|Honors Biology 324|Guitar III 885|Academic English IV 140|AP Statistics 204|Academic Chemistry 332|Intro to Materials & Manufacturing 789|Zoology 335|Graphic Arts Tech I 792|Art III 857|Guitar II 895|Athletic Training 938|Psychology 254|Applied Math 9449|Academic English I 110|Pre-Algebra 411|French III 513|R-English 4 564|Sectionals 901S|AP Human Geography 236|Calculus 469|Child Development 744|Graphic Arts Tech II 793|Strength and Conditioning 941|Sports and Games 955|Children’s Literature and Story Telling 171|Accounting II 652|Honors English I 115|Abnormal Psychology 256|Piano I 888|Honors English III 135").split("|").map(function(s){var i=s.lastIndexOf(" ");return{n:s.slice(0,i),c:s.slice(i+1)}}).sort(function(a,b){return a.n.localeCompare(b.n)});
-var cp=0,PER=15,cf=courses;
-function drawCourses(){var pg=Math.max(1,Math.ceil(cf.length/PER));cp=Math.min(cp,pg-1);$("cCount").textContent=cf.length+" courses";
- $("cList").innerHTML=cf.slice(cp*PER,cp*PER+PER).map(function(c,i){var d='style="animation-delay:'+i*25+'ms"';return"<div "+d+">"+c.n.replace(/&/g,"&amp;")+'</div><div class="n" '+d+'>'+c.c+"</div>"}).join("")||'<div style="grid-column:1/-1;color:var(--mu)">No courses match.</div>';
+
+var DEPT=["English","Social Studies","Science","Math","World Languages","Business","Tech & Life","Arts & Media","Music","PE & Health","Other"];
+function dept(c){var n=parseInt(c.c);
+ if(n===9449||n===204)return"Math";
+ if(n===999)return"Other";
+ if(n===10012||n===805)return"Tech & Life";
+ if(n===10658||n===10659||n===613||(n>=984&&n<=987))return"Arts & Media";
+ if(n===901||n===907||n===919||n===870||(n>=883&&n<=898))return"Music";
+ if(n>=900)return"PE & Health";
+ return n<200?"English":n<300?"Social Studies":n<400?"Science":n<500?"Math":n<550?"World Languages":n<600?"English":n<700?"Business":n<800?"Tech & Life":"Arts & Media"}
+var saved=[];try{saved=JSON.parse(store("rp_saved")||"[]")}catch(e){}
+courses.forEach(function(c){c.d=dept(c);c.l=/^AP /.test(c.n)?"AP":/^Honors /.test(c.n)?"Honors":/^Academic /.test(c.n)?"Academic":""});
+var cp=0,PER=15,cf=courses,cd="",cl="",co="az",csv=0;
+function cFilter(){var q=$("cq").value.trim().toLowerCase();
+ cf=courses.filter(function(c){return(!q||c.n.toLowerCase().indexOf(q)>-1||c.c.toLowerCase().indexOf(q)>-1||c.d.toLowerCase().indexOf(q)>-1)&&(!cd||c.d===cd)&&(!cl||c.l===cl)&&(!csv||saved.indexOf(c.c)>-1)});
+ cf=cf.slice().sort(co==="num"?function(a,b){return parseInt(a.c)-parseInt(b.c)}:co==="za"?function(a,b){return b.n.localeCompare(a.n)}:function(a,b){return a.n.localeCompare(b.n)})}
+function drawCourses(){cFilter();var pg=Math.max(1,Math.ceil(cf.length/PER));cp=Math.min(cp,pg-1);
+ $("cCount").textContent=cf.length+" of "+courses.length+" courses"+(saved.length?" \u00b7 "+saved.length+" saved":"");
+ var h=$("cList");h.innerHTML="";
+ if(!cf.length)h.innerHTML='<div class="empty">No courses match. Try clearing a filter.</div>';
+ cf.slice(cp*PER,cp*PER+PER).forEach(function(c,i){var r=mk("div","crow"),on=saved.indexOf(c.c)>-1;r.style.animationDelay=i*25+"ms";
+  var m=mk("div","cmeta");m.appendChild(mk("div","cn",c.n));var t=mk("div","ctags");t.appendChild(mk("span","role",c.d));if(c.l)t.appendChild(mk("span","role",c.l));m.appendChild(t);
+  var n=mk("button","cnum",c.c);n.title="Copy course number";n.onclick=cpy(c.c,"Copied "+c.c);
+  var st=mk("button","star"+(on?" on":""),on?"Saved":"Save");st.setAttribute("aria-pressed",on);
+  st.onclick=function(){var q=saved.indexOf(c.c);q>-1?saved.splice(q,1):saved.push(c.c);store("rp_saved",JSON.stringify(saved));toast((q>-1?"Removed ":"Saved ")+c.n);drawCourses()};
+  r.appendChild(m);r.appendChild(n);r.appendChild(st);h.appendChild(r)});
  $("cPg").textContent="Page "+(cp+1)+" of "+pg;$("cPrev").disabled=!cp;$("cNext").disabled=cp>=pg-1}
-$("cq").oninput=function(){var q=this.value.trim().toLowerCase();cf=courses.filter(function(c){return c.n.toLowerCase().indexOf(q)>-1||c.c.toLowerCase().indexOf(q)>-1});cp=0;drawCourses()};
+var dc=mk("div","cchips");
+["All"].concat(DEPT).forEach(function(n){var b=mk("button","chip",n);b.setAttribute("aria-pressed",n==="All");b.onclick=function(){cd=n==="All"?"":n;cp=0;Array.prototype.forEach.call(dc.children,function(x){x.setAttribute("aria-pressed",x===b)});drawCourses()};dc.appendChild(b)});
+var lv2=mk("select","ssel");lv2.setAttribute("aria-label","Level");lv2.innerHTML='<option value="">All levels</option><option>AP</option><option>Honors</option><option>Academic</option>';lv2.onchange=function(){cl=lv2.value;cp=0;drawCourses()};
+var so2=mk("select","ssel");so2.setAttribute("aria-label","Sort");so2.innerHTML='<option value="az">A to Z</option><option value="za">Z to A</option><option value="num">Course number</option>';so2.onchange=function(){co=so2.value;drawCourses()};
+var sv2=mk("button","chip","Saved only");sv2.setAttribute("aria-pressed","false");sv2.onclick=function(){csv=csv?0:1;sv2.setAttribute("aria-pressed",!!csv);cp=0;drawCourses()};
+var ctl=mk("div","ctools");ctl.appendChild(lv2);ctl.appendChild(so2);ctl.appendChild(sv2);$("cFilters").appendChild(dc);$("cFilters").appendChild(ctl);
+$("cq").oninput=function(){cp=0;drawCourses()};
 $("cPrev").onclick=function(){cp--;drawCourses()};$("cNext").onclick=function(){cp++;drawCourses()};
 
-
-/* ===== themes, prefs, effects ===== */
 var R=document.documentElement,pc="#7c7cff";
 R.classList.add("intro");setTimeout(function(){R.classList.remove("intro")},4800);
 var TH=[["dark","Indigo","#7c7cff"],["light","Light","#5555ee"],["amoled","Amoled","#e8e8ff"],["ocean","Ocean","#38bdf8"],["sunset","Sunset","#ff7a45"],["forest","Forest","#34d399"],["rose","Rose","#ff5fa2"]];
@@ -519,7 +523,7 @@ function thBtn(x,cls){var b=document.createElement("button");b.className=cls;b.d
 TH.forEach(function(x){menu.appendChild(thBtn(x,"mi"));$("thGrid").appendChild(thBtn(x,"thc"))});
 $("theme").onclick=function(e){e.stopPropagation();menu.classList.toggle("open")};
 document.addEventListener("click",function(){menu.classList.remove("open")});
-applyTheme(TH.some(function(x){return x[0]===R.dataset.theme})?R.dataset.theme:(AD.defTheme||"dark"),true);
+applyTheme(TH.some(function(x){return x[0]===R.dataset.theme})?R.dataset.theme:"dark",true);
 
 var P={anim:1,fx:reduce?0:1,tilt:1,compact:0,glow:1,host:1,stats:1,recent:1,newtab:1,sticky:1,qf:1,size:"m",start:"last",per:15};
 try{var sp0=JSON.parse(store("rp_prefs")||"{}");for(var k0 in sp0)P[k0]=sp0[k0]}catch(e){}
@@ -536,15 +540,12 @@ $("dRec").onclick=function(){recs=[];store("rp_recs","[]");draw();toast("Recent 
 $("dRep").onclick=function(){location.reload()};
 $("dAll").onclick=function(){try{localStorage.clear()}catch(e){}location.reload()};
 
-/* scroll progress, back to top */
 var tb=$("top");function sc(){var m=R.scrollHeight-innerHeight;$("sp").style.transform="scaleX("+(m>0?scrollY/m:0)+")";tb.classList.toggle("show",scrollY>500)}
 addEventListener("scroll",sc,{passive:true});tb.onclick=function(){scrollTo({top:0,behavior:"smooth"})};
 
-/* typing placeholder */
 var PH=["Search Canvas...","Search Desmos...","Search college tools...","Search Khan Academy...","Search by subject...","Search Google Docs..."],pi=0,pj=0,pd=0;
 (function tw(){var q=$("q");if(document.activeElement!==q&&!q.value){var s=PH[pi];if(!pd){pj++;q.placeholder=s.slice(0,pj)+"|";if(pj>=s.length){pd=1;setTimeout(tw,1600);return}}else{pj--;q.placeholder=s.slice(0,pj)+"|";if(pj<=0){pd=0;pi=(pi+1)%PH.length}}}setTimeout(tw,pd?35:75)})();
 
-/* ripple, tilt, parallax */
 document.addEventListener("pointerdown",function(e){var b=e.target.closest&&e.target.closest(".ibtn,.chip,.tabs button");if(!b||!P.anim)return;var r=b.getBoundingClientRect(),s=document.createElement("span"),d=Math.max(r.width,r.height)*2;s.className="rip";s.style.cssText="width:"+d+"px;height:"+d+"px;left:"+(e.clientX-r.left-d/2)+"px;top:"+(e.clientY-r.top-d/2)+"px";b.appendChild(s);setTimeout(function(){s.remove()},650)});
 var o1=document.querySelector(".o1"),o2=document.querySelector(".o2"),touch=matchMedia("(hover:none)").matches;
 document.addEventListener("mousemove",function(e){
@@ -553,7 +554,6 @@ document.addEventListener("mousemove",function(e){
   if(a&&P.tilt&&P.anim&&!touch){var r=a.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;a.style.transform="perspective(700px) rotateX("+(-py*9)+"deg) rotateY("+(px*9)+"deg) translateY(-4px)"}});
 document.addEventListener("mouseout",function(e){var a=e.target.closest&&e.target.closest(".app");if(a&&!a.contains(e.relatedTarget))a.style.transform=""});
 
-/* particles */
 var cv=$("fx"),cx=cv.getContext("2d"),pts=[];
 function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();addEventListener("resize",rs);
 for(var pi2=0;pi2<46;pi2++)pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.8+.6});
@@ -562,7 +562,6 @@ for(var pi2=0;pi2<46;pi2++)pts.push({x:Math.random()*innerWidth,y:Math.random()*
     for(var j=i+1;j<pts.length;j++){var q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<130){cx.globalAlpha=(1-d/130)*.18;cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.stroke()}}})}
   requestAnimationFrame(loop)})();
 
-/* ===== tools ===== */
 var CIR=2*Math.PI*52,tl0=1500,tl=1500,tt=null,rf=$("rf");rf.style.strokeDasharray=CIR;
 function fmt(s){return Math.floor(s/60)+":"+("0"+s%60).slice(-2)}
 function tdraw(){$("tm").textContent=fmt(tl);rf.style.strokeDashoffset=CIR*(1-tl/tl0)}
@@ -588,7 +587,6 @@ $("tda").onclick=tadd;$("tdi").onkeydown=function(e){if(e.key==="Enter")tadd()};
 var nt=$("nt");nt.value=store("rp_note")||"";nt.oninput=function(){store("rp_note",nt.value);$("ns").textContent="Saved on this device"};
 
 
-/* ===== new tools ===== */
 function p2(n){return("0"+n).slice(-2)}
 var UN={Length:{m:1,km:1000,cm:.01,mm:.001,mi:1609.344,yd:.9144,ft:.3048,"in":.0254},Mass:{kg:1,g:.001,mg:1e-6,lb:.45359237,oz:.028349523},Volume:{L:1,mL:.001,gal:3.785411784,qt:.946352946,pt:.473176473,cup:.2365882365,"fl oz":.0295735296},Temperature:{C:1,F:1,K:1}};
 $("uc").innerHTML=Object.keys(UN).map(function(k){return"<option>"+k+"</option>"}).join("");
@@ -642,14 +640,13 @@ function cite(){var a=$("ca").value.trim(),t=$("ct").value.trim(),w=$("cw").valu
 ["ca","ct","cw","cd","cu"].forEach(function(i){$(i).oninput=cite});
 $("ccp").onclick=function(){var s=cite();if(!s)return;try{navigator.clipboard.writeText(s).then(function(){toast("Citation copied")},function(){toast("Select the text to copy it")})}catch(e){toast("Select the text to copy it")}};
 
-/* ===== quick find + view toggle ===== */
 var lv=store("rp_view")==="list",vb=document.createElement("button");vb.className="chip";vb.style.marginLeft="auto";
 function vSync(){R.dataset.view=lv?"list":"grid";vb.textContent=lv?"Grid view":"List view"}
 vb.onclick=function(){lv=!lv;store("rp_view",lv?"list":"grid");vSync()};chips.appendChild(vb);vSync();
 var cmd=$("cmdk"),cmi=$("cmi"),cml=$("cml"),csel=0,citems=[];
 function cmdItems(q){var A2=[];VIEWS.forEach(function(v){A2.push({k:"tab",n:v[1],s:"Tab",f:function(){go(v[0])}})});
   TH.forEach(function(x){A2.push({k:"theme",n:"Theme: "+x[1],s:"Theme",f:function(){applyTheme(x[0])}})});
-  apps.forEach(function(a){if(AD.hidden.indexOf(a.n)>-1)return;A2.push({k:"app",n:a.n,s:D[a.c][0],a:a,f:function(){window.open(a.u,"_blank","noopener")}})});
+  apps.forEach(function(a){A2.push({k:"app",n:a.n,s:D[a.c][0],a:a,f:function(){window.open(a.u,"_blank","noopener")}})});
   q=q.toLowerCase();
   if(q)return A2.filter(function(x){return x.n.toLowerCase().indexOf(q)>-1||x.s.toLowerCase().indexOf(q)>-1}).slice(0,30);
   return A2.filter(function(x){return x.k!=="app"||favs.indexOf(x.n)>-1}).concat(A2.filter(function(x){return x.k==="app"&&favs.indexOf(x.n)<0}).slice(0,6))}
@@ -675,7 +672,6 @@ document.addEventListener("keydown",function(e){
   else if(e.key==="Enter"&&citems[csel]){e.preventDefault();cmdRun(citems[csel])}});
 
 
-/* ===== category scroller ===== */
 var cL=$("cL"),cR=$("cR");
 function cEdge(){cL.disabled=chips.scrollLeft<4;cR.disabled=chips.scrollLeft+chips.clientWidth>=chips.scrollWidth-4}
 cL.onclick=function(){chips.scrollBy({left:-chips.clientWidth*.6,behavior:"smooth"})};
@@ -695,7 +691,6 @@ function spy(){
 addEventListener("scroll",function(){requestAnimationFrame(spy)},{passive:true});
 
 
-/* ===== personalize ===== */
 var pz=$("pz");
 function prow(tt,s,ctl){var r=mk("div","srow"),d=mk("div");d.appendChild(mk("b","",tt));d.appendChild(mk("div","sub",s));r.appendChild(d);r.appendChild(ctl);pz.appendChild(r)}
 var fsz=mk("div","seg");fsz.style.margin="0";
@@ -717,71 +712,6 @@ prow("Accent color","Override the theme color",clrWrap);
 var sa=store("rp_accent");if(sa){accentApply(sa);clrIn.value=sa}
 applyPrefs();
 
-/* ===== admin ===== */
-var unlocked=false,fails=0,lockUntil=0;
-function aSave(){store("rp_admin",JSON.stringify(AD))}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-function sha(s){if(window.crypto&&crypto.subtle&&window.TextEncoder)return crypto.subtle.digest("SHA-256",new TextEncoder().encode("rp:"+s)).then(function(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return("0"+x.toString(16)).slice(-2)}).join("")});return Promise.resolve("b"+btoa(unescape(encodeURIComponent(s))))}
-function shake(){var c=$("adLock");c.classList.remove("shk");void c.offsetWidth;c.classList.add("shk")}
-function adRender(){
-  var has=!!AD.pin;$("adLock").hidden=unlocked;$("adBody").hidden=!unlocked;
-  if(!unlocked){$("adT").textContent=has?"Admin access":"Create an admin PIN";$("adMsg").textContent=has?"Enter your PIN to open the admin panel.":"Pick a PIN with at least 4 characters. You will use it to unlock this panel.";$("adGo").textContent=has?"Unlock":"Create PIN";$("adPin").value="";return}
-  adFill()}
-$("adGo").onclick=function(){
-  var v=$("adPin").value;
-  if(Date.now()<lockUntil){shake();$("adMsg").textContent="Too many tries. Wait "+Math.ceil((lockUntil-Date.now())/1000)+" seconds.";return}
-  if(!AD.pin){if(v.length<4){$("adMsg").textContent="Use at least 4 characters.";return}sha(v).then(function(h){AD.pin=h;aSave();unlocked=true;toast("PIN created");adRender()});return}
-  sha(v).then(function(h){if(h===AD.pin){unlocked=true;fails=0;adRender()}else{fails++;if(fails>=5){lockUntil=Date.now()+30000;fails=0}$("adMsg").textContent="That PIN is not right.";shake()}})};
-$("adPin").onkeydown=function(e){if(e.key==="Enter")$("adGo").click()};
-$("adLk").onclick=function(){unlocked=false;adRender();toast("Admin locked")};
-$("pnS").onclick=function(){var v=$("pnN").value;if(v.length<4){toast("Use at least 4 characters");return}sha(v).then(function(h){AD.pin=h;aSave();$("pnN").value="";toast("PIN changed")})};
-
-function banDraw(){var b=AD.ban,e=$("ban");if(!b||!b.t||store("rp_bandis")===b.id){e.hidden=true;return}e.hidden=false;e.className="ban "+(b.k||"info");$("banT").textContent=b.t}
-$("banX").onclick=function(){if(AD.ban)store("rp_bandis",AD.ban.id);$("ban").hidden=true};
-$("anPub").onclick=function(){var v=$("anT").value.trim();if(!v){toast("Write a message first");return}AD.ban={t:v,k:$("anK").value,id:String(Date.now())};aSave();banDraw();toast("Announcement published")};
-$("anClr").onclick=function(){delete AD.ban;aSave();banDraw();$("anT").value="";toast("Announcement removed")};
-
-function brandSet(){
-  var b=(AD.brand||"Raider Portal").trim()||"Raider Portal",w=b.split(/\s+/),last=w.pop(),first=w.join(" ");
-  function put(el,wrap){if(!el)return;el.innerHTML="";if(first){var s=document.createElement("span");if(wrap)s.className="w";s.textContent=first;el.appendChild(s);el.appendChild(document.createTextNode(" "))}var bb=document.createElement("b");bb.textContent=last;el.appendChild(bb)}
-  put(document.querySelector(".brand"));put(document.querySelector(".lw"));put(document.querySelector(".hero h1"),1);document.title=b;
-  $("greet").textContent=(hr<12?"Good morning":hr<18?"Good afternoon":"Good evening")+". "+(AD.sub||"Every school tool you need, one click away.")}
-$("bnSave").onclick=function(){var n=$("bnN").value.trim(),s=$("bnS").value.trim(),d=$("bnT").value;n?AD.brand=n:delete AD.brand;s?AD.sub=s:delete AD.sub;d?AD.defTheme=d:delete AD.defTheme;aSave();brandSet();toast("Branding saved")};
-$("bnRs").onclick=function(){delete AD.brand;delete AD.sub;delete AD.defTheme;aSave();brandSet();$("bnN").value=$("bnS").value="";$("bnT").value="";toast("Branding reset")};
-
-function normUrl(u){u=u.trim();if(!u)return"";if(!/^https?:\/\//i.test(u))u="https://"+u;try{var x=new URL(u);return(x.protocol==="http:"||x.protocol==="https:")&&x.hostname.indexOf(".")>0?x.href:""}catch(e){return""}}
-function rebuildChips(){Array.prototype.slice.call(chips.children).forEach(function(c){if(c.classList.contains("chip"))c.remove()});
-  ["All"].concat(D.map(function(c){return c[0]})).forEach(function(n,i){var b=document.createElement("button");b.className="chip";b.textContent=n;b.dataset.c=i-1;b.setAttribute("aria-pressed",i===0);b.onclick=function(){cat=i-1;Array.prototype.forEach.call(chips.children,function(x){x.setAttribute("aria-pressed",+x.dataset.c===cat)});draw()};chips.appendChild(b)});
-  chips.appendChild(vb);cEdge()}
-function customRefresh(){syncCustom();rebuildChips();cat=-1;draw();adFill()}
-$("caAdd").onclick=function(){var n=$("caN").value.trim(),u=normUrl($("caU").value);if(!n||!u){toast("Add a name and a valid link");return}
-  if(apps.some(function(a){return a.n.toLowerCase()===n.toLowerCase()}))n+=" (custom)";
-  AD.custom.push({n:n,u:u,c:$("caC").value});aSave();$("caN").value=$("caU").value="";customRefresh();toast("Added "+n)};
-function caList(){$("caL").innerHTML=AD.custom.map(function(x,i){return'<div class="row"><span class="k">'+esc(x.c)+'</span><span style="flex:1">'+esc(x.n)+'</span><button class="x" data-i="'+i+'">Remove</button></div>'}).join("")||'<div class="sub">No custom apps yet.</div>';
-  Array.prototype.forEach.call($("caL").querySelectorAll("button"),function(b){b.onclick=function(){AD.custom.splice(+b.dataset.i,1);aSave();customRefresh()}})}
-function hdList(){var q=$("hdQ").value.trim().toLowerCase(),l=apps.filter(function(a){return!q||a.n.toLowerCase().indexOf(q)>-1}).slice(0,60);$("hdN").textContent="("+AD.hidden.length+" hidden)";$("hdL").innerHTML="";
-  l.forEach(function(a){var off=AD.hidden.indexOf(a.n)>-1,r=mk("div","row"),s=mk("span","",a.n);s.style.flex="1";if(off)s.style.opacity=".5";r.appendChild(s);var b=mk("button","x",off?"Show":"Hide");b.onclick=function(){var k=AD.hidden.indexOf(a.n);k>-1?AD.hidden.splice(k,1):AD.hidden.push(a.n);aSave();draw();hdList()};r.appendChild(b);$("hdL").appendChild(r)})}
-$("hdQ").oninput=hdList;$("hdAll").onclick=function(){AD.hidden=[];aSave();draw();hdList();toast("All apps visible")};
-function usage(){var tot=0,arr=[];for(var k in cnt){tot+=cnt[k];arr.push([k,cnt[k]])}arr.sort(function(a,b){return b[1]-a[1]});
-  var h=row("Visits",store("rp_visits")||1)+row("App opens",tot)+row("Pinned apps",favs.length)+row("Hidden apps",AD.hidden.length)+row("Custom apps",AD.custom.length)+row("Tasks",todo.length)+row("Flashcards",cards.length);
-  h+='<div class="sub" style="margin-top:12px">Most opened</div>'+(arr.slice(0,8).map(function(x){return row(esc(x[0]),x[1]+" opens")}).join("")||'<div class="sub">Nothing opened yet.</div>');$("us").innerHTML=h}
-$("usClr").onclick=function(){cnt={};store("rp_counts","{}");usage();toast("Usage stats cleared")};
-function adFill(){
-  var b=AD.ban||{};$("anT").value=b.t||"";$("anK").value=b.k||"info";
-  $("bnN").value=AD.brand||"";$("bnS").value=AD.sub||"";
-  $("bnT").innerHTML='<option value="">Default theme: none</option>'+TH.map(function(x){return'<option value="'+x[0]+'">Default theme: '+x[1]+"</option>"}).join("");$("bnT").value=AD.defTheme||"";
-  $("caC").innerHTML=D.slice(0,BASED).map(function(c){return"<option>"+c[0]+"</option>"}).join("")+"<option>My Apps</option>";
-  caList();hdList();usage()}
-$("bkEx").onclick=function(){var o={};try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf("rp_")===0)o[k]=localStorage.getItem(k)}}catch(e){}$("bkT").value=JSON.stringify(o);toast("Backup ready")};
-$("bkCp").onclick=function(){var v=$("bkT").value;if(!v){toast("Click Export first");return}try{navigator.clipboard.writeText(v).then(function(){toast("Backup copied")},function(){$("bkT").select();toast("Select and copy it")})}catch(e){$("bkT").select();toast("Select and copy it")}};
-$("bkIm").onclick=function(){try{var o=JSON.parse($("bkT").value),n=0;Object.keys(o).forEach(function(k){if(k.indexOf("rp_")===0&&typeof o[k]==="string"){store(k,o[k]);n++}});toast("Imported "+n+" items");setTimeout(function(){location.reload()},900)}catch(e){toast("That backup is not valid")}};
-function conf(btn,fn){var lbl=btn.textContent,armed=false,tm;btn.onclick=function(){if(!armed){armed=true;btn.textContent="Click again to confirm";tm=setTimeout(function(){armed=false;btn.textContent=lbl},3000);return}clearTimeout(tm);armed=false;btn.textContent=lbl;fn()}}
-conf($("dzA"),function(){AD={pin:AD.pin,hidden:[],custom:[]};aSave();location.reload()});
-conf($("dzW"),function(){try{localStorage.clear()}catch(e){}location.reload()});
-store("rp_visits",(parseInt(store("rp_visits"))||0)+1);
-brandSet();banDraw();
-
-/* ===== calendar ===== */
 var EV={"2026-08-27":"First day of school. Quarter 1 and Semester 1 begin.","2026-11-04":"Quarter 1 ends.","2026-11-05":"Quarter 2 begins.","2027-01-22":"Quarter 2 and Semester 1 end.","2027-01-25":"Semester 2 and Quarter 3 begin.","2027-04-05":"Quarter 3 ends.","2027-04-06":"Quarter 4 begins.","2027-06-09":"Last day of school."};
 var now=new Date(),cy=now.getFullYear(),cm=now.getMonth(),MN="January February March April May June July August September October November December".split(" ");
 function iso(y,m,d){return y+"-"+("0"+(m+1)).slice(-2)+"-"+("0"+d).slice(-2)}
@@ -799,6 +729,20 @@ setTimeout(function(){$("yb").style.width=(pr*100).toFixed(1)+"%"},300);
 $("ys").textContent=now<ys?"The school year starts in "+Math.ceil((ys-now)/864e5)+" days.":now>ye?"The school year is over. Enjoy the break.":Math.round(pr*100)+"% of the school year has passed. "+Math.ceil((ye-now)/864e5)+" calendar days until the last day.";
 $("ev").innerHTML=Object.keys(EV).map(function(k){var d=new Date(k+"T00:00:00");return'<div class="row'+(d<now?" past":"")+'"><span class="k">'+MN[d.getMonth()].slice(0,3)+" "+d.getDate()+", "+d.getFullYear()+'</span><span>'+EV[k]+'</span></div>'}).join("");
 drawCal();sc();
+
+var gT=0,GO={a:"apps",t:"tools",c:"cal",s:"school",u:"courses",h:"help",e:"settings"};
+document.addEventListener("keydown",function(e){
+  var el=document.activeElement,tg=el&&el.tagName;
+  if(e.ctrlKey||e.metaKey||e.altKey||tg==="INPUT"||tg==="TEXTAREA"||tg==="SELECT"||!cmd.hidden)return;
+  var k=e.key;
+  if(gT&&Date.now()<gT){gT=0;if(GO[k]){e.preventDefault();go(GO[k])}return}
+  if(k==="g"){gT=Date.now()+1200;return}
+  if(/^[1-7]$/.test(k)){go(VIEWS[+k-1][0]);return}
+  if(k==="t"||k==="T"){var ti=TH.map(function(x){return x[0]}).indexOf(R.dataset.theme);applyTheme(TH[(ti+1)%TH.length][0]);return}
+  if(k==="l"||k==="L"){vb.click();return}
+  if(k==="?"){go("settings");setTimeout(function(){$("kbs").scrollIntoView({behavior:"smooth"})},120);return}
+  if(k==="["||k==="]"){go("apps");var n=Math.max(-1,Math.min(D.length-1,cat+(k==="]"?1:-1))),b=chips.querySelector('.chip[data-c="'+n+'"]');if(b)b.click();return}
+});
 
 draw();drawSchool();drawHelp();drawCourses();
 var t1=store("rp_tab"),st=P.start&&P.start!=="last"?P.start:(t1&&t1!=="admin"?t1:"apps");go(VIEWS.some(function(v){return v[0]===st})?st:"apps");
