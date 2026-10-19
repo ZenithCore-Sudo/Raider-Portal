@@ -20,7 +20,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Outfit',system-ui,-apple-
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--ac2);outline-offset:3px}
-/* loader */
+
 #loader{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:opacity .7s ease,visibility .7s;animation:failsafe .1s 6s forwards}
 #loader.done{opacity:0;visibility:hidden}
 @keyframes failsafe{to{opacity:0;visibility:hidden}}
@@ -33,14 +33,14 @@ a{color:inherit}
 .lbar{width:min(320px,70vw);height:9px;border-radius:9px;background:var(--sf2);overflow:hidden}
 .lbar i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--ac),var(--ac2));box-shadow:0 0 18px var(--glow)}
 #lpct{color:var(--mu);font-size:.95rem;letter-spacing:.04em;font-variant-numeric:tabular-nums}
-/* backdrop */
+
 .orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;opacity:.55;will-change:transform}
 .o1{width:520px;height:520px;background:var(--glow);top:-160px;left:-120px;animation:d1 22s ease-in-out infinite alternate}
 .o2{width:460px;height:460px;background:var(--o2);bottom:-160px;right:-100px;animation:d2 26s ease-in-out infinite alternate}
 @keyframes d1{to{transform:translate(220px,140px) scale(1.2)}}
 @keyframes d2{to{transform:translate(-200px,-120px) scale(1.15)}}
 .site{position:relative;z-index:1}
-/* nav */
+
 .bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:18px;padding:12px clamp(14px,3vw,36px);background:var(--nav);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--ln)}
 .brand{font-weight:600;font-size:1.2rem;white-space:nowrap}.brand b{font-weight:600;color:var(--ac)}
 .tabs{display:flex;gap:4px;position:relative;margin:0 auto;padding:4px;background:var(--sf);border:1px solid var(--ln);border-radius:99px;overflow-x:auto;max-width:100%}
@@ -53,7 +53,7 @@ a{color:inherit}
 main{max-width:1280px;margin:0 auto;padding:0 clamp(14px,3vw,36px) 70px}
 .panel{display:none}.panel.on{display:block;animation:in .5s cubic-bezier(.2,.8,.2,1)}
 @keyframes in{from{opacity:0;transform:translateY(16px)}}
-/* hero */
+
 .hero{padding:clamp(38px,8vw,90px) 0 26px;text-align:center}
 .hero h1{font-size:clamp(2.6rem,8vw,5.4rem);font-weight:600;letter-spacing:-.045em;line-height:1}
 .hero h1 b{font-weight:600;background:linear-gradient(100deg,var(--ac),var(--ac3),var(--ac));background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 6s linear infinite}
@@ -88,7 +88,7 @@ main{max-width:1280px;margin:0 auto;padding:0 clamp(14px,3vw,36px) 70px}
 .pin.on{background:var(--ac);border-color:var(--ac);color:var(--on)}
 @media(hover:none){.pin{opacity:1;transform:none}}
 .empty{border:1px dashed var(--ln);border-radius:16px;padding:34px;color:var(--mu);text-align:center}
-/* other panels */
+
 .ph{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:600;letter-spacing:-.03em;padding:38px 0 20px}
 .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
 .card{background:var(--sf);border:1px solid var(--ln);border-radius:18px;padding:20px;transition:.25s;animation:pop .5s both;animation-delay:calc(var(--i,0)*60ms)}
@@ -227,18 +227,18 @@ tbody tr:hover{background:var(--sf2)}
 .day.nos{background:color-mix(in srgb,#ff5a8c 14%,var(--sf));border-color:color-mix(in srgb,#ff5a8c 35%,var(--ln))}
 .kh{display:flex;align-items:center;gap:10px;margin-bottom:6px}.kh h3{flex:1;margin:0}.kh .ibtn{padding:5px 12px;font-size:.82rem}
 .kdl{max-height:380px;overflow-y:auto;overscroll-behavior:contain;margin:0 -6px;padding:0 6px}
-/* athletics + staff */
+
 .a2{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
 @media(max-width:920px){.a2{grid-template-columns:1fr}}
 .alc{display:flex;flex-direction:column;gap:10px}
 .alc h3{margin:0}.alc p{flex:1}
 .srow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--ln)}.srow:last-child{border:0}
-/* centered top bar */
+
 .bar{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
 .bar .tabs{margin:0;justify-self:center}
 .bar .rt{display:flex;align-items:center;gap:10px;justify-self:end}
 @media(max-width:1340px){.bar{grid-template-columns:1fr auto;row-gap:10px}.bar .tabs{grid-column:1/-1;grid-row:2}.chips{top:112px}.cw{top:112px}html{scroll-padding-top:170px}}
-/* background fixes */
+
 #p-cal .card{background:color-mix(in srgb,var(--bg) 60%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .pbar{height:12px;border-radius:12px;background:var(--sf2);overflow:hidden;margin:10px 0}
 .pbar i{display:block;height:100%;width:0;border-radius:12px;background:linear-gradient(90deg,var(--ac),var(--ac3));transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
@@ -330,7 +330,7 @@ html[data-noqf] #cmdBtn{display:none}
 .star{padding:6px 14px;border-radius:99px;border:1px solid var(--ln);background:var(--sf);font-size:.82rem;font-weight:500;transition:.2s}
 .star:hover{border-color:var(--ac)}.star.on{background:var(--ac);border-color:var(--ac);color:var(--on)}
 @media(max-width:560px){.crow{flex-wrap:wrap}.cmeta{flex:1 1 100%}}
-/* clock, tools, themes */
+
 :root[data-theme="slate"]{--bg:#0b0f14;--sf:rgba(160,180,210,.05);--sf2:rgba(160,180,210,.09);--ln:rgba(170,190,220,.15);--tx:#eaf0f8;--mu:#8b98aa;--ac:#8fa7c4;--ac2:#c3d3e8;--glow:rgba(143,167,196,.22);--nav:rgba(11,15,20,.76);--on:#0b1018;--ac3:#60a5fa;--o2:rgba(96,165,250,.1)}
 :root[data-theme="grape"]{--bg:#0c0614;--sf:rgba(200,140,255,.045);--sf2:rgba(200,140,255,.09);--ln:rgba(210,160,255,.15);--tx:#f6eeff;--mu:#a48cbd;--ac:#a855f7;--ac2:#d3a6fb;--glow:rgba(168,85,247,.24);--nav:rgba(12,6,20,.76);--on:#fff;--ac3:#ec4899;--o2:rgba(236,72,153,.12)}
 :root[data-theme="crimson"]{--bg:#100505;--sf:rgba(255,120,110,.045);--sf2:rgba(255,120,110,.09);--ln:rgba(255,140,130,.15);--tx:#fff0ee;--mu:#b88b87;--ac:#ef4444;--ac2:#fca5a5;--glow:rgba(239,68,68,.24);--nav:rgba(16,5,5,.76);--on:#fff;--ac3:#f97316;--o2:rgba(249,115,22,.12)}
@@ -455,7 +455,7 @@ html[data-lock="1"] body{overflow:hidden}
 .sbp:not(:has(button)){padding-right:16px}
 .sbp.tst2{border-color:var(--ac)}
 .sbp .ibtn{padding:5px 12px;font-size:.82rem}
-/* options turned off in CONFIG add an "off-name" class to <html> */
+
 .off-homeSearchBox .sbox{display:none}
 .off-homeHeroTitle .hero h1{display:none}
 .off-topBrand .brand{display:none}
@@ -614,59 +614,51 @@ var $=function(i){return document.getElementById(i)};
 function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
 var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
 
-/* ======================================================================
-   SITE OPTIONS
-   Change a value, save the file, reload the page.
-   Lockdown, testing mode and site-wide controls: true = turn it ON,
-   or fill in the text or list.
-   Everything from TABS down: true = feature on, false = feature off.
-   Turning a feature off hides it everywhere, including its Settings switch.
-   ====================================================================== */
 var CONFIG={
-  /* ================= LOCKDOWN ================= */
-  lockdown:false,               // true = cover the whole portal with a lock screen
+  /* ================================== */
+  lockdown:false,
   lockdownTitle:"Portal locked",
   lockdownMessage:"This portal is locked right now. Please check with your teacher.",
-  lockdownFrom:"",              // optional start, like "2026-10-20T08:00" (blank = starts now)
-  lockdownUntil:"",             // optional end,   like "2026-10-20T14:30" (blank = never ends)
-  lockdownShowHelp:true,        // keep a Call or text 988 button on the lock screen
+  lockdownFrom:"",
+  lockdownUntil:"",
+  lockdownShowHelp:true,
 
-  /* ================= TESTING MODE (true = block it) ================= */
-  testingMode:false,            // true = turn testing mode on
-  testingTabs:["tools"],        // tabs that stay open: apps, tools, plan, cal, school, courses, ath, help, settings
-  testingHideTools:["Quick notes","Citation maker","Word counter","Flashcards"],  // tools hidden while testing (exact tool names)
-  testingAllowedApps:[],        // apps that stay open while testing, like ["Desmos","Canvas"]
+  /* ================================== */
+  testingMode:false,
+  testingTabs:["tools"],
+  testingHideTools:["Quick notes","Citation maker","Word counter","Flashcards"],
+  testingAllowedApps:[],
   testingMessage:"Testing mode is on. Only approved tools are available.",
-  testingShowBanner:true,       // show the testing message at the bottom
-  testingBlockApps:true,        // block apps (except testingAllowedApps)
-  testingBlockLinks:true,       // block outside links
-  testingBlockShortcuts:true,   // turn off keyboard shortcuts
-  testingBlockQuickFind:true,   // turn off Quick find
-  testingBlockThemes:true,      // block theme changes
-  testingBlockCopyPaste:true,   // block copy, cut, paste and right-click
+  testingShowBanner:true,
+  testingBlockApps:true,
+  testingBlockLinks:true,
+  testingBlockShortcuts:true,
+  testingBlockQuickFind:true,
+  testingBlockThemes:true,
+  testingBlockCopyPaste:true,
 
-  /* ================= SITE-WIDE CONTROLS ================= */
-  banner:"",                    // message shown on every page ("" = none)
-  bannerTop:false,              // true = show the banner at the top instead of the bottom
-  bannerDismissible:false,      // true = students can close the banner (until they reopen the page)
-  noApps:false,                 // true = apps cannot be opened
-  noLinks:false,                // true = every outside link is blocked
-  blockedApps:[],               // apps removed completely, like ["YouTube","Netflix"]
-  blockedSites:[],              // sites blocked, like ["tiktok.com"] (removes matching apps and blocks links)
-  hiddenCategories:[],          // app categories hidden, like ["News"]
-  disabledTools:[],             // single tools hidden, like ["Typing test"]
-  warnBeforeLeaving:false,      // true = ask "Leave the portal?" before any outside link
-  disableRightClick:false,      // true = block the right-click menu
-  disableTextSelection:false,   // true = text cannot be selected (typing boxes still work)
-  idleScreenMinutes:0,          // show a "Still there?" screen after this many idle minutes (0 = off)
+  /* ================================== */
+  banner:"",
+  bannerTop:false,
+  bannerDismissible:false,
+  noApps:false,
+  noLinks:false,
+  blockedApps:[],
+  blockedSites:[],
+  hiddenCategories:[],
+  disabledTools:[],
+  warnBeforeLeaving:false,
+  disableRightClick:false,
+  disableTextSelection:false,
+  idleScreenMinutes:0,
   idleScreenMessage:"Are you still there? Tap Continue to keep using the portal.",
-  forceSameTab:false,           // true = apps open in the same tab
-  forcedTheme:"",               // lock the theme, like "dark" or "light" (blank = students choose)
-  startTab:"",                  // tab that opens first: apps, tools, plan, cal, school, courses, ath, help, settings (blank = last used)
-  portalName:"",                // rename the portal, like "Raider Hub" (blank = Raider Portal)
-  greetingText:"",              // replaces "Every school tool you need, one click away."
+  forceSameTab:false,
+  forcedTheme:"",
+  startTab:"",
+  portalName:"",
+  greetingText:"",
 
-  /* ================= TABS (true = on) ================= */
+  /* ================================== */
   tabApps:true,
   tabTools:true,
   tabPlanner:true,
@@ -677,47 +669,47 @@ var CONFIG={
   tabCounseling:true,
   tabSettings:true,
 
-  /* ================= TOOL GROUPS ================= */
-  toolTimers:true,              // Study timer, Stopwatch, Countdowns
-  toolGradeCalculators:true,    // Grade calculator, GPA calculator, Final exam calculator
-  toolMathCalculators:true,     // Scientific, Quadratic, Stats, GCF and LCM, Percent, Base converter, Roman numerals
-  toolConvertersAndDates:true,  // Unit converter, Date calculator
-  toolWritingHelpers:true,      // Word counter, Citation maker, Text tools, Typing test
-  toolOrganizers:true,          // To-do list, Quick notes, Flashcards
-  toolRandomAndSecurity:true,   // Randomizer, Password maker
-  toolColor:true,               // Color tools
+  /* ================================== */
+  toolTimers:true,
+  toolGradeCalculators:true,
+  toolMathCalculators:true,
+  toolConvertersAndDates:true,
+  toolWritingHelpers:true,
+  toolOrganizers:true,
+  toolRandomAndSecurity:true,
+  toolColor:true,
 
-  /* ================= APPS HOME PAGE ================= */
-  homeHeroTitle:true,           // big Raider Portal title
-  homeGreeting:true,            // greeting line
-  homeCounters:true,            // Apps / Categories / Courses numbers
-  homeSearchBox:true,           // search box (also turns off the / shortcut)
-  homeTypingPlaceholder:true,   // animated text in the search box
-  homeCategoryBar:true,         // category chips
-  homePinnedApps:true,          // Pin buttons and the Pinned row
-  homeRecentApps:true,          // Recently opened row
-  homeViewToggle:true,          // Grid / List button
+  /* ================================== */
+  homeHeroTitle:true,
+  homeGreeting:true,
+  homeCounters:true,
+  homeSearchBox:true,
+  homeTypingPlaceholder:true,
+  homeCategoryBar:true,
+  homePinnedApps:true,
+  homeRecentApps:true,
+  homeViewToggle:true,
 
-  /* ================= TOP BAR AND PAGE EXTRAS ================= */
-  topBrand:true,                // name at the left of the top bar
-  topTabBar:true,               // the row of tabs
-  topQuickFind:true,            // Quick find button and Ctrl K
-  topThemeMenu:true,            // Themes button
-  backToTopButton:true,         // floating Top button
-  scrollProgressBar:true,       // thin progress bar
-  loadingScreen:true,           // intro loading screen
-  keyboardShortcuts:true,       // every keyboard shortcut
+  /* ================================== */
+  topBrand:true,
+  topTabBar:true,
+  topQuickFind:true,
+  topThemeMenu:true,
+  backToTopButton:true,
+  scrollProgressBar:true,
+  loadingScreen:true,
+  keyboardShortcuts:true,
 
-  /* ================= VISUAL EFFECTS ================= */
-  animations:true,              // motion across pages, cards and hovers
-  floatingParticles:true,       // drifting dots
-  backgroundGlow:true,          // soft colored lights
-  cardTilt3D:true,              // app cards lean toward the cursor
-  frostedBlur:true,             // frosted glass blur
-  rippleEffect:true,            // ripple when a button is pressed
-  appAddresses:true,            // site name under each app
+  /* ================================== */
+  animations:true,
+  floatingParticles:true,
+  backgroundGlow:true,
+  cardTilt3D:true,
+  frostedBlur:true,
+  rippleEffect:true,
+  appAddresses:true,
 
-  /* ================= SETTINGS TAB SECTIONS ================= */
+  /* ================================== */
   settingsThemes:true,
   settingsEffects:true,
   settingsPersonalize:true,
@@ -725,13 +717,13 @@ var CONFIG={
   settingsAbout:true,
   settingsShortcutsList:true,
 
-  /* ================= EXTRA FEATURES ================= */
-  calendarMyEvents:true,        // add your own calendar events
-  athleticsMyGames:true,        // My games section
-  courseSaving:true,            // Save button and Saved only filter
-  plannerStats:true,            // stat tiles and progress bar
-  counselingCrisisCard:true,    // "Need help right now?" card
-  schoolTermsTable:true         // 2026-2027 calendar table
+  /* ================================== */
+  calendarMyEvents:true,
+  athleticsMyGames:true,
+  courseSaving:true,
+  plannerStats:true,
+  counselingCrisisCard:true,
+  schoolTermsTable:true
 };
 function on(k){return CONFIG[k]!==false}
 var themesOK=(on("topThemeMenu")||on("settingsThemes"))&&!CONFIG.forcedTheme;
@@ -743,7 +735,6 @@ function applyBrand(){var n=(CONFIG.portalName||"").trim();if(!n)return;var i=n.
   fill(document.querySelector(".brand"));fill(document.querySelector(".lw"));fill(document.querySelector(".hero h1"),true);document.title=n}
 applyBrand();
 
-/* loader */
 var t0=performance.now(),DUR=reduce?150:2400,fin=false;
 function step(now){
   var p=Math.min(1,(now-t0)/DUR),n=Math.floor((1-Math.pow(1-p,2.4))*99);
@@ -754,7 +745,6 @@ function step(now){
 if(on("loadingScreen"))requestAnimationFrame(step);else{$("loader").style.display="none";setTimeout(countUp,0)}
 function countUp(){if(fin)return;fin=true;Array.prototype.forEach.call(document.querySelectorAll("[data-n]"),function(el){var to=+el.dataset.n,s=performance.now();(function f(now){var p=Math.min(1,(now-s)/1200);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(s)})}
 
-/* tabs */
 var VIEWS=[["apps","Apps"],["tools","Tools"],["plan","Planner"],["cal","Calendar"],["school","School info"],["courses","Courses"],["ath","Athletics"],["help","Counseling"],["settings","Settings"]],tabs=$("tabs"),pill=$("pill");
 var TABKEY={apps:"tabApps",tools:"tabTools",plan:"tabPlanner",cal:"tabCalendar",school:"tabSchoolInfo",courses:"tabCourses",ath:"tabAthletics",help:"tabCounseling",settings:"tabSettings"};
 VIEWS=VIEWS.filter(function(v){return on(TABKEY[v[0]])});if(!VIEWS.length)VIEWS=[["apps","Apps"]];
@@ -771,7 +761,6 @@ var th=CONFIG.forcedTheme||store("rp_theme");if(th)document.documentElement.data
 
 var hr=new Date().getHours();$("greet").textContent=(hr<12?"Good morning":hr<18?"Good afternoon":"Good evening")+". "+(CONFIG.greetingText||"Every school tool you need, one click away.");
 
-/* apps */
 var D=[
 ["School","Canvas~middletownsd.instructure.com|Clever~clever.com/in/masd/student/portal|RaiderWeb~www.raiderweb.org/home|PowerSchool~powerschool.raiderweb.org/public/|LinkIt! Student~raiderweb.linkit.com/student|Naviance~id.naviance.com|Destiny Library~http://destiny.raiderweb.org|Securly Pass~pass.securly.com/passes/create|Securly Flex~flex.securly.com/login|MAHS Announce~www.youtube.com/user/MAHSAnnouncements|PBIS Rewards~pbisr.navigate360.com/login.php|FitnessGram~myhealthyzone.fitnessgram.net|Student Services~www.raiderweb.org/student_services|Hazing Reporting~www.raiderweb.org/student_services/hazing_reporting"],
 ["Google","Drive~drive.google.com/drive/my-drive|Gmail~mail.google.com/mail/u/0/|Classroom~classroom.google.com/u/3/?pli=1|Docs~docs.google.com/document|Sheets~docs.google.com/spreadsheets|Slides~docs.google.com/presentation|Forms~docs.google.com/forms|Drawings~docs.google.com/drawings|Calendar~calendar.google.com|Meet~meet.google.com|Keep~keep.google.com|Sites~sites.google.com|Scholar~scholar.google.com|Translate~translate.google.com|Maps~maps.google.com|Earth~earth.google.com|Books~books.google.com|Arts and Culture~artsandculture.google.com|Photos~photos.google.com|YouTube~www.youtube.com|Trends~trends.google.com|Chrome Web Store~chromewebstore.google.com|Contacts~contacts.google.com|Google Finance~www.google.com/finance"],
@@ -835,7 +824,6 @@ $("q").oninput=draw;
 document.addEventListener("keydown",function(e){if(e.key==="/"&&document.activeElement.tagName!=="INPUT"&&!sOff()&&on("homeSearchBox")){e.preventDefault();go("apps");$("q").focus()}});
 document.addEventListener("mousemove",function(e){var a=e.target.closest&&e.target.closest(".app");if(a){var r=a.getBoundingClientRect();a.style.setProperty("--mx",(e.clientX-r.left)+"px");a.style.setProperty("--my",(e.clientY-r.top)+"px")}});
 
-/* school + counseling */
 var S=[{n:"Middletown Area High School",a:"1155 North Union St, Middletown, PA 17057",p:"717-948-3333",f:"717-948-3359",ad:[["Principal","Mr. Paul Roman","proman"],["Assistant Principal","Mr. JJ Ortiz","jortiz"]],co:[["School Counselor","Mrs. Breann Fleming","bfleming","60009"],["School Counselor","Mr. Donnie Russell","drussell","60007"],["School Counselor","Mrs. Jennifer Stoe","jstoe","60008"],["Guidance Office Secretary","Mrs. Katelynn Wilson","kwilson","60009"]]},
 {n:"Middletown Area Middle School",a:"215 Oberlin Road, Middletown, PA 17057",p:"717-930-0739",f:"717-944-0591",ad:[["Principal","Dr. Shannon L. Wevodau","swevodau"],["Assistant Principal","Mr. Michael DeFilippo","mdefilippo"]],co:[["School Counselor (A-K)","Mrs. Lynette Good","lgood","5310"],["School Counselor (L-Z)","Mrs. Kiersten Betancourt","krobinson","5004"],["Guidance and Attendance Secretary","Mrs. Keim Cowan","kcowan","5006"],["MAMS Social Worker","Ms. Amy McPhilemy","amcphilemy","5005"]]}];
 function tel(p,x){return'<a href="tel:'+p.replace(/-/g,"")+'">'+p+(x?" ext. "+x:"")+'</a>'}
@@ -876,7 +864,6 @@ seg($("hSeg"),function(){return hp},function(i){hp=i;drawHelp()});
 var T=[["School year","08/27/2026","06/09/2027",180],["Semester 1","08/27/2026","01/22/2027",90],["Semester 2","01/25/2027","06/09/2027",90],["Quarter 1","08/27/2026","11/04/2026",45],["Quarter 2","11/05/2026","01/22/2027",45],["Quarter 3","01/25/2027","04/05/2027",45],["Quarter 4","04/06/2027","06/09/2027",45]];
 $("terms").innerHTML="<thead><tr><th>Term</th><th>Start</th><th>End</th><th>Days</th></tr></thead><tbody>"+T.map(function(t){return"<tr><td>"+t[0]+"</td><td>"+t[1]+"</td><td>"+t[2]+"</td><td>"+t[3]+"</td></tr>"}).join("")+"</tbody>";
 
-/* courses */
 var courses=("Honors U.S. History I 215|Environmental Science 351|Piano III 898|Honors Pre-Calc 424|Radio Communications I 984|Honors English II 125|French II 512|AP Government 244|AP Biology 348|AP Computer Science 10012|Chorus 907|Yearbook 190|AP Calculus (BC) 2446|Geometry 435|ESL - Math 451|Internship 601|Video Production & Animation I 10658|TV Production 613|Intro to Coding 805|Algebra II 420|R-English 3 563|Radio Communications III 986|Video Production & Animation II 10659|Honors World History 225|Accounting 651|Creative Writing - Story Writing 173|Geometry Theory & Structure 430|Band 901|AP Environmental Science 352|Criminal Justice 255|AP Chemistry 343|Spanish III 543|Health Science 937|R-English 2 562|Honors Geometry w/Trig 423|Lifetime Fitness 9544|AP Language and Composition 146|Forensics 336|Reading 557|Interior Design I 747|Band/Chorus 919|AP Literature and Composition 145|Earth System Science 314|Creative Living 742|AP U.S. History 235|Physics I 340|Ceramics and Pottery 873|World History 220|Probability & Statistics 442|Art I 855|Academic English II 120|Honors Chemistry 330|Spanish IV 544|Spanish I 541|Health 9934|21st Cent Skills/Entrepreneurship 605|Radio Communications II 985|U.S. History I 211|ESL Support 182|U.S. History II 231|Pre-Calculus/Trigonometry 426|Digital Photography Tech 798|Intro to Business 633|Public Speaking 160|Graphic Arts Tech III 799|Art II 856|ESL English 181|Personal Finance 612|STEM 427|Study Hall 999|Philosophy 268|Honors Algebra I 409|AP Calculus (AB) 445|Honors Algebra II 422|Radio Communications IV 987|French I 511|Spanish II 542|Sociology 252|Sports & Entertainment Marketing 641|Art IV 865|Arts and Crafts 866|Anatomy and Physiology 939|Academic English III 130|Honors English IV 144|Adaptive Physical Educ 915|Academic Biology 322|Algebra I 412|Piano II 896|Dramatic Arts 169|Honors U.S. History II 232|Economics & Government 240|Internship 602|Guitar I 883|Mythology 170|AP Psychology 203|R-English 1 561|History of Rock & Roll 870|Honors Biology 324|Guitar III 885|Academic English IV 140|AP Statistics 204|Academic Chemistry 332|Intro to Materials & Manufacturing 789|Zoology 335|Graphic Arts Tech I 792|Art III 857|Guitar II 895|Athletic Training 938|Psychology 254|Applied Math 9449|Academic English I 110|Pre-Algebra 411|French III 513|R-English 4 564|Sectionals 901S|AP Human Geography 236|Calculus 469|Child Development 744|Graphic Arts Tech II 793|Strength and Conditioning 941|Sports and Games 955|Children’s Literature and Story Telling 171|Accounting II 652|Honors English I 115|Abnormal Psychology 256|Piano I 888|Honors English III 135").split("|").map(function(s){var i=s.lastIndexOf(" ");return{n:s.slice(0,i),c:s.slice(i+1)}}).sort(function(a,b){return a.n.localeCompare(b.n)});
 
 var DEPT=["English","Social Studies","Science","Math","World Languages","Business","Tech & Life","Arts & Media","Music","PE & Health","Other"];
@@ -914,7 +901,6 @@ var ctl=mk("div","ctools");ctl.appendChild(lv2);ctl.appendChild(so2);ctl.appendC
 $("cq").oninput=function(){cp=0;drawCourses()};
 $("cPrev").onclick=function(){cp--;drawCourses()};$("cNext").onclick=function(){cp++;drawCourses()};
 
-/* ===== themes, prefs, effects ===== */
 var R=document.documentElement,pc="#7c7cff";
 R.classList.add("intro");setTimeout(function(){R.classList.remove("intro")},4800);
 var TH=[["dark","Indigo","#7c7cff"],["light","Light","#5555ee"],["amoled","Amoled","#e8e8ff"],["ocean","Ocean","#38bdf8"],["sunset","Sunset","#ff7a45"],["forest","Forest","#34d399"],["rose","Rose","#ff5fa2"],["slate","Slate","#8fa7c4"],["grape","Grape","#a855f7"],["crimson","Crimson","#ef4444"],["mocha","Mocha","#d6a679"],["sand","Sand","#b45309"],["mint","Mint","#0f9f6e"],["midnight","Midnight","#5b8cff"],["neon","Neon","#00f5a0"],["lavender","Lavender","#7c3aed"],["arctic","Arctic","#0284c7"],["dracula","Dracula","#bd93f9"],["nord","Nord","#88c0d0"],["solar","Solar","#268bd2"],["terminal","Terminal","#39ff6a"],["auto","Auto (follows device)","#8a8aa8"]];
@@ -947,15 +933,12 @@ $("dRec").onclick=function(){recs=[];store("rp_recs","[]");draw();toast("Recent 
 $("dRep").onclick=function(){location.reload()};
 $("dAll").onclick=function(){try{localStorage.clear()}catch(e){}location.reload()};
 
-/* scroll progress, back to top */
 var tb=$("top");function sc(){var m=R.scrollHeight-innerHeight;$("sp").style.transform="scaleX("+(m>0?scrollY/m:0)+")";tb.classList.toggle("show",scrollY>500)}
 addEventListener("scroll",sc,{passive:true});tb.onclick=function(){scrollTo({top:0,behavior:"smooth"})};
 
-/* typing placeholder */
 var PH=["Search Canvas...","Search Desmos...","Search college tools...","Search Khan Academy...","Search by subject...","Search Google Docs..."],pi=0,pj=0,pd=0;
 if(on("homeTypingPlaceholder"))(function tw(){var q=$("q");if(document.activeElement!==q&&!q.value){var s=PH[pi];if(!pd){pj++;q.placeholder=s.slice(0,pj)+"|";if(pj>=s.length){pd=1;setTimeout(tw,1600);return}}else{pj--;q.placeholder=s.slice(0,pj)+"|";if(pj<=0){pd=0;pi=(pi+1)%PH.length}}}setTimeout(tw,pd?35:75)})();
 
-/* ripple, tilt, parallax */
 document.addEventListener("pointerdown",function(e){var b=e.target.closest&&e.target.closest(".ibtn,.chip,.tabs button");if(!b||!P.anim||!on("rippleEffect"))return;var r=b.getBoundingClientRect(),s=document.createElement("span"),d=Math.max(r.width,r.height)*2;s.className="rip";s.style.cssText="width:"+d+"px;height:"+d+"px;left:"+(e.clientX-r.left-d/2)+"px;top:"+(e.clientY-r.top-d/2)+"px";b.appendChild(s);setTimeout(function(){s.remove()},650)});
 var o1=document.querySelector(".o1"),o2=document.querySelector(".o2"),touch=matchMedia("(hover:none)").matches;
 document.addEventListener("mousemove",function(e){
@@ -964,7 +947,6 @@ document.addEventListener("mousemove",function(e){
   if(a&&P.tilt&&P.anim&&!touch){var r=a.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;a.style.transform="perspective(700px) rotateX("+(-py*9)+"deg) rotateY("+(px*9)+"deg) translateY(-4px)"}});
 document.addEventListener("mouseout",function(e){var a=e.target.closest&&e.target.closest(".app");if(a&&!a.contains(e.relatedTarget))a.style.transform=""});
 
-/* particles */
 var cv=$("fx"),cx=cv.getContext("2d"),pts=[];
 function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();addEventListener("resize",rs);
 for(var pi2=0;pi2<46;pi2++)pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.8+.6});
@@ -973,7 +955,6 @@ for(var pi2=0;pi2<46;pi2++)pts.push({x:Math.random()*innerWidth,y:Math.random()*
     for(var j=i+1;j<pts.length;j++){var q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<130){cx.globalAlpha=(1-d/130)*.18;cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.stroke()}}})}
   requestAnimationFrame(loop)})();
 
-/* ===== tools ===== */
 var CIR=2*Math.PI*52,tl0=1500,tl=1500,tt=null,rf=$("rf");rf.style.strokeDasharray=CIR;
 function fmt(s){return Math.floor(s/60)+":"+("0"+s%60).slice(-2)}
 function tdraw(){$("tm").textContent=fmt(tl);rf.style.strokeDashoffset=CIR*(1-tl/tl0)}
@@ -999,7 +980,6 @@ $("tda").onclick=tadd;$("tdi").onkeydown=function(e){if(e.key==="Enter")tadd()};
 var nt=$("nt");nt.value=store("rp_note")||"";nt.oninput=function(){store("rp_note",nt.value);$("ns").textContent="Saved on this device"};
 
 
-/* ===== new tools ===== */
 function p2(n){return("0"+n).slice(-2)}
 var UN={Length:{m:1,km:1000,cm:.01,mm:.001,mi:1609.344,yd:.9144,ft:.3048,"in":.0254},Mass:{kg:1,g:.001,mg:1e-6,lb:.45359237,oz:.028349523},Volume:{L:1,mL:.001,gal:3.785411784,qt:.946352946,pt:.473176473,cup:.2365882365,"fl oz":.0295735296},Temperature:{C:1,F:1,K:1}};
 $("uc").innerHTML=Object.keys(UN).map(function(k){return"<option>"+k+"</option>"}).join("");
@@ -1053,7 +1033,6 @@ function cite(){var a=$("ca").value.trim(),t=$("ct").value.trim(),w=$("cw").valu
 ["ca","ct","cw","cd","cu"].forEach(function(i){$(i).oninput=cite});
 $("ccp").onclick=function(){var s=cite();if(!s)return;try{navigator.clipboard.writeText(s).then(function(){toast("Citation copied")},function(){toast("Select the text to copy it")})}catch(e){toast("Select the text to copy it")}};
 
-/* ===== quick find + view toggle ===== */
 var lv=on("homeViewToggle")&&store("rp_view")==="list",vb=document.createElement("button");vb.className="chip";vb.style.marginLeft="auto";
 function vSync(){R.dataset.view=lv?"list":"grid";vb.textContent=lv?"Grid view":"List view"}
 vb.onclick=function(){lv=!lv;store("rp_view",lv?"list":"grid");vSync()};if(on("homeViewToggle"))chips.appendChild(vb);vSync();
@@ -1086,7 +1065,6 @@ document.addEventListener("keydown",function(e){
   else if(e.key==="Enter"&&citems[csel]){e.preventDefault();cmdRun(citems[csel])}});
 
 
-/* ===== category scroller ===== */
 var cL=$("cL"),cR=$("cR");
 function cEdge(){cL.disabled=chips.scrollLeft<4;cR.disabled=chips.scrollLeft+chips.clientWidth>=chips.scrollWidth-4}
 cL.onclick=function(){chips.scrollBy({left:-chips.clientWidth*.6,behavior:"smooth"})};
@@ -1106,7 +1084,6 @@ function spy(){
 addEventListener("scroll",function(){requestAnimationFrame(spy)},{passive:true});
 
 
-/* ===== personalize ===== */
 var pz=$("pz");
 function prow(tt,s,ctl){var r=mk("div","srow"),d=mk("div");d.appendChild(mk("b","",tt));d.appendChild(mk("div","sub",s));r.appendChild(d);r.appendChild(ctl);pz.appendChild(r)}
 var fsz=mk("div","seg");fsz.style.margin="0";
@@ -1164,7 +1141,6 @@ clrRs.onclick=function(){accentClear();toast("Accent reset")};
 var sa=store("rp_accent");if(sa&&/^#[0-9a-f]{6}$/i.test(sa)){accentApply(sa);accPk.set(sa);accSw.style.background=sa}else accSw.style.background=toHex(pc);
 applyPrefs();
 
-/* ===== calendar ===== */
 var EV={"2026-08-27":"First day of school. Quarter 1 and Semester 1 begin.","2026-11-04":"Quarter 1 ends.","2026-11-05":"Quarter 2 begins.","2027-01-22":"Quarter 2 and Semester 1 end.","2027-01-25":"Semester 2 and Quarter 3 begin.","2027-04-05":"Quarter 3 ends.","2027-04-06":"Quarter 4 begins.","2027-06-09":"Last day of school."};
 var ES={"2026-08-27":"First day","2026-11-04":"Q1 ends","2026-11-05":"Q2 begins","2027-01-22":"Q2 ends","2027-01-25":"Q3 begins","2027-04-05":"Q3 ends","2027-04-06":"Q4 begins","2027-06-09":"Last day"};
 var KT={"2026-08-27":"m","2027-06-09":"m"};
@@ -1262,7 +1238,6 @@ $("kp").onclick=function(){showPast=!showPast;drawKey()};$("ea").onclick=addEv;$
 drawCal(true);drawSel();drawNext();drawYear();drawKey();sc();
 
 
-/* ===== athletics + staff search ===== */
 var AL=[["Athletic schedules","Game schedules for every team.","https://www.raiderweb.org/athletics/athletic_schedules"],
 ["Athletic information","Participation forms and important dates for students and athletes.","https://www.raiderweb.org/athletics/athletic_information"],
 ["Contact a coach","Find the right coach for your sport.","https://www.raiderweb.org/athletics/contact_a_coach"],
@@ -1279,10 +1254,8 @@ function drawGames(){
 function addGame(){var d=$("gd").value,t=$("gt").value.trim();if(!d||!t){toast("Add a date and game details");return}UE.push({d:d,t:t,g:1});saveUE();$("gt").value="";drawGames();cRefresh();toast("Game added to your calendar")}
 $("ga").onclick=addGame;$("gt").onkeydown=function(e){if(e.key==="Enter"){e.preventDefault();addGame()}};
 drawGames();
-/* ===== clock, new tools, keybinds ===== */
 var kbCap=false;
 
-/* ===== restrictions: lockdown, testing mode, banner, apps and links ===== */
 var lastAct=Date.now(),_lk=null;
 ["pointerdown","keydown","touchstart","mousemove"].forEach(function(t){addEventListener(t,function(){lastAct=Date.now()},{passive:true})});
 function lockedNow(){if(CONFIG.lockdown!==true)return false;var n=Date.now(),f=CONFIG.lockdownFrom?Date.parse(CONFIG.lockdownFrom):NaN,u=CONFIG.lockdownUntil?Date.parse(CONFIG.lockdownUntil):NaN;if(!isNaN(f)&&n<f)return false;if(!isNaN(u)&&n>=u)return false;return true}
@@ -1332,15 +1305,12 @@ document.addEventListener("click",function(e){var t=e.target,a=t.closest?t.close
 ["copy","cut","paste","contextmenu"].forEach(function(t){document.addEventListener(t,function(e){
   if((t==="contextmenu"&&CONFIG.disableRightClick===true)||tBlock("testingBlockCopyPaste")){e.preventDefault()}},true)});
 
-/* ===== clock ===== */
 var _ap=applyPrefs;applyPrefs=function(){_ap();R.dataset.font=P.font||"d";if(P.bigtap)R.dataset.big="1";else delete R.dataset.big;if(P.hc)R.dataset.hc="1";else delete R.dataset.hc;if(P.lift)delete R.dataset.nolift;else R.dataset.nolift="1"};
 
-/* ===== new tools ===== */
 var tgrid=document.querySelector("#p-tools .tgrid"),tnum=13;
 function tcard(title,html){var c=mk("div","card tool");c.style.setProperty("--i",tnum++);c.appendChild(mk("h3","",title));var d=document.createElement("div");d.innerHTML=html;while(d.firstChild)c.appendChild(d.firstChild);tgrid.appendChild(c);return c}
 
 
-/* scientific calculator */
 function sciEval(src,deg,ans){
   var s=String(src).replace(/\s+/g,"").replace(/\u00d7/g,"*").replace(/\u00f7/g,"/").replace(/\u03c0/g,"pi").replace(/\u221a/g,"sqrt").toLowerCase(),i=0;
   function bad(){throw new Error("x")}
@@ -1368,7 +1338,6 @@ tcard("Scientific calculator",'<input id="xsI" placeholder="Type an expression, 
   $("xsI").oninput=sciDraw;$("xsI").onkeydown=function(e){if(e.key==="Enter"){try{sciAns=sciEval($("xsI").value,sciDeg,sciAns)}catch(x){}}}})();
 function sciDraw(){var v=$("xsI").value.trim(),r=$("xsR");if(!v){r.textContent="Result shows here";return}try{var x=sciEval(v,sciDeg,sciAns);r.innerHTML="= <b></b>";r.querySelector("b").textContent=sciFmt(x)}catch(e){r.textContent="Keep typing, or check the expression"}}
 
-/* countdowns */
 var CDS=[];try{CDS=JSON.parse(store("rp_cds")||"[]");if(!Array.isArray(CDS))CDS=[]}catch(e){CDS=[]}
 tcard("Countdowns",'<div class="fgrid"><input id="xcN" placeholder="Event name" maxlength="40" aria-label="Event name"><input id="xcD" type="date" aria-label="Event date"></div><div class="btns"><button class="ibtn pri" id="xcA">Add countdown</button><button class="ibtn" id="xcL1">Last day of school</button></div><div id="xcL"></div>');
 function cdSave(){store("rp_cds",JSON.stringify(CDS))}
@@ -1380,7 +1349,6 @@ function cdAdd(n,d){if(!n||!d){toast("Add a name and a date");return}if(CDS.leng
 $("xcA").onclick=function(){cdAdd($("xcN").value.trim(),$("xcD").value);$("xcN").value=""};
 $("xcL1").onclick=function(){cdAdd("Last day of school","2027-06-09")};cdBuild();
 
-/* date calculator */
 tcard("Date calculator",'<select id="xdM" aria-label="Mode"><option value="b">Days between two dates</option><option value="a">Add or subtract days</option></select><div class="fgrid" style="margin-top:8px"><input id="xdA" type="date" aria-label="First date"><input id="xdB" type="date" aria-label="Second date"><input id="xdN" type="number" placeholder="Days to add (negative to subtract)" aria-label="Days" hidden></div><div class="res" id="xdR">Pick two dates</div>');
 function dcCalc(){var m=$("xdM").value,a=$("xdA").value,b=$("xdB").value,r=$("xdR");$("xdB").hidden=m==="a";$("xdN").hidden=m==="b";
   if(!a){r.textContent=m==="b"?"Pick two dates":"Pick a date and a number of days";return}
@@ -1390,7 +1358,6 @@ function dcCalc(){var m=$("xdM").value,a=$("xdA").value,b=$("xdB").value,r=$("xd
   else{var k=parseInt($("xdN").value,10);if(isNaN(k)){r.textContent="Enter a number of days";return}var D2=new Date(A.getTime());D2.setDate(D2.getDate()+k);r.innerHTML="<b>"+D2.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"})+"</b>"}}
 ["xdM","xdA","xdB","xdN"].forEach(function(i){$(i).oninput=$(i).onchange=dcCalc});dcCalc();
 
-/* typing test */
 var TYS=["The quick brown fox jumps over the lazy dog near the old river.","Practice a little every day and your speed will grow faster than you expect.","A calm mind and steady hands make long essays feel much shorter.","The library was quiet except for the soft tapping of busy keyboards.","Good habits are built one small choice at a time, starting today.","Every great project begins with a plain page and one clear idea.","Raiders work hard, help each other, and finish what they start.","Clear writing is just clear thinking with the extra words removed."],tyT="",tyS=0,tyDone=false;
 tcard("Typing test",'<div class="tyt" id="xtP"></div><textarea id="xtI" placeholder="Start typing here" aria-label="Typing area" style="min-height:70px" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea><div class="btns"><button class="ibtn" id="xtN">New sentence</button></div><div class="res" id="xtR">Your speed shows here</div>');
 function tyNew(){tyT=TYS[Math.floor(Math.random()*TYS.length)];tyS=0;tyDone=false;$("xtI").value="";$("xtI").disabled=false;$("xtR").textContent="Your speed shows here";tyDraw()}
@@ -1399,7 +1366,6 @@ $("xtI").oninput=function(){if(tyDone)return;var v=$("xtI").value;if(!tyS&&v.len
   if(v.length>=tyT.length){tyDone=true;$("xtI").disabled=true;var ok=0;for(var i=0;i<tyT.length;i++)if(v[i]===tyT[i])ok++;var mins=Math.max((Date.now()-tyS)/60000,1/20);$("xtR").innerHTML="<b>"+Math.round(tyT.length/5/mins)+" WPM</b> and "+Math.round(ok/tyT.length*100)+"% accuracy"}};
 $("xtN").onclick=tyNew;tyNew();
 
-/* quadratic solver */
 tcard("Quadratic solver",'<p class="sub" style="margin-bottom:10px">Solves ax\u00b2 + bx + c = 0</p><div class="fgrid" style="grid-template-columns:repeat(3,1fr)"><input id="xqA" type="number" step="any" placeholder="a" aria-label="a"><input id="xqB" type="number" step="any" placeholder="b" aria-label="b"><input id="xqC" type="number" step="any" placeholder="c" aria-label="c"></div><div class="res" id="xqR">Enter a, b and c</div>');
 function qdCalc(){var a=parseFloat($("xqA").value),b=parseFloat($("xqB").value),c=parseFloat($("xqC").value),r=$("xqR");if(isNaN(a)||isNaN(b)||isNaN(c)){r.textContent="Enter a, b and c";return}
   function f(x){return String(+x.toPrecision(8))}
@@ -1411,7 +1377,6 @@ function qdCalc(){var a=parseFloat($("xqA").value),b=parseFloat($("xqB").value),
   r.innerHTML=h+"<br>Vertex: ("+f(vx)+", "+f(vy)+")"}
 ["xqA","xqB","xqC"].forEach(function(i){$(i).oninput=qdCalc});
 
-/* ===== planner ===== */
 var HW=[];try{HW=JSON.parse(store("rp_hw")||"[]");if(!Array.isArray(HW))HW=[]}catch(e){HW=[]}
 HW=HW.filter(function(h){return h&&typeof h.t==="string"}).map(function(h){return{t:h.t,s:h.s||"General",due:h.due||"",p:+h.p||2,d:h.d?1:0,c:h.c||0}});
 var SUBJ=["General","English","Math","Science","Social Studies","Language","Elective"],hwF="open",hwFSub="",hwSort="due",hwPri=2,hwEdit=null;
@@ -1466,7 +1431,6 @@ function hwDraw(){
   $("hwClr").onclick=function(){var k=HW.filter(function(h){return h.d}).length;if(!k){toast("Nothing to clear");return}if(!confirm("Remove "+k+" finished assignment"+(k>1?"s":"")+"?"))return;HW=HW.filter(function(h){return!h.d});hwSave();hwDraw();toast(k+" cleared")}})();
 hwDraw();
 
-/* ===== v2.4: more tools ===== */
 tcard("Stats calculator",'<textarea id="xnT" placeholder="Numbers separated by commas, spaces or new lines" aria-label="Numbers" style="min-height:90px"></textarea><div class="res" id="xnR">Enter some numbers</div>');
 function stCalc(){var n=($("xnT").value.match(/-?\d*\.?\d+(?:e[+-]?\d+)?/gi)||[]).map(parseFloat).filter(isFinite),r=$("xnR");if(!n.length){r.textContent="Enter some numbers";return}
   var s=n.slice().sort(function(a,b){return a-b}),N=n.length,sum=n.reduce(function(a,b){return a+b},0),mean=sum/N,mid=N%2?s[(N-1)/2]:(s[N/2-1]+s[N/2])/2,cn={},best=0;
@@ -1511,7 +1475,6 @@ $("xkG").onclick=function(){var c=hex2rgb(xkCur);cpy("rgb("+c.join(", ")+")","RG
 $("xkL").onclick=function(){var c=hex2rgb(xkCur),h=rgb2hsl(c[0],c[1],c[2]);cpy("hsl("+h[0]+", "+h[1]+"%, "+h[2]+"%)","HSL copied")()};
 xkInfo();
 
-/* ===== v2.5: more tools ===== */
 tcard("Text tools",'<textarea id="xyT" placeholder="Paste or type text" aria-label="Text" style="min-height:110px"></textarea><div class="btns"><button class="ibtn" data-x="up">UPPER</button><button class="ibtn" data-x="low">lower</button><button class="ibtn" data-x="title">Title Case</button><button class="ibtn" data-x="rev">Reverse</button><button class="ibtn" data-x="sp">Fix spaces</button><button class="ibtn" data-x="sort">Sort lines</button><button class="ibtn" data-x="cp">Copy</button></div>');
 Array.prototype.forEach.call(document.querySelectorAll("[data-x]"),function(b){b.onclick=function(){var t=$("xyT"),v=t.value,k=b.dataset.x;
   if(k==="up")v=v.toUpperCase();else if(k==="low")v=v.toLowerCase();
@@ -1530,7 +1493,6 @@ $("xrI").oninput=function(){var s=$("xrI").value.trim().toUpperCase(),r=$("xrR")
   if(/^[IVXLCDM]+$/.test(s)){var d=fromRoman(s);r.innerHTML=d>=1&&d<=3999&&toRoman(d)===s?s+" = <b>"+d+"</b>":"That is not a standard Roman numeral";return}
   r.textContent="Use digits or the letters I V X L C D M"};
 
-/* ===== date and time settings, fonts, backup ===== */
 function tgRow(c,key,title,sub){var r=mk("div","srow"),d=mk("div");d.appendChild(mk("b","",title));d.appendChild(mk("div","sub",sub));r.appendChild(d);var b=mk("button","tg");b.setAttribute("role","switch");b.setAttribute("aria-label",title);
   function sync(){b.setAttribute("aria-checked",!!P[key])}sync();b.onclick=function(){P[key]=P[key]?0:1;sync();applyPrefs()};r.appendChild(b);c.appendChild(r)}
 (function(){var f=mk("select","ssel");f.setAttribute("aria-label","Font style");f.innerHTML='<option value="d">Default</option><option value="serif">Serif</option><option value="mono">Monospace</option><option value="easy">Easy to read</option>';f.value=P.font||"d";f.onchange=function(){P.font=f.value;applyPrefs()};prow("Font style","Changes the typeface across the portal",f)})();
@@ -1541,7 +1503,6 @@ function tgRow(c,key,title,sub){var r=mk("div","srow"),d=mk("div");d.appendChild
   var rk=mk("button","ibtn","Reset shortcuts");rk.onclick=function(){store("rp_kb","");Object.keys(KBD).forEach(function(k){KB[k]=KBD[k]});drawKB();toast("Shortcuts reset")};
   q.appendChild(ex);q.appendChild(im);q.appendChild(rk)})();
 
-/* ===== keybinds ===== */
 var KBD={gp:"g",theme:"t",view:"l",help:"?",prev:"[",next:"]",notes:"n",rand:"r",top:"h",plan:"p",zen:"z",tabn:".",tabp:","},KB={};
 (function(){var s={};try{s=JSON.parse(store("rp_kb")||"{}")||{}}catch(e){}Object.keys(KBD).forEach(function(k){KB[k]=typeof s[k]==="string"&&s[k].length===1?s[k]:KBD[k]})})();
 var KBL=[["gp","Go-to key","Press it, then a letter to jump to a tab"],["theme","Next theme","Cycle through the themes"],["view","Grid or list","Switch the app layout"],["help","Shortcut list","Jump to this list"],["prev","Previous category","On the Apps tab"],["next","Next category","On the Apps tab"],["notes","Quick notes","Opens Tools and starts a note"],["rand","Random app","Opens a random app from the Apps tab"],["top","Scroll to top","Jump back to the top of the page"],["plan","Planner","Opens the Planner and starts a task"],["zen","Focus mode","Hide the top bar for more room. Press again to bring it back"],["tabn","Next tab","Move one tab to the right"],["tabp","Previous tab","Move one tab to the left"]];
@@ -1581,13 +1542,11 @@ document.addEventListener("keydown",function(e){
   if(kl===KB.prev||kl===KB.next){go("apps");var n=Math.max(-1,Math.min(D.length-1,cat+(kl===KB.next?1:-1))),b=chips.querySelector('.chip[data-c="'+n+'"]');if(b)b.click();return}
 });
 
-/* ===== shared one-second timer ===== */
 function tick(){
   cdDraw();var l=lockedNow();if(_lk!==null&&l!==_lk)applyControls();
   var m=+CONFIG.idleScreenMinutes||0;if(m>0&&!l&&$("idleov").hidden&&Date.now()-lastAct>m*60000)showIdle();
   setTimeout(tick,1000-Date.now()%1000+20)}
 
-/* hide tool groups that are turned off */
 var TOOLGROUPS={toolTimers:["Study timer","Stopwatch","Countdowns"],toolGradeCalculators:["Grade calculator","GPA calculator","Final exam calculator"],toolMathCalculators:["Scientific calculator","Quadratic solver","Stats calculator","GCF and LCM","Percent calculator","Base converter","Roman numerals"],toolConvertersAndDates:["Unit converter","Date calculator"],toolWritingHelpers:["Word counter","Citation maker","Text tools","Typing test"],toolOrganizers:["To-do list","Quick notes","Flashcards"],toolRandomAndSecurity:["Randomizer","Password maker"],toolColor:["Color tools"]};
 function applyToolOptions(){var hide=[];Object.keys(TOOLGROUPS).forEach(function(k){if(!on(k))hide=hide.concat(TOOLGROUPS[k])});hide=hide.concat(CONFIG.disabledTools||[]);if(testOn())hide=hide.concat(CONFIG.testingHideTools||[]);
   Array.prototype.forEach.call(document.querySelectorAll("#p-tools .tool"),function(c){var h=c.querySelector("h3"),t=h&&h.firstChild?h.firstChild.textContent.trim():"";c.style.display=hide.indexOf(t)>-1?"none":""})}
