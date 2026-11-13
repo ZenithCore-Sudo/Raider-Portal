@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Portal Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08080d;--p1:#11111a;--p2:#171724;--ln:#262638;--tx:#f1f1fa;--mu:#9494b0;--ac:#7c7cff;--ac2:#9a9aff;--ok:#3ddc97;--wn:#ffb84d;--er:#ff5a8c;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--tx);font:500 14px/1.45 Outfit,system-ui,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:1px solid var(--ln);background:var(--p2);border-radius:10px;padding:8px 14px}
+button:hover{border-color:var(--ac)}button.pri{background:var(--ac);border-color:var(--ac);color:#0b0b14;font-weight:700}button.pri:disabled{opacity:.4;cursor:default}
+button.bad{border-color:#5a2338;color:var(--er)}button.lnk{border:0;background:none;padding:2px 6px;color:var(--ac2);font-size:12px}
+input[type=text],input[type=password],input[type=number],input[type=search],input[type=datetime-local],select,textarea{width:100%;background:var(--bg);border:1px solid var(--ln);border-radius:10px;padding:9px 12px;outline:0}
+input:focus,select:focus,textarea:focus{border-color:var(--ac)}textarea{resize:vertical;min-height:60px}
+.top{position:sticky;top:0;z-index:5;display:flex;gap:10px;align-items:center;padding:12px 18px;background:rgba(8,8,13,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln)}
+.brand{font-weight:700;font-size:18px;white-space:nowrap}.brand b{color:var(--ac2)}.sp{flex:1}.top input{max-width:280px}
+.st{color:var(--mu);font-size:13px;white-space:nowrap}.st.d{color:var(--wn)}
+.wrap{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 60px)}
+nav{border-right:1px solid var(--ln);padding:14px;position:sticky;top:60px;align-self:start;height:calc(100vh - 60px);overflow:auto}
+nav button{display:flex;width:100%;justify-content:space-between;align-items:center;border:0;background:none;text-align:left;padding:9px 12px;border-radius:10px;color:var(--mu)}
+nav button:hover{background:var(--p1);color:var(--tx)}nav button.on{background:var(--p2);color:var(--tx)}
+nav .sep{height:1px;background:var(--ln);margin:10px 4px}nav small{color:var(--ac2);font-weight:700}
+main{padding:24px;max-width:980px;width:100%}
+h1{font-size:24px;margin:0 0 4px}h2{font-size:16px;margin:26px 0 10px}.sub{color:var(--mu);margin:0 0 18px}
+.card{background:var(--p1);border:1px solid var(--ln);border-radius:14px;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.tile .k{color:var(--mu);font-size:12px;text-transform:uppercase;letter-spacing:.06em}.tile .v{font-size:20px;font-weight:700;margin-top:4px;word-break:break-word}
+.on-v{color:var(--er)}.off-v{color:var(--ok)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr) 56px;gap:14px;align-items:start;padding:14px 0;border-bottom:1px solid var(--ln)}
+.row.wide{grid-template-columns:1fr 56px}.row.wide .meta{grid-column:1/2}.row.wide .ctl{grid-column:1/2;grid-row:2}.row.wide .rs{grid-column:2;grid-row:1}
+.lbl{font-weight:600;display:flex;gap:8px;align-items:center}.hint{color:var(--mu);font-size:13px;margin-top:2px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ac);display:inline-block}.dot[hidden],.rs button[hidden]{display:none}
+.tg{position:relative;display:inline-block;width:46px;height:26px}.tg input{opacity:0;position:absolute;inset:0;margin:0;cursor:pointer;z-index:1}
+.tg span{position:absolute;inset:0;background:var(--ln);border-radius:20px;transition:.15s}.tg span:after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.15s}
+.tg input:checked+span{background:var(--ac)}.tg input:checked+span:after{transform:translateX(20px)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;background:var(--bg);border:1px solid var(--ln);border-radius:10px;padding:6px}
+.tags input{flex:1;min-width:140px;border:0;background:none;outline:0;padding:4px 6px}
+.tag{display:inline-flex;gap:6px;align-items:center;background:var(--p2);border-radius:8px;padding:3px 4px 3px 10px}.tag button{border:0;background:none;padding:0 6px;color:var(--mu)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips label{display:flex;gap:6px;align-items:center;background:var(--p2);border:1px solid var(--ln);border-radius:10px;padding:6px 12px;cursor:pointer}
+.mrow{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;margin-bottom:8px}
+.item{display:grid;gap:8px;background:var(--bg);border:1px solid var(--ln);border-radius:12px;padding:12px;margin-bottom:10px}
+.item.a{grid-template-columns:1fr 1.4fr 150px auto}.acts{display:flex;gap:6px;flex-wrap:wrap}
+.pill{display:inline-block;border-radius:20px;padding:2px 10px;font-size:12px;font-weight:700}
+.ok{background:rgba(61,220,151,.15);color:var(--ok)}.warn{background:rgba(255,184,77,.15);color:var(--wn)}.fail{background:rgba(255,90,140,.15);color:var(--er)}
+.res{display:grid;grid-template-columns:150px 1fr 70px;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--ln)}.res small{color:var(--mu)}
+.lst{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--ln)}.lst .n{flex:1;min-width:0}.lst small{color:var(--mu);display:block}
+.login{max-width:360px;margin:16vh auto;padding:0 18px}.login .card{display:grid;gap:12px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--p2);border:1px solid var(--ln);border-radius:12px;padding:11px 18px;opacity:0;pointer-events:none;transition:.2s;z-index:20;max-width:90vw}#toast.on{opacity:1}#toast.e{border-color:var(--er);color:var(--er)}
+code,.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px}
+@media(max-width:820px){.wrap{grid-template-columns:1fr}nav{position:static;height:auto;display:flex;gap:4px;overflow:auto;border-right:0;border-bottom:1px solid var(--ln)}nav button{white-space:nowrap;width:auto}nav .sep{display:none}.row{grid-template-columns:1fr 56px}.row .ctl{grid-column:1;grid-row:2}.item.a{grid-template-columns:1fr}.top{flex-wrap:wrap}.top input{max-width:none;order:9;flex-basis:100%}main{padding:16px}.res{grid-template-columns:1fr}}
+</style></head><body><div id="app"></div><div id="toast"></div>
+<script>
+const SCHEMA=__SCHEMA__;
+const J=JSON.stringify,C=x=>JSON.parse(J(x));
+const DEF={};SCHEMA.forEach(f=>DEF[f.k]=f.d);
+const GROUPS=[];SCHEMA.forEach(f=>{let g=GROUPS.find(x=>x.n===f.g);if(!g)GROUPS.push(g={n:f.g,f:[]});g.f.push(f)});
+const TABS=SCHEMA.find(f=>f.k==='startTab').o.filter(Boolean);
+const S={cfg:{},saved:{},presets:{},savedPresets:{},sha:null,commits:[],view:'dash',q:'',checks:null,links:{},busy:false,site:'/'};
+const BUILT=[['Normal day',{}],['Test day',{testingMode:true}],['Full lock',{lockdown:true}],['No outside links',{noLinks:true}],['No apps',{noApps:true}]];
+const get=k=>k in S.cfg?S.cfg[k]:DEF[k];
+const dirty=()=>J(S.cfg)!==J(S.saved)||J(S.presets)!==J(S.savedPresets);
+const changed=()=>[...new Set([...Object.keys(S.cfg),...Object.keys(S.saved)])].filter(k=>J(S.cfg[k])!==J(S.saved[k]));
+
+function h(t,a,...c){const e=document.createElement(t);if(a)for(const k in a){const v=a[k];if(k==='class')e.className=v;else if(k.startsWith('on'))e.addEventListener(k.slice(2),v);else if(k==='value')e.value=v;else if(v===true)e.setAttribute(k,'');else if(v!==false&&v!=null)e.setAttribute(k,v)}c.flat(9).forEach(x=>{if(x==null||x===false)return;e.append(x.nodeType?x:document.createTextNode(x))});return e}
+const $=s=>document.querySelector(s);
+
+let tt;function toast(m,e){const t=$('#toast');t.textContent=m;t.className='on'+(e?' e':'');clearTimeout(tt);tt=setTimeout(()=>t.className='',e?5000:3200)}
+
+async function api(p,o){
+  o=o||{};const init={method:'GET',headers:{}};
+  if(o.post){init.method='POST';init.headers['x-requested-with']='raider-admin';if(o.body){init.headers['content-type']='application/json';init.body=J(o.body)}}
+  const r=await fetch(p,init);let j={};try{j=await r.json()}catch(e){}
+  if(r.status===401&&p!=='/api/admin/login'){showLogin();throw new Error('Signed out')}
+  if(!r.ok)throw Object.assign(new Error(j.error||('HTTP '+r.status)),{status:r.status});
+  return j;
+}
+
+function set(k,v){if(J(v)===J(DEF[k]))delete S.cfg[k];else S.cfg[k]=v;sync()}
+function sync(){const d=dirty(),b=$('#pub');if(!b)return;b.disabled=!d||S.busy;$('#dis').disabled=!d||S.busy;const s=$('#stt');s.textContent=S.busy?'Publishing...':d?changed().length+' unsaved':'All changes published';s.className='st'+(d?' d':'');document.querySelectorAll('nav [data-g]').forEach(n=>{const c=GROUPS.find(g=>g.n===n.dataset.g).f.filter(f=>f.k in S.cfg).length;n.querySelector('small').textContent=c||''})}
+
+function tags(f,put){
+  let a=[...get(f.k)];const inp=h('input',{type:'text',placeholder:'Type and press Enter'});const box=h('div',{class:'tags'});
+  const draw=()=>box.replaceChildren(...a.map((t,i)=>h('span',{class:'tag'},t,h('button',{onclick:()=>{a.splice(i,1);put([...a]);draw()}},'×'))),inp);
+  const add=()=>{const v=inp.value.trim().replace(/,$/,'');if(v&&!a.includes(v)){a.push(v);put([...a])}inp.value='';draw()};
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===','){e.preventDefault();add();inp.focus()}});inp.addEventListener('blur',()=>{if(inp.value.trim())add()});
+  draw();return box;
+}
+function multi(f,put){
+  const a=new Set(get(f.k));
+  return h('div',{class:'chips'},f.o.map(o=>{const i=h('input',{type:'checkbox'});i.checked=a.has(o);i.onchange=()=>{i.checked?a.add(o):a.delete(o);put(f.o.filter(x=>a.has(x)))};return h('label',null,i,o)}));
+}
+function mapEd(f,put){
+  const m={...get(f.k)};
+  return h('div',null,TABS.map(t=>{const i=h('input',{type:'text',maxlength:30,placeholder:'Default name',value:m[t]||''});i.oninput=()=>{const v=i.value;if(v.trim())m[t]=v;else delete m[t];put({...m})};return h('div',{class:'mrow'},h('span',{class:'mono'},t),i)}));
+}
+function listEd(f,put,fields,blank,extra){
+  let a=C(get(f.k));const box=h('div');
+  const emit=()=>put(C(a));
+  const draw=()=>{
+    box.replaceChildren(...a.map((x,i)=>{
+      const ins=fields.map(([k,ph,mx,tag])=>{const e=h(tag||'input',{type:'text',placeholder:ph,maxlength:mx,rows:tag?3:null,value:x[k]||''});e.oninput=()=>{x[k]=e.value;emit()};return e});
+      const mv=(d)=>()=>{const j=i+d;if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];emit();draw()};
+      const acts=h('div',{class:'acts'},h('button',{onclick:mv(-1)},'↑'),h('button',{onclick:mv(1)},'↓'),h('button',{class:'bad',onclick:()=>{a.splice(i,1);emit();draw()}},'Delete'));
+      const st=extra&&extra(x,i);
+      return h('div',{class:'item'+(extra?' a':'')},ins,acts,st);
+    }),h('div',{class:'acts'},h('button',{onclick:()=>{a.push({...blank});emit();draw()}},'Add'),extra&&extra.bulk&&extra.bulk()));
+  };
+  draw();return box;
+}
+function control(f,put){
+  const v=get(f.k);
+  switch(f.t){
+    case 'bool':{const i=h('input',{type:'checkbox'});i.checked=!!v;i.onchange=()=>put(i.checked);return h('label',{class:'tg'},i,h('span'))}
+    case 'num':return h('input',{type:'number',min:0,value:v,oninput:e=>put(Math.max(0,parseInt(e.target.value||'0',10)||0))});
+    case 'str':return h('input',{type:'text',maxlength:200,value:v,oninput:e=>put(e.target.value)});
+    case 'text':{const t=h('textarea',{maxlength:1000,rows:2});t.value=v;t.oninput=()=>put(t.value);return t}
+    case 'dt':return h('input',{type:'datetime-local',value:v,oninput:e=>put(e.target.value)});
+    case 'select':{const s=h('select',null,f.o.map(o=>h('option',{value:o,selected:o===v},o||'Not set')));s.onchange=()=>put(s.value);return s}
+    case 'multi':return multi(f,put);
+    case 'list':return tags(f,put);
+    case 'map':return mapEd(f,put);
+    case 'faq':return listEd(f,put,[['q','Question',200],['a','Answer',3000,'textarea']],{q:'',a:''});
+    case 'apps':return appsEd(f,put);
+  }
+}
+function appsEd(f,put){
+  const ex=(x)=>{const o=h('div',{class:'mono'});const r=S.links[x.u];if(r)o.append(h('span',{class:'pill '+r.status},r.status),' '+r.detail);return o};
+  ex.bulk=()=>h('button',{onclick:async e=>{e.target.disabled=true;await runLinks(get(f.k).map(x=>x.u).filter(Boolean));e.target.disabled=false;render()}},'Check links');
+  return listEd(f,put,[['n','Name',60],['u','Link, like example.com',300],['c','Category',40]],{n:'',u:'',c:'More'},ex);
+}
+function field(f){
+  const dot=h('i',{class:'dot',title:'Changed from default'});
+  const rs=h('button',{class:'lnk',onclick:()=>{delete S.cfg[f.k];sync();render()}},'Reset');
+  const upd=()=>{const m=f.k in S.cfg;dot.hidden=!m;rs.hidden=!m};
+  const ctl=control(f,v=>{set(f.k,v);upd()});
+  upd();
+  return h('div',{class:'row'+(['faq','apps','list','map','multi'].includes(f.t)?' wide':'')},h('div',{class:'meta'},h('div',{class:'lbl'},f.l,dot),f.h&&h('div',{class:'hint'},f.h)),h('div',{class:'ctl'},ctl),h('div',{class:'rs'},rs));
+}
+
+async function runLinks(urls){
+  urls=[...new Set(urls)].slice(0,60);if(!urls.length){toast('Nothing to check');return}
+  try{const r=await api('/api/admin/checks',{post:true,body:{urls}});r.links.forEach(l=>S.links[l.url]=l)}catch(e){toast(e.message,true)}
+}
+
+async function publish(msg){
+  if(S.busy)return;S.busy=true;sync();
+  try{
+    const k=changed();
+    const m=msg||('changed '+(k.slice(0,4).join(', ')||'presets')+(k.length>4?' +'+(k.length-4):''));
+    const r=await api('/api/admin/save',{post:true,body:{config:S.cfg,presets:S.presets,sha:S.sha,message:m}});
+    S.cfg=C(r.config);S.saved=C(r.config);S.presets=C(r.presets);S.savedPresets=C(r.presets);
+    await load(true);
+    toast('Published. Visitors get it within about 15 seconds.');
+  }catch(e){toast(e.message,true)}
+  S.busy=false;render();
+}
+async function load(keepEdits){
+  const st=await api('/api/admin/state');
+  S.sha=st.sha;S.commits=st.commits;S.saved=C(st.config);S.savedPresets=C(st.presets);
+  if(!keepEdits){S.cfg=C(st.config);S.presets=C(st.presets)}
+}
+function quick(k,v,label){
+  const extra=dirty()&&!(changed().length===0)?'\n\nThis also publishes your other unsaved changes.':'';
+  if(!confirm(label+' for everyone now?'+extra))return;
+  set(k,v);publish(label.toLowerCase());
+}
+
+function tile(k,v,on){return h('div',{class:'card tile'},h('div',{class:'k'},k),h('div',{class:'v '+(on===true?'on-v':on===false?'off-v':'')},v))}
+function qbtn(k,onLabel,offLabel,onWarn){const on=!!get(k);return h('button',{class:on?'':onWarn?'bad':'',onclick:()=>quick(k,!on,on?offLabel:onLabel)},on?offLabel:onLabel)}
+
+function vDash(){
+  const lk=get('lockdown'),sch=get('lockdownFrom')||get('lockdownUntil');
+  const bn=get('banner');
+  const bi=h('input',{type:'text',maxlength:1000,placeholder:'Message shown on every page',value:bn});
+  return [h('h1',null,'Dashboard'),h('p',{class:'sub'},'Live controls for the whole portal. Changes publish to GitHub and reach visitors in seconds, with no redeploy.'),
+    h('div',{class:'grid'},
+      tile('Portal',lk?(sch?'Locked (scheduled)':'Locked'):'Open',lk),
+      tile('Testing mode',get('testingMode')?'On':'Off',!!get('testingMode')),
+      tile('Apps',get('noApps')?'Blocked':'Allowed',!!get('noApps')),
+      tile('Outside links',get('noLinks')?'Blocked':'Allowed',!!get('noLinks')),
+      tile('Banner',bn||'None'),
+      tile('Custom settings',Object.keys(S.saved).length+' live')),
+    h('h2',null,'Emergency controls'),
+    h('div',{class:'card'},h('div',{class:'acts'},qbtn('lockdown','Lock portal','Unlock portal',true),qbtn('testingMode','Start testing mode','End testing mode'),qbtn('noApps','Block all apps','Allow apps',true),qbtn('noLinks','Block outside links','Allow outside links',true)),
+      h('div',{class:'mrow',style:'margin-top:14px;grid-template-columns:1fr auto auto'},bi,h('button',{class:'pri',onclick:()=>{set('banner',bi.value);publish('set banner')}},'Publish banner'),h('button',{onclick:()=>{set('banner','');publish('clear banner')}},'Clear'))),
+    h('h2',null,'Recent changes'),
+    h('div',{class:'card'},S.commits.length?S.commits.slice(0,6).map(c=>h('div',{class:'lst'},h('div',{class:'n'},c.message.replace(/^admin: /,''),h('small',null,new Date(c.date).toLocaleString())),h('code',null,c.sha.slice(0,7)))):'Nothing published yet.'),
+    h('h2',null,'Health'),
+    h('div',{class:'card acts'},h('button',{onclick:()=>go('checks')},'Open API checks'),h('a',{href:S.site,target:'_blank',rel:'noopener'},h('button',null,'Open the portal')))];
+}
+function vGroup(g){return [h('h1',null,g.n),h('p',{class:'sub'},'A dot means a value differs from the built-in default.'),h('div',{class:'card'},g.f.map(field))]}
+function vSearch(){const q=S.q.toLowerCase();const r=SCHEMA.filter(f=>(f.k+' '+f.l+' '+f.h+' '+f.g).toLowerCase().includes(q));return [h('h1',null,'Search'),h('p',{class:'sub'},r.length+' matching settings'),h('div',{class:'card'},r.map(f=>h('div',null,h('small',{class:'hint'},f.g),field(f))))]}
+
+function vPresets(){
+  const nm=h('input',{type:'text',maxlength:40,placeholder:'Preset name, like Exam week'});
+  const load1=(c,n)=>()=>{S.cfg=C(c);sync();render();toast('Loaded "'+n+'". Publish to apply.')};
+  return [h('h1',null,'Presets'),h('p',{class:'sub'},'Save a set of settings and switch to it in one click. Presets are stored in GitHub with everything else.'),
+    h('h2',null,'Built in'),h('div',{class:'card'},BUILT.map(([n,c])=>h('div',{class:'lst'},h('div',{class:'n'},n),h('button',{onclick:load1(c,n)},'Load')))),
+    h('h2',null,'Yours'),h('div',{class:'card'},Object.keys(S.presets).length?Object.keys(S.presets).map(n=>h('div',{class:'lst'},h('div',{class:'n'},n,h('small',null,Object.keys(S.presets[n]).length+' settings')),h('button',{onclick:load1(S.presets[n],n)},'Load'),h('button',{onclick:()=>{S.presets[n]=C(S.cfg);sync();render()}},'Overwrite'),h('button',{class:'bad',onclick:()=>{delete S.presets[n];sync();render()}},'Delete'))):h('div',{class:'hint'},'No saved presets yet.'),
+      h('div',{class:'mrow',style:'margin-top:14px;grid-template-columns:1fr auto'},nm,h('button',{onclick:()=>{const n=nm.value.trim();if(!n)return;S.presets[n]=C(S.cfg);sync();render();toast('Saved. Publish to keep it.')}},'Save current settings')))];
+}
+function vHistory(){
+  return [h('h1',null,'History'),h('p',{class:'sub'},'Every publish is a commit in GitHub. Load an older version into the editor, then publish to roll back.'),
+    h('div',{class:'card'},S.commits.length?S.commits.map(c=>h('div',{class:'lst'},h('div',{class:'n'},c.message.replace(/^admin: /,''),h('small',null,new Date(c.date).toLocaleString()+' · '+c.sha.slice(0,7))),h('button',{onclick:async()=>{try{const r=await api('/api/admin/revision?ref='+c.sha);S.cfg=C(r.config);sync();render();toast('Loaded. Publish to roll back.')}catch(e){toast(e.message,true)}}},'Load'))):'No history yet.')];
+}
+function vChecks(){
+  const ta=h('textarea',{rows:4,placeholder:'One link per line'});
+  const out=h('div');
+  const show=()=>out.replaceChildren(...Object.values(S.links).map(l=>h('div',{class:'res'},h('span',{class:'mono'},l.url),h('span',null,h('span',{class:'pill '+l.status},l.status),' '+l.detail),h('small',null,l.ms?l.ms+' ms':''))));
+  show();
+  const res=h('div');
+  const draw=()=>res.replaceChildren(...(S.checks?S.checks.map(c=>h('div',{class:'res'},h('b',null,c.name),h('span',null,h('span',{class:'pill '+c.status},c.status),' '+c.detail),h('small',null,c.ms+' ms'))):[h('div',{class:'hint'},'Not run yet.')]));
+  draw();
+  const run=h('button',{class:'pri',onclick:async e=>{e.target.disabled=true;e.target.textContent='Running...';try{S.checks=(await api('/api/admin/checks')).checks;draw()}catch(x){toast(x.message,true)}e.target.disabled=false;e.target.textContent='Run all checks'}},'Run all checks');
+  const lb=h('button',{onclick:async e=>{const u=ta.value.split('\n').map(x=>x.trim()).filter(Boolean);e.target.disabled=true;await runLinks(u);e.target.disabled=false;show()}},'Check links');
+  const cb=h('button',{onclick:async e=>{e.target.disabled=true;await runLinks(get('customApps').map(x=>x.u));e.target.disabled=false;show()}},'Check my custom apps');
+  const ms=h('div',{class:'mono hint'});
+  const ping=h('button',{onclick:async()=>{const t=[];for(const p of ['/api/health','/api/config']){const s=performance.now();try{const r=await fetch(p,{cache:'no-store'});t.push(p+' '+r.status+' '+Math.round(performance.now()-s)+' ms')}catch(e){t.push(p+' failed')}}ms.textContent=t.join('   ')}},'Ping from this browser');
+  return [h('h1',null,'API checks'),h('p',{class:'sub'},'Verifies the environment, GitHub, the settings endpoint, the live site and security headers.'),
+    h('div',{class:'acts'},run,ping),ms,h('div',{class:'card',style:'margin-top:14px'},res),
+    h('h2',null,'Link checker'),h('div',{class:'card'},ta,h('div',{class:'acts',style:'margin-top:10px'},lb,cb),out)];
+}
+function vRaw(){
+  const t=h('textarea',{class:'mono',rows:22,spellcheck:'false'});t.value=J(S.cfg,null,1);
+  const file=h('input',{type:'file',accept:'application/json',style:'display:none'});
+  file.onchange=async()=>{try{S.cfg=JSON.parse(await file.files[0].text());sync();render();toast('Imported. Publish to apply.')}catch(e){toast('Not valid JSON',true)}};
+  return [h('h1',null,'Raw settings'),h('p',{class:'sub'},'The overrides on top of the built-in defaults. Unknown or invalid values are dropped when you publish.'),t,
+    h('div',{class:'acts',style:'margin-top:12px'},h('button',{class:'pri',onclick:()=>{try{const o=JSON.parse(t.value);if(!o||typeof o!=='object'||Array.isArray(o))throw 0;S.cfg=o;sync();render();toast('Applied. Publish to save.')}catch(e){toast('Not valid JSON',true)}}},'Apply'),
+      h('button',{onclick:()=>{const a=h('a',{href:URL.createObjectURL(new Blob([J(S.cfg,null,1)],{type:'application/json'})),download:'portal-settings.json'});document.body.append(a);a.click();a.remove()}},'Export'),
+      h('button',{onclick:()=>file.click()},'Import'),file,
+      h('button',{class:'bad',onclick:()=>{if(confirm('Reset every setting to its default in the editor?')){S.cfg={};sync();render()}}},'Reset everything'))];
+}
+
+function go(v){S.view=v;S.q='';render();scrollTo(0,0)}
+function render(){
+  const app=$('#app');
+  const q=h('input',{type:'search',placeholder:'Search every setting',value:S.q});
+  q.oninput=()=>{S.q=q.value;const m=$('main');m.replaceChildren(...(S.q.trim()?vSearch():view()));};
+  const nav=h('nav',null,
+    h('button',{class:S.view==='dash'?'on':'',onclick:()=>go('dash')},'Dashboard'),h('div',{class:'sep'}),
+    GROUPS.map(g=>h('button',{'data-g':g.n,class:S.view==='g:'+g.n?'on':'',onclick:()=>go('g:'+g.n)},g.n,h('small'))),h('div',{class:'sep'}),
+    [['presets','Presets'],['history','History'],['checks','API checks'],['raw','Raw settings']].map(([k,n])=>h('button',{class:S.view===k?'on':'',onclick:()=>go(k)},n)));
+  app.replaceChildren(
+    h('div',{class:'top'},h('div',{class:'brand'},'Raider ',h('b',null,'Admin')),q,h('div',{class:'sp'}),h('span',{id:'stt',class:'st'}),
+      h('button',{id:'dis',onclick:()=>{S.cfg=C(S.saved);S.presets=C(S.savedPresets);sync();render()}},'Discard'),
+      h('button',{id:'pub',class:'pri',onclick:()=>publish()},'Publish'),
+      h('button',{onclick:async()=>{try{await api('/api/admin/logout',{post:true})}catch(e){}showLogin()}},'Sign out')),
+    h('div',{class:'wrap'},nav,h('main',null,...(S.q.trim()?vSearch():view()))));
+  sync();
+}
+function view(){
+  if(S.view==='dash')return vDash();
+  if(S.view==='presets')return vPresets();
+  if(S.view==='history')return vHistory();
+  if(S.view==='checks')return vChecks();
+  if(S.view==='raw')return vRaw();
+  const g=GROUPS.find(x=>'g:'+x.n===S.view);return g?vGroup(g):vDash();
+}
+
+function showLogin(msg){
+  const p=h('input',{type:'password',placeholder:'Admin password',autocomplete:'current-password'});
+  const err=h('div',{class:'hint',style:'color:var(--er);min-height:18px'},msg||'');
+  const go1=async()=>{err.textContent='';try{await api('/api/admin/login',{post:true,body:{password:p.value}});await start()}catch(e){err.textContent=e.message==='not configured'?'The admin is not configured on this deployment yet.':e.message}};
+  p.addEventListener('keydown',e=>{if(e.key==='Enter')go1()});
+  $('#app').replaceChildren(h('div',{class:'login'},h('div',{class:'card'},h('div',{class:'brand'},'Raider ',h('b',null,'Admin')),p,h('button',{class:'pri',onclick:go1},'Sign in'),err)));
+  p.focus();
+}
+async function start(){
+  try{await load(false);S.view='dash';render()}catch(e){if(e.message!=='Signed out')showLogin(e.message)}
+}
+addEventListener('beforeunload',e=>{if(dirty()){e.preventDefault();e.returnValue=''}});
+addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();if(dirty())publish()}});
+start();
+</script></body></html>
