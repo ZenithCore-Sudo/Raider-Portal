@@ -1,0 +1,97 @@
+{
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
+        },
+        {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "same-origin"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i).*(curl|wget|python|requests|httpx|aiohttp|scrapy|httrack|httpie|go-http|java/|libwww|okhttp|axios|node-fetch|postman|headless|phantom|puppeteer|playwright|selenium|spider|crawl|bot).*"
+        }
+      ],
+      "destination": "/404.html"
+    },
+    {
+      "source": "/assets/:path*",
+      "has": [
+        {
+          "type": "header",
+          "key": "sec-fetch-dest",
+          "value": "(document|iframe|embed|object|empty)"
+        }
+      ],
+      "destination": "/404.html"
+    },
+    {
+      "source": "/assets/:path*",
+      "has": [
+        {
+          "type": "header",
+          "key": "sec-fetch-site",
+          "value": "(cross-site|same-site|none)"
+        }
+      ],
+      "destination": "/404.html"
+    },
+    {
+      "source": "/(vercel\\.json|package\\.json|package-lock\\.json|\\.env.*|\\.git.*|.*\\.map|README.*|SECURITY.*|tools/.*|src/.*|api/.*|config/.*|original.*)",
+      "destination": "/404.html"
+    }
+  ],
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':!config'"
+}
